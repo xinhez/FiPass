@@ -1,2 +1,2 @@
 # money-maker
-Dev: Aiqi, Eron, Xinhe
+Dev: Aiqi, Clair, Eron, Xinhe
