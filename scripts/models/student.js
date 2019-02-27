@@ -1,7 +1,7 @@
 // models/student.js
 
 // Import the database
-const db = require('../db/config');
+const db = require("../db/config");
 
 // Instantiate a new object.
 // This will interface with the fipass-app database.
@@ -12,13 +12,11 @@ const Student = {};
 
 // Returns all students from the table
 Student.findAll = () => {
-  return db.query(
-    `SELECT * FROM students`
-  );
+  return db.query(`SELECT * FROM students`);
 };
 
 // Return one student with the specific id
-Student.findById = (id) => {
+Student.findById = id => {
   return db.oneOrNone(
     `
       SELECT * FROM students

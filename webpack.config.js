@@ -1,21 +1,21 @@
 // webpack.config.js
 
 // Import dependencies
-const path = require('path');
+const path = require("path");
 // Handles css files
-const ExtractTextPlugin  = require('extract-text-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 // Spits out an index.html file in the build
-const HtmlWebPackPlugin = require('html-webpack-plugin');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 // Configure webpack
 const config = {
   // Entry point will be in the src folder, file will be named index.js
-  entry: './src/index.js',
+  entry: "./src/index.js",
   // Send the files to the build folder, create one if it isn't present
-    output: {
-        path: path.resolve(__dirname,'build'),
-        filename: 'bundle.js',
-    },
+  output: {
+    path: path.resolve(__dirname, "build"),
+    filename: "bundle.js"
+  },
   module: {
     rules: [
       {
@@ -29,11 +29,10 @@ const config = {
       {
         // for .css files use css-loader. If that doesn't work use style-loader
         test: /\.css$/,
-        use: ExtractTextPlugin.extract(
-          {
-            fallback: 'style-loader',
-            use: 'css-loader'
-          })
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       }
     ]
   },
@@ -44,7 +43,7 @@ const config = {
       filename: "./index.html"
     }),
     // Name the css file sent to the build folder style.css
-    new ExtractTextPlugin({filename: 'style.css'})
+    new ExtractTextPlugin({ filename: "style.css" })
   ]
 };
 

@@ -1,8 +1,8 @@
 // src/components/Student.js
 
-import axios from 'axios';
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Student extends Component {
   constructor() {
@@ -10,24 +10,24 @@ class Student extends Component {
     this.state = {
       student: null,
       dataLoaded: false
-    }
+    };
   }
 
   componentDidMount() {
     // Use string interpolation to get the id from the URL
     axios({
-      method: 'GET',
+      method: "GET",
       url: `/api/student/${this.props.match.params.id}`
     })
-    .then(data => {
-      this.setState({
-        student: data.data.data,
-        dataLoaded: true
+      .then(data => {
+        this.setState({
+          student: data.data.data,
+          dataLoaded: true
+        });
       })
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   renderStudent() {
@@ -35,14 +35,13 @@ class Student extends Component {
     if (this.state.dataLoaded) {
       return (
         <div>
-          <p className="student_name">{student.first_name} {student.last_name}</p>
+          <p className="student_name">
+            {student.first_name} {student.last_name}
+          </p>
         </div>
-      )
-    }
-    else {
-      return (
-        <p>Loading...</p>
-      )
+      );
+    } else {
+      return <p>Loading...</p>;
     }
   }
 
@@ -53,8 +52,8 @@ class Student extends Component {
         {this.renderStudent()}
         <Link to="/">Back to Students</Link>
       </div>
-    )
+    );
   }
-};
+}
 
 export default Student;
