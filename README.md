@@ -5,11 +5,11 @@ Business: Chenchen
 
 # Dev Notes
 1. Install Postgres, Node and npm.
-3. Run `createdb quotes-app` to create the database.
+3. Run `createdb fipass-app` to create the database.
 4. Add the table and seed the database:
 
- * `psql -d quotes-app -f db/migrations/create_students-20190226.sql`
- * `psql -d quotes-app -f db/seeds/add_students-20190226.sql`
+ * `psql -d fipass-app -f db/migrations/create_students-20190226.sql`
+ * `psql -d fipass-app -f db/seeds/add_students-20190226.sql`
 
 5. Run `npm install` in your terminal to install dependencies.
 6. Start the server with `npm run dev`. (for production run `npm start`)
