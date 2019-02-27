@@ -1,2 +1,17 @@
-# money-maker
-Dev: Aiqi, Clair, Eron, Xinhe
+# FiPass
+Dev: acui34, JanathonL-CMU, yyn19951228, xinhez
+Design: Clair
+Business: Chenchen
+
+# Dev Notes
+1. Install Postgres, Node and npm.
+3. Run `createdb quotes-app` to create the database.
+4. Add the table and seed the database:
+
+ * `psql -d quotes-app -f db/migrations/create_students-20190226.sql`
+ * `psql -d quotes-app -f db/seeds/add_students-20190226.sql`
+
+5. Run `npm install` in your terminal to install dependencies.
+6. Start the server with `npm run dev`. (for production run `npm start`)
+7. In a separate tab build the front-end with `npm run dbgbuild`. (for production run `npm run build`)
+8. Navigate to http://localhost:3000/ in your browser.
