@@ -1,0 +1,22 @@
+{
+  "name": "fipass",
+  "version": "1.0.0",
+  "description": "Dev: Aiqi, Clair, Eron, Xinhe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xinhez/FiPass.git"
+  },
+  "author": "xinhez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xinhez/FiPass/issues"
+  },
+  "homepage": "https://github.com/xinhez/FiPass#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
