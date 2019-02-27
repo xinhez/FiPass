@@ -1,13 +1,20 @@
 // server.js
-const express = require('express');
-const app = express();
+
 const PORT = process.env.PORT || 3000;
+
+const express = require('express');
+const path = require('path');
+
+const app = express();
+
+// Static files
+app.use(express.static('build'));
 
 // API Routes
 app.use('/api/student', require('./routes/student'));
 
-app.get('/', (req, res) => {
-  res.send('Welcome to FiPass!');
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'))
 });
 
 app.listen(PORT, () => {
