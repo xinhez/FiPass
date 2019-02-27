@@ -1,8 +1,9 @@
 // src/components/Home.js
 
 // Import react
-import React, { Component } from 'react';
 import axios from 'axios';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   constructor() {
@@ -37,7 +38,7 @@ class Home extends Component {
   render() {
     return (
       <div className="Home">
-        <h1>Registered students</h1>
+        <h1>All Students</h1>
         {this.renderStudents()}
       </div>
     )
@@ -48,7 +49,7 @@ class Home extends Component {
       return this.state.students.map(student => {
         return (
           <div key={student.id}>
-            <p className="student_name">{student.first_name} {student.last_name}</p>
+            <Link to={`/${student.id}`}>{student.first_name} {student.last_name}</Link>
           </div>
         )
       })

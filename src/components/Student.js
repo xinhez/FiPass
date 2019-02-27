@@ -1,8 +1,8 @@
 // src/components/Student.js
 
+import axios from 'axios';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 class Student extends Component {
   constructor() {
@@ -49,7 +49,7 @@ class Student extends Component {
   render() {
     return (
       <div className="Student">
-        <h3>Displaying student</h3>
+        <h3>Student</h3>
         {this.renderStudent()}
         <Link to="/">Back to Students</Link>
       </div>
