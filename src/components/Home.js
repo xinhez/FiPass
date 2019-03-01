@@ -49,7 +49,7 @@ class Home extends Component {
       return this.state.students.map(student => {
         return (
           <div key={student.id}>
-            <Link to={`/${student.id}`}>
+            <Link to={`/students/${student.id}`}>
               {student.first_name} {student.last_name}
             </Link>
           </div>
