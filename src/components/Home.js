@@ -4,6 +4,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import FormDialog from "./Login";
 
 class Home extends Component {
   constructor() {
@@ -40,6 +41,7 @@ class Home extends Component {
       <div className="Home">
         <h1>All Students</h1>
         {this.renderStudents()}
+        <FormDialog />
       </div>
     );
   }
