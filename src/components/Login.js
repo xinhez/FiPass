@@ -17,54 +17,20 @@ class FormDialog extends Component {
       ComfirmedPassWord: ""
     };
 
-    this.handleFirstClickOpen = this.handleFirstClickOpen.bind(this);
-    this.handleFirstClose = this.handleFirstClose.bind(this);
-    this.handleSecondClickOpen = this.handleSecondClickOpen.bind(this);
-    this.handleSecondClose = this.handleSecondClose.bind(this);
-    this.handleThridClickOpen = this.handleThridClickOpen.bind(this);
-    this.handleThirdClose = this.handleThirdClose.bind(this);
-    this.handleExit = this.handleExit.bind(this);
+    this.handleStep = this.handleStep.bind(this);
   }
 
-  handleFirstClickOpen() {
+  handleStep(v, event) {
+    if (this.state.openStep + v > 3) {
+      this.state.openStep = 0;
+    } else if (this.state.openStep + v < 0) {
+      this.state.openStep = 0;
+    } else {
+      this.state.openStep += v;
+    }
+    // console.log(this.state.openStep)
     this.setState({
-      openStep: 1
-    });
-  }
-
-  handleFirstClose() {
-    this.setState({
-      openStep: 0
-    });
-  }
-
-  handleSecondClickOpen() {
-    this.setState({
-      openStep: 2
-    });
-  }
-
-  handleSecondClose() {
-    this.setState({
-      openStep: 1
-    });
-  }
-
-  handleThridClickOpen() {
-    this.setState({
-      openStep: 3
-    });
-  }
-
-  handleThirdClose() {
-    this.setState({
-      openStep: 2
-    });
-  }
-
-  handleExit() {
-    this.setState({
-      openStep: 0
+      openStep: this.state.openStep
     });
   }
 
@@ -79,7 +45,8 @@ class FormDialog extends Component {
         <Button
           variant="outlined"
           color="primary"
-          onClick={this.handleFirstClickOpen}
+          value="1"
+          onClick={this.handleStep.bind(this, 1)}
         >
           Open form dialog
         </Button>
@@ -119,11 +86,11 @@ class FormDialog extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleFirstClose} color="primary">
+            <Button onClick={this.handleStep.bind(this, -1)} color="primary">
               Cancel
             </Button>
             <Button
-              onClick={this.handleSecondClickOpen}
+              onClick={this.handleStep.bind(this, 1)}
               color="primary"
               size="medium"
             >
@@ -149,10 +116,10 @@ class FormDialog extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleSecondClose} color="primary">
+            <Button onClick={this.handleStep.bind(this, -1)} color="primary">
               previous
             </Button>
-            <Button onClick={this.handleThridClickOpen} color="primary">
+            <Button onClick={this.handleStep.bind(this, 1)} color="primary">
               Next Step
             </Button>
           </DialogActions>
@@ -183,10 +150,10 @@ class FormDialog extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleThirdClose} color="primary">
+            <Button onClick={this.handleStep.bind(this, -1)} color="primary">
               Prev
             </Button>
-            <Button onClick={this.handleExit} color="primary">
+            <Button onClick={this.handleStep.bind(this, 1)} color="primary">
               Finish
             </Button>
           </DialogActions>
