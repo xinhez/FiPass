@@ -1,56 +1,54 @@
-import axios from "axios";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
-class EmployerHome extends Component {
-  constructor() {
-    super();
-    this.state = {
-      students: [],
-      dataLoaded: false
-    };
-  }
+import { fetchStudents } from "../../actions/student";
 
+class EmployerHome extends Component {
   componentDidMount() {
-    axios({
-      method: "GET",
-      url: "/api/student"
-    })
-      .then(data => {
-        this.setState({
-          students: data.data.data,
-          dataLoaded: true
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.props.dispatch(fetchStudents());
   }
 
   render() {
+    const { error, loading, students } = this.props;
+    console.log(error, loading, students);
+
+    if (error) {
+      return <div>Error {error.message}</div>;
+    }
+
+    if (loading) {
+      return <div>loading...</div>;
+    }
+
     return (
       <div>
         <h1>All Students</h1>
-        {this.renderStudents()}
+        {this.renderStudents(students)}
       </div>
     );
   }
 
-  renderStudents() {
-    if (this.state.dataLoaded) {
-      return this.state.students.map(student => {
-        return (
-          <div key={student.id}>
-            <Link to={`/student/${student.id}`}>
-              {student.first_name} {student.last_name}
-            </Link>
-          </div>
-        );
-      });
-    } else {
-      <p>Loading...</p>;
-    }
+  renderStudents(students) {
+    return students.map(student => {
+      return (
+        <div key={student.id}>
+          <Link to={`/student/${student.id}`}>
+            {student.first_name} {student.last_name}
+          </Link>
+        </div>
+      );
+    });
   }
 }
 
-export default EmployerHome;
+const mapStateToProps = state => {
+  console.log("mapping state", state);
+  return {
+    students: state.student.students,
+    loading: state.student.fetchingStudents,
+    error: state.student.error
+  };
+};
+
+export default connect(mapStateToProps)(EmployerHome);

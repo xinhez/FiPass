@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
-import EmployerHome from "./components/pages/EmployerHome";
-import StudentHome from "./components/pages/StudentHome";
-import Student from "./components/Student";
+import EmployerHome from "./pages/EmployerHome";
+import StudentHome from "./pages/StudentHome";
+import Student from "./Student";
 
 class App extends Component {
   render() {
@@ -12,7 +11,7 @@ class App extends Component {
         <div className="App">
           <Route exact path="/" component={StudentHome} />
           <Route exact path="/employer" component={EmployerHome} />
-          <Route exact path="/student/:id" component={Student} />
+          <Route exact path="/student/:student_id" component={Student} />
         </div>
       </Router>
     );

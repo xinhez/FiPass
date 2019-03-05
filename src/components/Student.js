@@ -1,45 +1,17 @@
-import axios from "axios";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 class Student extends Component {
-  constructor() {
-    super();
-    this.state = {
-      student: null,
-      dataLoaded: false
-    };
-  }
-
-  componentDidMount() {
-    axios({
-      method: "GET",
-      url: `/api/student/${this.props.match.params.id}`
-    })
-      .then(data => {
-        this.setState({
-          student: data.data.data,
-          dataLoaded: true
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-
   renderStudent() {
-    const student = this.state.student;
-    if (this.state.dataLoaded) {
-      return (
-        <div>
-          <p className="student_name">
-            {student.first_name} {student.last_name}
-          </p>
-        </div>
-      );
-    } else {
-      return <p>Loading...</p>;
-    }
+    const student = this.props.student;
+    return (
+      <div>
+        <p className="student_name">
+          {student.first_name} {student.last_name}
+        </p>
+      </div>
+    );
   }
 
   render() {
@@ -53,4 +25,11 @@ class Student extends Component {
   }
 }
 
-export default Student;
+const mapStateToProps = (state, ownProps) => {
+  let id = ownProps.match.params.student_id;
+  return {
+    student: state.student.students.find(student => student.id === id)
+  };
+};
+
+export default connect(mapStateToProps)(Student);
