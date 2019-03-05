@@ -1,5 +1,3 @@
-// src/components/Student.js
-
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
@@ -14,7 +12,6 @@ class Student extends Component {
   }
 
   componentDidMount() {
-    // Use string interpolation to get the id from the URL
     axios({
       method: "GET",
       url: `/api/student/${this.props.match.params.id}`
@@ -50,7 +47,7 @@ class Student extends Component {
       <div className="Student">
         <h3>Student</h3>
         {this.renderStudent()}
-        <Link to="/">Back to Students</Link>
+        <Link to="/employer">Back to Students</Link>
       </div>
     );
   }

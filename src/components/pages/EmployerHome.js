@@ -1,35 +1,27 @@
-// src/components/Home.js
-
-// Import react
 import axios from "axios";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class Home extends Component {
+class EmployerHome extends Component {
   constructor() {
     super();
-    // Define state
     this.state = {
       students: [],
       dataLoaded: false
     };
   }
 
-  // Is called when the component succesfully loads
   componentDidMount() {
-    // GET request to our server
     axios({
       method: "GET",
       url: "/api/student"
     })
-      // Saves the data to state. Only way to change the state is with setState
       .then(data => {
         this.setState({
           students: data.data.data,
           dataLoaded: true
         });
       })
-      // logs an error
       .catch(err => {
         console.log(err);
       });
@@ -37,7 +29,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="Home">
+      <div>
         <h1>All Students</h1>
         {this.renderStudents()}
       </div>
@@ -49,7 +41,7 @@ class Home extends Component {
       return this.state.students.map(student => {
         return (
           <div key={student.id}>
-            <Link to={`/${student.id}`}>
+            <Link to={`/student/${student.id}`}>
               {student.first_name} {student.last_name}
             </Link>
           </div>
@@ -61,4 +53,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default EmployerHome;

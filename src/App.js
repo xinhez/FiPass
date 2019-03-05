@@ -1,12 +1,8 @@
-// src/App.js
-
-// Import react and the component class
 import React, { Component } from "react";
-// Import BrowserRouter
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-// import each component
-import Home from "./components/Home";
+import EmployerHome from "./components/pages/EmployerHome";
+import StudentHome from "./components/pages/StudentHome";
 import Student from "./components/Student";
 
 class App extends Component {
@@ -14,13 +10,13 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/:id" component={Student} />
+          <Route exact path="/" component={StudentHome} />
+          <Route exact path="/employer" component={EmployerHome} />
+          <Route exact path="/student/:id" component={Student} />
         </div>
       </Router>
     );
   }
 }
 
-// Export the App component
 export default App;
