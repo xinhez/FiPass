@@ -32,15 +32,20 @@
     ]
   },
   "dependencies": {
+    "@material-ui/icons": "^3.0.2",
     "axios": "^0.18.0",
     "express": "^4.16.4",
+    "material-ui-icons": "^1.0.0-beta.36",
     "path": "^0.12.7",
-    "pg-promise": "^8.5.6"
+    "pg-promise": "^8.5.6",
+    "react-swipeable-views": "^0.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
+    "@material-ui/core": "^3.9.2",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",

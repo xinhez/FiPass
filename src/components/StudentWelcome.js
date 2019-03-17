@@ -21,6 +21,10 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../css/studentwelcome.css";
 import logo from "../test-img/test-logo.jpg";
+import heart from "../test-img/heart.png";
+import locationImg from "../test-img/location.png";
+import CompanyCard from "./CompanyCard.js";
+import CompanyDetailContent from "./CompanyDetailContent.js";
 
 class Topbar extends Component {
   render() {
@@ -50,35 +54,29 @@ class Companybar extends Component {
   }
 }
 
-class CompanyCard extends Component {
-  render() {
-    return (
-      <div className="CompanyCard">
-        <img src={logo} alt="logo" />
-        <div className="CompanyCard-detail">
-          <p>Company Name</p>
-          <p>Location </p>
-          <button> apply </button>
-        </div>
-      </div>
-    );
-  }
-}
-
 class CompanyList extends Component {
-  renderCompanyCards() {
-    return <CompanyCard />;
+  renderCompanyCards(name_, location_, jd_) {
+    return (
+      <CompanyCard
+        imgSrc={logo}
+        heartSrc={heart}
+        name={name_}
+        location={location_}
+        locationImg={locationImg}
+        jd={jd_}
+      />
+    );
   }
   render() {
     return (
       <div className={this.props.className}>
         <ul>
-          {this.renderCompanyCards()}
-          {this.renderCompanyCards()}
-          {this.renderCompanyCards()}
-          {this.renderCompanyCards()}
-          {this.renderCompanyCards()}
-          {this.renderCompanyCards()}
+          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
+          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
+          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
+          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
+          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
+          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
         </ul>
       </div>
     );
@@ -109,11 +107,23 @@ class CompanyDetail extends Component {
 }
 
 class Content extends Component {
+  renderCompanyDetail(name_, location_, jd_) {
+    return (
+      <CompanyDetailContent
+        imgSrc={logo}
+        heartSrc={heart}
+        name={name_}
+        location={location_}
+        locationImg={locationImg}
+        jd={jd_}
+      />
+    );
+  }
   render() {
     return (
       <div>
         <CompanyList className="CompanyList" />
-        <CompanyDetail className="CompanyDetail" />
+        {this.renderCompanyDetail("google", "MTV", "software engineer intern")}
       </div>
     );
   }
