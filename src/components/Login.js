@@ -6,18 +6,67 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import MenuItem from "@material-ui/core/MenuItem";
+import { FormControl, InputLabel, Select } from "@material-ui/core";
+
+const gradYears = [
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020
+];
+
+function CommonInfoTextField(props) {
+  return (
+    <TextField
+      autoFocus
+      margin="dense"
+      id={props.id}
+      label={props.label}
+      type={props.type}
+      fullWidth
+      onChange={props.onChange}
+      value={props.value}
+    />
+  );
+}
 
 class FormDialog extends Component {
   constructor() {
     super();
     this.state = {
       openStep: 0,
+      email: "xxx@gmail.com",
       UserName: "",
       PassWord: "",
-      ComfirmedPassWord: ""
+      ComfirmedPassWord: "",
+      FirstName: "",
+      LastName: "",
+      MiddleName: "",
+      School: "",
+      Degree: "",
+      GradYear: 2000,
+      Major1: "",
+      Major2: "",
+      Phone: "",
+      selectedIndex: -1
     };
 
     this.handleStep = this.handleStep.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  createGradYear() {
+    var gradYears = Array();
+    for (var i = 1990; i <= 2020; i++) gradYears.push(i);
+    return gradYears;
   }
 
   handleStep(v, event) {
@@ -36,6 +85,15 @@ class FormDialog extends Component {
 
   handleChange(event) {
     this.setState({ [event.target.id]: event.target.value });
+  }
+
+  handleMenuItemClick(event, index) {
+    console.log(index);
+    console.log(this.state.GradYear);
+    this.setState({
+      GradYear: gradYears[index],
+      selectedIndex: index
+    });
   }
 
   render() {
@@ -57,32 +115,27 @@ class FormDialog extends Component {
         >
           <DialogTitle id="form-dialog-title">Sign up 1/3</DialogTitle>
           <DialogContent>
-            <DialogContentText>First Sign up step</DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="UserName"
-              label="UserName"
-              type="text"
-              fullWidth
-              onChange={this.handleChange.bind(this)}
-              value={this.state.UserName}
+            <DialogContentText>Let's get started</DialogContentText>
+            <CommonInfoTextField
+              id="email"
+              label="Email"
+              type="email"
+              onChange={this.handleChange}
+              value={this.state.email}
             />
-            <TextField
-              autoFocus
-              margin="dense"
+            <CommonInfoTextField
               id="PassWord"
               label="PassWord"
               type="password"
-              fullWidth
+              onChange={this.handleChange}
+              value={this.state.PassWord}
             />
-            <TextField
-              autoFocus
-              margin="dense"
+            <CommonInfoTextField
               id="ComfirmedPassWord"
               label="Confirm PassWord"
               type="password"
-              fullWidth
+              onChange={this.handleChange}
+              value={this.state.ComfirmedPassWord}
             />
           </DialogContent>
           <DialogActions>
@@ -106,13 +159,102 @@ class FormDialog extends Component {
           <DialogTitle id="form-dialog-title">Sign up 2/3</DialogTitle>
           <DialogContent>
             <DialogContentText>Second Sign up step</DialogContentText>
+            <CommonInfoTextField
+              id="FirstName"
+              label="FirstName"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.FirstName}
+            />
+            <CommonInfoTextField
+              id="MiddleName"
+              label="MiddleName"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.MiddleName}
+            />
+            <CommonInfoTextField
+              id="LastName"
+              label="LastName"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.LastName}
+            />
+            <CommonInfoTextField
+              id="School"
+              label="School"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.School}
+            />
+            <CommonInfoTextField
+              id="Degree"
+              label="Degree"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Degree}
+            />
+            <FormControl>
+              <InputLabel>GradYear</InputLabel>
+              <Select
+                native
+                id="GradYear"
+                value={this.state.GradYear}
+                onChange={this.handleChange}
+              >
+                {gradYears.map((value, index) => (
+                  <option
+                    key={value.toString()}
+                    selected={index === this.state.selectedIndex}
+                    onClick={event =>
+                      this.handleMenuItemClick.bind(event, index)
+                    }
+                  >
+                    {value}
+                  </option>
+                ))}
+              </Select>
+            </FormControl>
             <TextField
               autoFocus
+              select
               margin="dense"
-              id="ComfirmedPassWord"
-              label="Confirm PassWord"
-              type="password"
+              id="GradYear"
+              label="GradYear"
               fullWidth
+              onChange={this.handleChange.bind(this)}
+              value={this.state.GradYear}
+            >
+              {gradYears.map((option, index) => (
+                <MenuItem
+                  key={option.toString()}
+                  selected={index === this.state.selectedIndex}
+                  onClick={e => this.handleMenuItemClick.bind(e, index)}
+                >
+                  {option}
+                </MenuItem>
+              ))}
+            </TextField>
+            <CommonInfoTextField
+              id="Major1"
+              label="Major1"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Major1}
+            />
+            <CommonInfoTextField
+              id="Major2"
+              label="Major2"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Major2}
+            />
+            <CommonInfoTextField
+              id="Phone"
+              label="Phone"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Phone}
             />
           </DialogContent>
           <DialogActions>
@@ -132,21 +274,19 @@ class FormDialog extends Component {
           <DialogTitle id="form-dialog-title">Sign up 3/3</DialogTitle>
           <DialogContent>
             <DialogContentText>Last Sign up step!</DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="ComfirmedPassWord"
-              label="Confirm PassWord"
-              type="password"
-              fullWidth
+            <CommonInfoTextField
+              id="Phone"
+              label="Phone"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Phone}
             />
-            <TextField
-              autoFocus
-              margin="dense"
-              id="ComfirmedPassWord"
-              label="Confirm PassWord"
-              type="password"
-              fullWidth
+            <CommonInfoTextField
+              id="Phone"
+              label="Phone"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Phone}
             />
           </DialogContent>
           <DialogActions>
