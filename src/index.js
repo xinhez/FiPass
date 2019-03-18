@@ -1,14 +1,17 @@
-// src/index.js
-
-// Import react and react-dom
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { applyMiddleware, createStore } from "redux";
+import thunk from "redux-thunk";
 
-// Import the App.js component, give react something to render
-import App from "./App";
+import App from "./components/App";
+import rootReducer from "./reducers/rootReducer";
 
-// Import the css file
-import "./index.css";
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
-// Attach the App component to the div with the id "root" in our index.html file
-ReactDOM.render(<App />, document.getElementById("root"));
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
