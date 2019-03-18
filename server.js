@@ -11,7 +11,8 @@ const app = express();
 app.use(express.static("build"));
 
 // API Routes
-app.use("/api/student", require("./scripts/routes/student"));
+app.use("/api/students", require("./scripts/routes/student"));
+app.use("/api/companies", require("./scripts/routes/company"));
 
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname + "/index.html"));
