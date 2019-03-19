@@ -7,7 +7,11 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MenuItem from "@material-ui/core/MenuItem";
-import { FormControl, InputLabel, Select } from "@material-ui/core";
+import { FormControl, InputLabel, Select, withStyles } from "@material-ui/core";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import ArrowBackIcon from "@material-ui/icons/ArrowBackIos";
+import Typography from "@material-ui/core/Typography";
 
 const gradYears = [
   2010,
@@ -22,6 +26,35 @@ const gradYears = [
   2019,
   2020
 ];
+
+const style = theme => ({
+  dialogTitle: {
+    // color: 'blue',
+    textAlign: "center",
+    color: "#2EA9DF",
+    fontFamily: "Roboto",
+    fontSize: 30
+  },
+  closeButton: {
+    position: "absolute",
+    right: theme.spacing.unit,
+    top: theme.spacing.unit * 2,
+    color: theme.palette.grey[500]
+  },
+  prevButton: {
+    position: "absolute",
+    left: theme.spacing.unit,
+    top: theme.spacing.unit * 2,
+    color: theme.palette.grey[500]
+  },
+  nextButton: {
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto",
+    width: "fit-content",
+    background: "#2EA9DF"
+  }
+});
 
 function CommonInfoTextField(props) {
   return (
@@ -61,6 +94,7 @@ class FormDialog extends Component {
 
     this.handleStep = this.handleStep.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleExit = this.handleExit.bind(this);
   }
 
   createGradYear() {
@@ -83,6 +117,12 @@ class FormDialog extends Component {
     });
   }
 
+  handleExit(event) {
+    this.setState({
+      openStep: 0
+    });
+  }
+
   handleChange(event) {
     this.setState({ [event.target.id]: event.target.value });
   }
@@ -97,6 +137,7 @@ class FormDialog extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <div>{this.state.openSecondStep ? this.state.UserName : null}</div>
@@ -111,11 +152,17 @@ class FormDialog extends Component {
         <Dialog
           open={this.state.openStep === 1}
           onClose={this.handleClose}
-          aria-labelledby="form-dialog-title"
+          // aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Sign up 1/3</DialogTitle>
+          <DialogTitle
+            id="form-dialog-title"
+            className={classes.dialogTitle}
+            disableTypography={true}
+          >
+            Sign up 1/3
+          </DialogTitle>
           <DialogContent>
-            <DialogContentText>Let's get started</DialogContentText>
+            {/* <DialogContentText>Let's get started</DialogContentText> */}
             <CommonInfoTextField
               id="email"
               label="Email"
@@ -139,13 +186,22 @@ class FormDialog extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleStep.bind(this, -1)} color="primary">
+            {/* <Button className={classes.prevButton1} onClick={this.handleStep.bind(this, -1)} color="primary">
               Cancel
-            </Button>
+            </Button> */}
+            <IconButton
+              aria-label="Close"
+              className={classes.closeButton}
+              onClick={this.handleExit}
+            >
+              <CloseIcon />
+            </IconButton>
             <Button
+              className={classes.nextButton}
               onClick={this.handleStep.bind(this, 1)}
               color="primary"
               size="medium"
+              variant="contained"
             >
               Next Step
             </Button>
@@ -156,7 +212,13 @@ class FormDialog extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Sign up 2/3</DialogTitle>
+          <DialogTitle
+            id="form-dialog-title"
+            className={classes.dialogTitle}
+            disableTypography={true}
+          >
+            Sign up 2/3
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>Second Sign up step</DialogContentText>
             <CommonInfoTextField
@@ -258,12 +320,28 @@ class FormDialog extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleStep.bind(this, -1)} color="primary">
-              previous
-            </Button>
-            <Button onClick={this.handleStep.bind(this, 1)} color="primary">
+            <IconButton
+              className={classes.prevButton}
+              onClick={this.handleStep.bind(this, -1)}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <Button
+              className={classes.nextButton}
+              onClick={this.handleStep.bind(this, 1)}
+              color="primary"
+              size="medium"
+              variant="contained"
+            >
               Next Step
             </Button>
+            <IconButton
+              aria-label="Close"
+              className={classes.closeButton}
+              onClick={this.handleExit}
+            >
+              <CloseIcon />
+            </IconButton>
           </DialogActions>
         </Dialog>
         <Dialog
@@ -271,7 +349,13 @@ class FormDialog extends Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <DialogTitle id="form-dialog-title">Sign up 3/3</DialogTitle>
+          <DialogTitle
+            id="form-dialog-title"
+            className={classes.dialogTitle}
+            disableTypography={true}
+          >
+            Sign up 3/3
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>Last Sign up step!</DialogContentText>
             <CommonInfoTextField
@@ -290,12 +374,28 @@ class FormDialog extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleStep.bind(this, -1)} color="primary">
-              Prev
+            <IconButton
+              className={classes.prevButton}
+              onClick={this.handleStep.bind(this, -1)}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <Button
+              className={classes.nextButton}
+              onClick={this.handleStep.bind(this, 1)}
+              color="primary"
+              size="medium"
+              variant="contained"
+            >
+              Next Step
             </Button>
-            <Button onClick={this.handleStep.bind(this, 1)} color="primary">
-              Finish
-            </Button>
+            <IconButton
+              aria-label="Close"
+              className={classes.closeButton}
+              onClick={this.handleExit}
+            >
+              <CloseIcon />
+            </IconButton>
           </DialogActions>
         </Dialog>
       </div>
@@ -303,4 +403,4 @@ class FormDialog extends Component {
   }
 }
 
-export default FormDialog;
+export default withStyles(style)(FormDialog);
