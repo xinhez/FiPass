@@ -15,6 +15,17 @@ const styles = theme => ({
   },
   padding: {
     padding: theme.spacing.unit
+  },
+  location: {
+    float: "right",
+    width: "fit-content"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit
+  },
+  button: {
+    margin: theme.spacing.unit
   }
 });
 
@@ -22,67 +33,34 @@ class LoginFormStu extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Paper className={classes.padding}>
-        <div className={classes.margin}>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
-              <Face />
-            </Grid>
-            <Grid item md={true} sm={true} xs={true}>
-              <TextField
-                id="username"
-                label="Username"
-                type="email"
-                fullWidth
-                autoFocus
-                required
-              />
-            </Grid>
-          </Grid>
-          <Grid container spacing={8} alignItems="flex-end">
-            <Grid item>
-              <Fingerprint />
-            </Grid>
-            <Grid item md={true} sm={true} xs={true}>
-              <TextField
-                id="username"
-                label="Password"
-                type="password"
-                fullWidth
-                required
-              />
-            </Grid>
-          </Grid>
-          <Grid container alignItems="center" justify="space-between">
-            <Grid item>
-              <FormControlLabel
-                control={<Checkbox color="primary" />}
-                label="Remember me"
-              />
-            </Grid>
-            <Grid item>
-              <Button
-                disableFocusRipple
-                disableRipple
-                style={{ textTransform: "none" }}
-                variant="text"
-                color="primary"
-              >
-                Forgot password ?
-              </Button>
-            </Grid>
-          </Grid>
-          <Grid container justify="center" style={{ marginTop: "10px" }}>
-            <Button
-              variant="outlined"
-              color="primary"
-              style={{ textTransform: "none" }}
-            >
-              Login
-            </Button>
-          </Grid>
-        </div>
-      </Paper>
+      <Grid container xs className={classes.location}>
+        <TextField
+          id="filled-email-input"
+          label="Email"
+          className={classes.textField}
+          type="email"
+          name="email"
+          autoComplete="email"
+          margin="normal"
+          variant="filled"
+        />
+
+        <TextField
+          id="filled-password-input"
+          label="Password"
+          className={classes.textField}
+          type="password"
+          autoComplete="current-password"
+          margin="normal"
+          variant="filled"
+        />
+        <Button variant="contained" color="primary" className={classes.button}>
+          Login
+        </Button>
+        <Button variant="contained" color="primary" className={classes.button}>
+          Sign up
+        </Button>
+      </Grid>
     );
   }
 }

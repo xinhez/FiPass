@@ -19,8 +19,8 @@ const styles = theme => ({
     // maxWidth: 10,
   },
   image: {
-    width: 128,
-    height: 128
+    width: "100%",
+    height: "20%"
   },
   img: {
     margin: "auto",
@@ -45,8 +45,29 @@ const styles = theme => ({
   location: {
     margin: "auto",
     display: "block",
+    maxWidth: "80%",
+    maxHeight: "80%"
+  },
+  linkImage: {
+    width: 30,
+    height: 30
+  },
+  linkImg: {
+    margin: "auto",
+    display: "block",
     maxWidth: "50%",
     maxHeight: "80%"
+  },
+  title: {
+    padding: "0 5%",
+    "font-weight": "bold",
+    "font-size": "xx-large"
+  },
+  padding5: {
+    padding: "0 5% 2%"
+  },
+  locationText: {
+    "padding-top": "5px"
   }
 });
 
@@ -65,34 +86,37 @@ function CompanyDetailContent(props) {
 
           <Grid item xs container direction="column" spacing={16}>
             <Grid item xs>
-              <Typography gutterBottom variant="subtitle1">
+              <Typography
+                gutterBottom
+                variant="subtitle1"
+                className={classes.title}
+              >
                 {props.name}
               </Typography>
 
-              <Grid item xs container>
-                <Grid item xs>
-                  <ButtonBase className={classes.locationImage}>
+              <Grid item xs container className={classes.padding5}>
+                <ButtonBase className={classes.locationImage}>
+                  <img
+                    className={classes.location}
+                    alt="complex"
+                    src={props.locationImg}
+                  />
+                </ButtonBase>
+                <Typography gutterBottom className={classes.locationText}>
+                  {props.location}
+                </Typography>
+
+                <Grid item xs container className={classes.padding5}>
+                  <ButtonBase className={classes.linkImage}>
                     <img
-                      className={classes.location}
+                      className={classes.linkImg}
                       alt="complex"
-                      src={props.locationImg}
+                      src={props.linkImg}
                     />
                   </ButtonBase>
-                </Grid>
-                <Grid item xs>
-                  <Typography gutterBottom>{props.location}</Typography>
-                </Grid>
-                <Grid item xs>
-                  <ButtonBase className={classes.locationImage}>
-                    <img
-                      className={classes.location}
-                      alt="complex"
-                      src={props.locationImg}
-                    />
-                  </ButtonBase>
-                </Grid>
-                <Grid item xs>
-                  <Typography gutterBottom>{props.location}</Typography>
+                  <a className={classes.locationText} href={props.linkUrl}>
+                    {props.linkUrl}
+                  </a>
                 </Grid>
               </Grid>
 

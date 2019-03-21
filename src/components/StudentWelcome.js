@@ -11,7 +11,7 @@ Content:
                     Location 
                     Company | position
                     detail
- */
+*/
 
 // src/components/Home.js
 
@@ -23,15 +23,21 @@ import "../css/studentwelcome.css";
 import logo from "../test-img/test-logo.jpg";
 import heart from "../test-img/heart.png";
 import locationImg from "../test-img/location.png";
+import background from "../test-img/background.png";
+import linkImg from "../test-img/link.png";
 import CompanyCard from "./CompanyCard.js";
 import CompanyDetailContent from "./CompanyDetailContent.js";
-
+import LoginFormStu from "./LoginFormStu.js";
+import { Paper, Grid } from "@material-ui/core";
+// <LoginForm className="login-form right" />
 class Topbar extends Component {
   render() {
     return (
       <div className="Topbar">
-        <img src={logo} className="left" alt="logo" />
-        <LoginForm className="login-form right" />
+        <Grid containter>
+          <img src={logo} className="left" alt="logo" />
+          <LoginFormStu />
+        </Grid>
       </div>
     );
   }
@@ -43,13 +49,13 @@ class Companybar extends Component {
   }
   render() {
     return (
-      <div className="Companybar">
+      <Grid containter className="Companybar">
         {this.renderButton()}
         {this.renderButton()}
         {this.renderButton()}
         {this.renderButton()}
         {this.renderButton()}
-      </div>
+      </Grid>
     );
   }
 }
@@ -98,6 +104,7 @@ class CompanyDetail extends Component {
           <button>Company</button>
           <button>Position</button>
         </div>
+        s
         <div className="CompanyDetail-content">
           <p>Content</p>
         </div>
@@ -107,14 +114,16 @@ class CompanyDetail extends Component {
 }
 
 class Content extends Component {
-  renderCompanyDetail(name_, location_, jd_) {
+  renderCompanyDetail(name_, location_, jd_, linkUrl_) {
     return (
       <CompanyDetailContent
-        imgSrc={logo}
+        imgSrc={background}
         heartSrc={heart}
         name={name_}
         location={location_}
         locationImg={locationImg}
+        linkImg={linkImg}
+        linkUrl={linkUrl_}
         jd={jd_}
       />
     );
@@ -123,7 +132,12 @@ class Content extends Component {
     return (
       <div>
         <CompanyList className="CompanyList" />
-        {this.renderCompanyDetail("google", "MTV", "software engineer intern")}
+        {this.renderCompanyDetail(
+          "google",
+          "MTV",
+          "software engineer intern",
+          "https://www.google.com"
+        )}
       </div>
     );
   }

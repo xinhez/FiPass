@@ -42,8 +42,11 @@ const styles = theme => ({
   location: {
     margin: "auto",
     display: "block",
-    maxWidth: "50%",
+    maxWidth: "80%",
     maxHeight: "80%"
+  },
+  locationText: {
+    "padding-top": "5px"
   }
 });
 
@@ -67,18 +70,16 @@ function CompanyCard(props) {
                 </Typography>
 
                 <Grid item xs container>
-                  <Grid item xs>
-                    <ButtonBase className={classes.locationImage}>
-                      <img
-                        className={classes.location}
-                        alt="complex"
-                        src={props.locationImg}
-                      />
-                    </ButtonBase>
-                  </Grid>
-                  <Grid item xs>
-                    <Typography gutterBottom>{props.location}</Typography>
-                  </Grid>
+                  <ButtonBase className={classes.locationImage}>
+                    <img
+                      className={classes.location}
+                      alt="complex"
+                      src={props.locationImg}
+                    />
+                  </ButtonBase>
+                  <Typography gutterBottom className={classes.locationText}>
+                    {props.location}
+                  </Typography>
                 </Grid>
 
                 <Typography color="textSecondary">{props.jd}</Typography>
