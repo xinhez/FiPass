@@ -90,6 +90,17 @@ class CompanyList extends Component {
   }
 
   render() {
+    // const { error, loading, students } = this.props;
+    // console.log(error, loading, students);
+
+    // if (error) {
+    //   return <div>Error {error.message}</div>;
+    // }
+
+    // if (loading) {
+    //   return <div>loading...</div>;
+    // }
+
     return (
       <div className={this.props.className}>
         <ul>
@@ -136,6 +147,15 @@ class CompanyDetail extends Component {
 }
 
 class Content extends Component {
+  // componentDidMount() {
+  //   this.props.dispatch(fetchCompany(this.props.id));
+  // }
+  // renderCompanies(companies){
+  //   return companies.map(company => {
+  //     return this.renderCompanyDetail(xxxx);
+  //   });
+  // }
+
   renderCompanyDetail(name_, location_, jd_, linkUrl_) {
     return (
       <CompanyDetailContent
@@ -151,6 +171,17 @@ class Content extends Component {
     );
   }
   render() {
+    // const { error, loading, students } = this.props;
+    // console.log(error, loading, students);
+
+    // if (error) {
+    //   return <div>Error {error.message}</div>;
+    // }
+
+    // if (loading) {
+    //   return <div>loading...</div>;
+    // }
+
     return (
       <div>
         <CompanyList className="CompanyList" />
@@ -184,17 +215,6 @@ class LoginForm extends Component {
   }
 
   render() {
-    // const { error, loading, students } = this.props;
-    // console.log(error, loading, students);
-
-    // if (error) {
-    //   return <div>Error {error.message}</div>;
-    // }
-
-    // if (loading) {
-    //   return <div>loading...</div>;
-    // }
-
     return (
       <div className={this.props.className}>
         <form className="studentloginform" onSubmit={this.handleSubmit}>
