@@ -34,8 +34,11 @@
   "dependencies": {
     "axios": "^0.18.0",
     "express": "^4.16.4",
+    "nodemon": "^1.18.10",
     "path": "^0.12.7",
-    "pg-promise": "^8.5.6"
+    "pg-promise": "^8.5.6",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
