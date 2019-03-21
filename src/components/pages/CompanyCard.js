@@ -1,11 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
+import { Paper, Grid, Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
-
+import { Link } from "react-router-dom";
 const styles = theme => ({
   root: {
     flexGrow: 1
@@ -54,13 +53,13 @@ function CompanyCard(props) {
   const { classes } = props;
   console.log(props);
   return (
-    <div className={classes.root}>
+    <div key={props.id} className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={16}>
           <Grid item>
-            <ButtonBase className={classes.image}>
+            <Link to={`/testCompanyCard`} className={classes.image}>
               <img className={classes.img} alt="complex" src={props.imgSrc} />
-            </ButtonBase>
+            </Link>
           </Grid>
           <Grid item xs={12} sm container>
             <Grid item xs container direction="column" spacing={16}>

@@ -57,7 +57,12 @@ class LoginFormStu extends React.Component {
         <Button variant="contained" color="primary" className={classes.button}>
           Login
         </Button>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          href="/signup"
+        >
           Sign up
         </Button>
       </Grid>

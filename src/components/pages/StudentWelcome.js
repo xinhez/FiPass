@@ -28,14 +28,20 @@ import linkImg from "../test-img/link.png";
 import CompanyCard from "./CompanyCard.js";
 import CompanyDetailContent from "./CompanyDetailContent.js";
 import LoginFormStu from "./LoginFormStu.js";
-import { Paper, Grid } from "@material-ui/core";
-// <LoginForm className="login-form right" />
+import { Paper, Grid, Button } from "@material-ui/core";
+import { connect } from "react-redux";
+
+// import { fetchCompanies } from "../../actions/student";
+
 class Topbar extends Component {
   render() {
     return (
       <div className="Topbar">
         <Grid containter>
-          <img src={logo} className="left" alt="logo" />
+          <Button href="/StudentWelcome">
+            <img src={logo} className="left" alt="logo" />
+          </Button>
+
           <LoginFormStu />
         </Grid>
       </div>
@@ -61,9 +67,18 @@ class Companybar extends Component {
 }
 
 class CompanyList extends Component {
-  renderCompanyCards(name_, location_, jd_) {
+  // componentDidMount() {
+  //   this.props.dispatch(fetchCompanies());
+  // }
+  // renderCompanies(companies){
+  //   return companies.map(company => {
+  //     return this.renderCompanyCards(company.id, company.name, company.location, company.jd);
+  //   });
+  // }
+  renderCompanyCards(id_, name_, location_, jd_) {
     return (
       <CompanyCard
+        id={id_}
         imgSrc={logo}
         heartSrc={heart}
         name={name_}
@@ -73,16 +88,23 @@ class CompanyList extends Component {
       />
     );
   }
+
   render() {
     return (
       <div className={this.props.className}>
         <ul>
-          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
-          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
-          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
-          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
-          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
-          {this.renderCompanyCards("google", "MTV", "software engineer intern")}
+          {this.renderCompanyCards(
+            1,
+            "google",
+            "MTV",
+            "software engineer intern"
+          )}
+          {this.renderCompanyCards(
+            2,
+            "google",
+            "MTV",
+            "software engineer intern"
+          )}
         </ul>
       </div>
     );
@@ -162,6 +184,17 @@ class LoginForm extends Component {
   }
 
   render() {
+    // const { error, loading, students } = this.props;
+    // console.log(error, loading, students);
+
+    // if (error) {
+    //   return <div>Error {error.message}</div>;
+    // }
+
+    // if (loading) {
+    //   return <div>loading...</div>;
+    // }
+
     return (
       <div className={this.props.className}>
         <form className="studentloginform" onSubmit={this.handleSubmit}>
@@ -194,5 +227,13 @@ class StudentWelcome extends Component {
     );
   }
 }
-
+// const mapStateToProps = state => {
+//   console.log("mapping state", state);
+//   return {
+//     students: state.company.companies,
+//     loading: state.company.fetchingCompanies,
+//     error: state.company.error
+//   };
+// };
+// export default connect(mapStateToProps)(StudentWelcome);
 export default StudentWelcome;
