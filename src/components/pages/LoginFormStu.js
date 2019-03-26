@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import { Face, Fingerprint } from "@material-ui/icons";
 const styles = theme => ({
+  root: {},
   margin: {
     margin: theme.spacing.unit * 2
   },
@@ -24,8 +25,38 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit
   },
-  button: {
-    margin: theme.spacing.unit
+  loginButton: {
+    position: "relative",
+    right: "-40px",
+    width: "40%",
+    // margin: theme.spacing.unit,
+    background: "#FFFFFF",
+    /* #51A8DD */
+    border: "1px solid #51A8DD",
+    "box-sizing": "border-box",
+    "border-radius": "5px",
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": 500,
+    "font-size": "20px",
+    "line-height": "normal",
+    color: "#51A8DD"
+  },
+  signupButton: {
+    position: "relative",
+    right: "-50px",
+    width: "40%",
+
+    // margin: theme.spacing.unit,
+    background: "#51A8DD",
+    /* #51A8DD */
+    "border-radius": "5px",
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": 500,
+    "font-size": "20px",
+    "line-height": "normal",
+    color: "#FFFFFF"
   }
 });
 
@@ -33,39 +64,23 @@ class LoginFormStu extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid container xs className={classes.location}>
-        <TextField
-          id="filled-email-input"
-          label="Email"
-          className={classes.textField}
-          type="email"
-          name="email"
-          autoComplete="email"
-          margin="normal"
-          variant="filled"
-        />
-
-        <TextField
-          id="filled-password-input"
-          label="Password"
-          className={classes.textField}
-          type="password"
-          autoComplete="current-password"
-          margin="normal"
-          variant="filled"
-        />
-        <Button variant="contained" color="primary" className={classes.button}>
-          Login
+      <div className={classes.root}>
+        <Button
+          variant="outlined"
+          color="primary"
+          className={classes.loginButton}
+        >
+          Log in
         </Button>
         <Button
           variant="contained"
           color="primary"
-          className={classes.button}
+          className={classes.signupButton}
           href="/signup"
         >
           Sign up
         </Button>
-      </Grid>
+      </div>
     );
   }
 }

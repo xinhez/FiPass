@@ -28,8 +28,6 @@ import background from "../test-img/background.png";
 import linkImg from "../test-img/link.png";
 import CompanyCard from "./CompanyCard.js";
 import Topbar from "./Topbar.js";
-import Companybar from "./Companybar.js";
-import Content from "./Content.js";
 import CompanyDetailContent from "./CompanyDetailContent.js";
 import LoginFormStu from "./LoginFormStu.js";
 import { Paper, Grid, Button, withStyles } from "@material-ui/core";
@@ -52,24 +50,57 @@ const styles = theme => ({
   divider: {
     margin: `${theme.spacing.unit * 2}px 0`
   },
+  marginleft: {
+    "margin-left": "18px",
+    width: "90%",
+    padding: "10px 0"
+  },
   root: {
-    background: "#E5E5E5"
+    height: "10%"
+  },
+  button: {
+    background: "#DCDCDC",
+    "border-radius": "5px",
+    width: "100%",
+    margin: "1% 8px",
+    height: "60%",
+
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": 300,
+    "font-size": "20px",
+    "line-height": "normal",
+    color: "#000000"
   }
+  // first:{
+  //   'margin': '1% 8px 1% 30px'
+  // }
 });
 
-class StudentWelcome extends Component {
-  // props function pass way
+class Companybar extends Component {
+  renderButton(string) {
+    const { classes } = this.props;
+    return (
+      <Grid item xs={2}>
+        <button className={classes.button}> {string} </button>
+      </Grid>
+    );
+  }
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Topbar />
-        <Companybar />
-        <Content />
+        <Grid container spacing={24} className={classes.marginleft}>
+          {this.renderButton("Internship")}
+          {this.renderButton("Full-Time job")}
+          {this.renderButton("Part-Time")}
+          {this.renderButton("Liked Companies")}
+        </Grid>
       </div>
     );
   }
 }
+
 // const mapStateToProps = state => {
 //   console.log("mapping state", state);
 //   return {
@@ -80,8 +111,8 @@ class StudentWelcome extends Component {
 // };
 // export default connect(mapStateToProps)(StudentWelcome);
 //
-StudentWelcome.propTypes = {
+Companybar.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withStyles(styles)(StudentWelcome);
+export default withStyles(styles)(Companybar);
 // export default StudentWelcome;

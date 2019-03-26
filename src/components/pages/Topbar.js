@@ -27,9 +27,6 @@ import locationImg from "../test-img/location.png";
 import background from "../test-img/background.png";
 import linkImg from "../test-img/link.png";
 import CompanyCard from "./CompanyCard.js";
-import Topbar from "./Topbar.js";
-import Companybar from "./Companybar.js";
-import Content from "./Content.js";
 import CompanyDetailContent from "./CompanyDetailContent.js";
 import LoginFormStu from "./LoginFormStu.js";
 import { Paper, Grid, Button, withStyles } from "@material-ui/core";
@@ -45,43 +42,46 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit,
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
     whiteSpace: "nowrap",
     marginBottom: theme.spacing.unit
   },
   divider: {
     margin: `${theme.spacing.unit * 2}px 0`
   },
+  left: {
+    left: "30px"
+  },
   root: {
-    background: "#E5E5E5"
+    background: "#FFFFFF",
+    "box-shadow": "0px 2px 10px rgba(0, 0, 0, 0.05)"
   }
 });
 
-class StudentWelcome extends Component {
-  // props function pass way
+class Topbar extends Component {
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Topbar />
-        <Companybar />
-        <Content />
+        <Grid container spacing={24}>
+          <Grid item xs={3}>
+            <Button className={classes.left} href="/StudentWelcome">
+              <img src={Fipass} alt="logo" />
+            </Button>
+          </Grid>
+          <Grid item xs={3} />
+          <Grid item xs={3} />
+          <Grid item xs={3}>
+            <LoginFormStu />
+          </Grid>
+        </Grid>
       </div>
     );
   }
 }
-// const mapStateToProps = state => {
-//   console.log("mapping state", state);
-//   return {
-//     students: state.company.companies,
-//     loading: state.company.fetchingCompanies,
-//     error: state.company.error
-//   };
-// };
-// export default connect(mapStateToProps)(StudentWelcome);
-//
-StudentWelcome.propTypes = {
+
+Topbar.propTypes = {
   classes: PropTypes.object.isRequired
 };
-export default withStyles(styles)(StudentWelcome);
+export default withStyles(styles)(Topbar);
 // export default StudentWelcome;
