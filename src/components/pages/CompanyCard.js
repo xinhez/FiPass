@@ -6,6 +6,11 @@ import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { Link } from "react-router-dom";
 const styles = theme => ({
+  container: {
+    display: "grid",
+    gridTemplateColumns: "repeat(12, 1fr)",
+    gridGap: `${theme.spacing.unit * 3}px`
+  },
   root: {
     flexGrow: 1
   },
@@ -44,8 +49,30 @@ const styles = theme => ({
     maxWidth: "80%",
     maxHeight: "80%"
   },
-  locationText: {
-    "padding-top": "5px"
+  locationNameFont: {
+    "padding-top": "5px",
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": 500,
+    "font-size": "16px",
+    "line-height": "normal",
+    color: "#858585"
+  },
+  companyNameFont: {
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": "bold",
+    "font-size": "18px",
+    "line-height": "normal",
+    color: "#000000"
+  },
+  companyShortDescriptionFont: {
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": "normal",
+    "font-size": "14px",
+    "line-height": "20px",
+    color: "#2e2e2e"
   }
 });
 
@@ -56,15 +83,20 @@ function CompanyCard(props) {
     <div key={props.id} className={classes.root}>
       <Paper className={classes.paper}>
         <Grid container spacing={16}>
-          <Grid item>
+          <Grid item xs={3}>
             <Link to={`/testCompanyCard`} className={classes.image}>
               <img className={classes.img} alt="complex" src={props.imgSrc} />
             </Link>
           </Grid>
-          <Grid item xs={12} sm container>
+
+          <Grid item xs={9} sm container>
             <Grid item xs container direction="column" spacing={16}>
               <Grid item xs>
-                <Typography gutterBottom variant="subtitle1">
+                <Typography
+                  gutterBottom
+                  variant="subtitle1"
+                  className={classes.companyNameFont}
+                >
                   {props.name}
                 </Typography>
 
@@ -76,22 +108,21 @@ function CompanyCard(props) {
                       src={props.locationImg}
                     />
                   </ButtonBase>
-                  <Typography gutterBottom className={classes.locationText}>
+                  <Typography gutterBottom className={classes.locationNameFont}>
                     {props.location}
                   </Typography>
                 </Grid>
 
-                <Typography color="textSecondary">{props.jd}</Typography>
+                <Grid item xs container>
+                  <Typography
+                    color="textSecondary"
+                    className={classes.companyShortDescriptionFont}
+                  >
+                    {props.jd}
+                  </Typography>
+                  <Link to={`/more`}>and more</Link>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid item>
-              <ButtonBase className={classes.heartImage}>
-                <img
-                  className={classes.heart}
-                  alt="complex"
-                  src={props.heartSrc}
-                />
-              </ButtonBase>
             </Grid>
           </Grid>
         </Grid>

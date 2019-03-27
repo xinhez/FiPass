@@ -36,23 +36,16 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import { fetchCompanies } from "../../actions/student";
 const styles = theme => ({
-  container: {
-    display: "grid",
-    gridTemplateColumns: "repeat(12, 1fr)",
-    gridGap: `${theme.spacing.unit * 3}px`
-  },
-  paper: {
-    padding: theme.spacing.unit,
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-    whiteSpace: "nowrap",
-    marginBottom: theme.spacing.unit
-  },
-  divider: {
-    margin: `${theme.spacing.unit * 2}px 0`
-  },
   root: {
-    background: "#E5E5E5"
+    "margin-right": 30
+  },
+  ulmargin: {
+    "margin-top": 0
+  },
+  CompanyList: {
+    float: "left",
+    width: "30%",
+    height: "100%"
   }
 });
 
@@ -90,51 +83,56 @@ class CompanyList extends Component {
     // if (loading) {
     //   return <div>loading...</div>;
     // }
-
+    const { classes } = this.props;
     return (
       <div className={this.props.className}>
-        <ul>
+        <ul className={classes.ulmargin}>
           {this.renderCompanyCards(
             1,
-            "google",
-            "MTV",
-            "software engineer intern"
+            "Google",
+            "San Francisco",
+            "Technical Solution Specialist Intern Digital Sales Intern"
           )}
           {this.renderCompanyCards(
-            2,
-            "google",
-            "MTV",
-            "software engineer intern"
+            1,
+            "Google",
+            "San Francisco",
+            "Technical Solution Specialist Intern Digital Sales Intern"
           )}
           {this.renderCompanyCards(
-            2,
-            "google",
-            "MTV",
-            "software engineer intern"
+            1,
+            "Google",
+            "San Francisco",
+            "Technical Solution Specialist Intern Digital Sales Intern"
           )}
           {this.renderCompanyCards(
-            2,
-            "google",
-            "MTV",
-            "software engineer intern"
+            1,
+            "Google",
+            "San Francisco",
+            "Technical Solution Specialist Intern Digital Sales Intern"
           )}
           {this.renderCompanyCards(
-            2,
-            "google",
-            "MTV",
-            "software engineer intern"
+            1,
+            "Google",
+            "San Francisco",
+            "Technical Solution Specialist Intern Digital Sales Intern"
           )}
           {this.renderCompanyCards(
-            2,
-            "google",
-            "MTV",
-            "software engineer intern"
+            1,
+            "Google",
+            "San Francisco",
+            "Technical Solution Specialist Intern Digital Sales Intern"
           )}
         </ul>
       </div>
     );
   }
 }
+
+CompanyList.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 class CompanyDetail extends Component {
   render() {
     return (
@@ -160,6 +158,10 @@ class CompanyDetail extends Component {
   }
 }
 
+CompanyDetail.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 class Content extends Component {
   // componentDidMount() {
   //   this.props.dispatch(fetchCompany(this.props.id));
@@ -171,8 +173,10 @@ class Content extends Component {
   // }
 
   renderCompanyDetail(name_, location_, jd_, linkUrl_) {
+    const { classes } = this.props;
     return (
       <CompanyDetailContent
+        classes={classes}
         imgSrc={background}
         heartSrc={heart}
         name={name_}
@@ -195,56 +199,16 @@ class Content extends Component {
     // if (loading) {
     //   return <div>loading...</div>;
     // }
-
+    const { classes } = this.props;
     return (
-      <div>
-        <CompanyList className="CompanyList" />
+      <div classes={classes.root}>
+        <CompanyList className={classes.CompanyList} classes={classes} />
         {this.renderCompanyDetail(
           "google",
-          "MTV",
+          "San Francisco, CA, USA",
           "software engineer intern",
           "https://www.google.com"
         )}
-      </div>
-    );
-  }
-}
-
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: "" };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
-
-  handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <div className={this.props.className}>
-        <form className="studentloginform" onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-          <input
-            type="password"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-          <input type="submit" value="Submit" />
-        </form>
-        <button href="google.com">singup</button>
       </div>
     );
   }

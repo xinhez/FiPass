@@ -9,24 +9,30 @@ import FloatingActionButtonZoom from "./FloatingActionButtonZoom.js";
 const styles = theme => ({
   root: {
     display: "inline-block",
-    float: "right",
-    width: "70%",
+    // float: "right",
+    width: "68%",
     height: "100%"
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    margin: "auto"
+    margin: "auto",
+    height: "100%"
+
     // maxWidth: 10,
+  },
+  nopadding: {
+    padding: 0,
+    margin: 0
   },
   image: {
     width: "100%",
-    height: "20%"
+    height: "12%"
   },
   img: {
     margin: "auto",
     display: "block",
-    maxWidth: "100%",
-    maxHeight: "100%"
+    width: "100%",
+    height: "100%"
   },
   heart: {
     margin: "auto",
@@ -76,7 +82,7 @@ function CompanyDetailContent(props) {
   console.log(props);
   return (
     <div className={classes.root}>
-      <Paper className={classes.paper}>
+      <Paper className={`${classes.paper} ${classes.nopadding}`}>
         <Grid item>
           <Grid item>
             <ButtonBase className={classes.image}>
