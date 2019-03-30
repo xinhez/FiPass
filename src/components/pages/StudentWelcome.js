@@ -96,6 +96,7 @@ class StudentWelcome extends Component {
         linkUrl: "https://www.Google.com",
         positions: [
           {
+            percent: "70",
             id: 1,
             role: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
@@ -103,6 +104,7 @@ class StudentWelcome extends Component {
               "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
           },
           {
+            percent: "70",
             id: 2,
             role: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
@@ -136,6 +138,7 @@ class StudentWelcome extends Component {
         linkUrl: "https://www.facebook.com",
         positions: [
           {
+            percent: "70",
             id: 1,
             role: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
@@ -143,6 +146,7 @@ class StudentWelcome extends Component {
               "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
           },
           {
+            percent: "70",
             id: 2,
             role: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",

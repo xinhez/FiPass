@@ -150,6 +150,7 @@ class CompanyDetailContent extends React.Component {
                   company_id={this.props.id}
                   likePosition={this.props.likePosition}
                   positions={this.props.positions}
+                  percent={this.props.percent}
                 />
               </Grid>
             </Grid>

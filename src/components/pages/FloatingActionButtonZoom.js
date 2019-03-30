@@ -85,13 +85,14 @@ class FloatingActionButtonZoom extends React.Component {
         position.id,
         position.role,
         position.location,
-        position.jd
+        position.jd,
+        position.percent
       )
     );
     return <ul className={classes.ulmargin}>{listItems}</ul>;
   }
 
-  renderPositionCard(id_, role_, location_, jd_) {
+  renderPositionCard(id_, role_, location_, jd_, percent_) {
     console.log("renderPositionCard", this.props);
     return (
       // <ButtonBase onClick={(e) => this.handleClick(id_, e)}>
@@ -106,6 +107,7 @@ class FloatingActionButtonZoom extends React.Component {
         locationImg={locationImg}
         jd={jd_}
         likePosition={this.props.likePosition}
+        percent={percent_}
       />
       // </ButtonBase>
     );

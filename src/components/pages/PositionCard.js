@@ -87,6 +87,18 @@ const styles = theme => ({
   alignright: {
     display: "flex",
     "justify-content": "flex-end"
+  },
+  matched: {
+    "margin-top": "-5px",
+    "margin-left": "6px",
+    background: "#51A8DD",
+    "border-radius": "5px",
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": "500",
+    "font-size": "16px",
+    "line-height": "normal",
+    color: "#F2F2F2"
   }
 });
 
@@ -130,13 +142,18 @@ class PositionCard extends React.Component {
             <Grid item xs={10} sm container>
               <Grid item xs container direction="column" spacing={16}>
                 <Grid item xs>
-                  <Typography
-                    gutterBottom
-                    variant="subtitle1"
-                    className={classes.PostionNameFont}
-                  >
-                    {this.props.name}
-                  </Typography>
+                  <Grid container>
+                    <Typography
+                      gutterBottom
+                      variant="subtitle1"
+                      className={classes.PostionNameFont}
+                    >
+                      {this.props.name}
+                    </Typography>
+                    <Button className={classes.matched}>
+                      {this.props.percent}% matched
+                    </Button>
+                  </Grid>
 
                   <Grid item xs>
                     <Typography
