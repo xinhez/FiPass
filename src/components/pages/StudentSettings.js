@@ -7,14 +7,39 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
-  Button
+  Button,
+  Paper
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
+import cameraIcon from "@material-ui/icons/CameraAlt";
 
 const styles = theme => ({
-  avatar: {
-    width: 100,
-    height: 100,
+  skillsPaper: {
+    position: "absolute",
+    width: 876,
+    height: 488,
+    left: 282,
+    top: 166,
+    backgroundColor: "#FFFFFF",
+    border: "1px solid #DCDCDC",
+    borderRadius: 5
+  },
+  infoPaper: {
+    position: "absolute",
+    width: 876,
+    height: 655,
+    left: 282,
+    top: 720,
+    backgroundColor: "#FFFFFF",
+    border: "1px solid #DCDCDC",
+    borderRadius: 5
+  },
+  photoAvater: {
+    position: "absolute",
+    width: 130,
+    height: 130,
+    left: 328,
+    top: 40,
     backgroundColor: theme.palette.secondary.main
   },
   textField: {
@@ -71,82 +96,91 @@ class StudentSettings extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <Grid container alignItems="center" direction="column" justify="center">
-        <Grid item>
-          <Avatar className={classes.avatar} />
-        </Grid>
-        <Grid item>
-          <TextField
-            id="outlined-email-input"
-            label="yiningya@andrew.cmu.edu"
-            className={classes.textField}
-            type="email"
-            name="email"
-            autoComplete="email"
-            margin="normal"
-            variant="outlined"
-            disabled
-          />
-        </Grid>
-        <Grid item>
-          <FormControl
-            className={classes.formControl}
-            disabled={this.state.disableEditing}
+      <div>
+        <Paper id="edit-skill-paper" className={classes.skillsPaper}>
+          <Avatar className={classes.photoAvater} />
+        </Paper>
+        <Paper id="edit-info-paper" className={classes.infoPaper}>
+          <Grid
+            container
+            alignItems="center"
+            direction="column"
+            justify="center"
           >
-            <InputLabel htmlFor="htmlfor">Name</InputLabel>
-            <Input
-              id="name"
-              value={this.state.name}
-              onChange={this.handleChange.bind(this)}
-            />
-            <FormHelperText>Your Name</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item>
-          <FormControl className={classes.formControl} disabled>
-            <InputLabel htmlFor="htmlfor">Name</InputLabel>
-            <Input id="PassWord" value={this.state.name} />
-            <FormHelperText>Your Name</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item>
-          <FormControl className={classes.formControl} disabled>
-            <InputLabel htmlFor="htmlfor">School</InputLabel>
-            <Input id="School" value={this.state.school} />
-            <FormHelperText>Your School</FormHelperText>
-          </FormControl>
-        </Grid>
-        <Grid item>
-          <FormControl className={classes.formControl} disabled>
-            <InputLabel htmlFor="htmlfor">Major1</InputLabel>
-            <Input id="Major" value={this.state.major} />
-            <FormHelperText>Your Major</FormHelperText>
-          </FormControl>
-        </Grid>
+            <Grid item>
+              <TextField
+                id="outlined-email-input"
+                label="yiningya@andrew.cmu.edu"
+                className={classes.textField}
+                type="email"
+                name="email"
+                autoComplete="email"
+                margin="normal"
+                variant="outlined"
+                disabled
+              />
+            </Grid>
+            <Grid item>
+              <FormControl
+                className={classes.formControl}
+                disabled={this.state.disableEditing}
+              >
+                <InputLabel htmlFor="htmlfor">Name</InputLabel>
+                <Input
+                  id="name"
+                  value={this.state.name}
+                  onChange={this.handleChange.bind(this)}
+                />
+                <FormHelperText>Your Name</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl className={classes.formControl} disabled>
+                <InputLabel htmlFor="htmlfor">Name</InputLabel>
+                <Input id="PassWord" value={this.state.name} />
+                <FormHelperText>Your Name</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl className={classes.formControl} disabled>
+                <InputLabel htmlFor="htmlfor">School</InputLabel>
+                <Input id="School" value={this.state.school} />
+                <FormHelperText>Your School</FormHelperText>
+              </FormControl>
+            </Grid>
+            <Grid item>
+              <FormControl className={classes.formControl} disabled>
+                <InputLabel htmlFor="htmlfor">Major1</InputLabel>
+                <Input id="Major" value={this.state.major} />
+                <FormHelperText>Your Major</FormHelperText>
+              </FormControl>
+            </Grid>
 
-        <Grid item>
-          <Input value="Yining Yang" className={classes.input} disabled />
-        </Grid>
-        <Grid>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={this.enableEdit.bind(this)}
-          >
-            Edit
-          </Button>
+            <Grid item>
+              <Input value="Yining Yang" className={classes.input} disabled />
+            </Grid>
+            <Grid>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={this.enableEdit.bind(this)}
+              >
+                Edit
+              </Button>
 
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            onClick={this.disableEdit.bind(this)}
-          >
-            Save
-          </Button>
-        </Grid>
-      </Grid>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={this.disableEdit.bind(this)}
+              >
+                Save
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
+      </div>
     );
   }
 }

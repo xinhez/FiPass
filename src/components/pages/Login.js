@@ -16,12 +16,13 @@ import {
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import DoneIcon from "@material-ui/icons/Done";
 import ArrowBackIcon from "@material-ui/icons/ArrowBackIos";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Grid from "@material-ui/core/Grid";
 import AddIcon from "@material-ui/icons/Add";
+
+import { connect } from "react-redux";
 
 const gradYears = [
   2010,
@@ -36,6 +37,7 @@ const gradYears = [
   2019,
   2020
 ];
+const degrees = ["Under Graduate", "PhD", "Master"];
 
 const style = theme => ({
   topoCSS: {
@@ -131,10 +133,31 @@ const style = theme => ({
     margin: theme.spacing.unit / 2
   },
   uploadButton: {
-    variant: "outlined"
+    variant: "outlined",
+    position: "absolute",
+    width: 204,
+    height: 108,
+    left: 173,
+    top: 170
   },
   uploadInput: {
     display: "none"
+  },
+  dialogContentText: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  uploadResumeFont: {
+    color: "#51A8DD",
+    textAlign: "center",
+    fontSize: 20,
+    fontStyle: "normal",
+    fontWeight: "normal",
+    position: "absolute",
+    width: 150,
+    height: 108,
+    left: 200,
+    top: 135
   }
 });
 
@@ -160,7 +183,6 @@ class FormDialog extends Component {
     this.state = {
       openStep: 0,
       email: "xxx@gmail.com",
-      UserName: "",
       PassWord: "",
       ComfirmedPassWord: "",
       FirstName: "",
@@ -172,7 +194,6 @@ class FormDialog extends Component {
       Major1: "",
       Major2: "",
       Phone: "",
-      selectedIndex: -1,
       SoftwreSkills: [
         { key: 0, label: "JavaScript" },
         { key: 1, label: "C++" },
@@ -187,12 +208,7 @@ class FormDialog extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleExit = this.handleExit.bind(this);
     this.handleSkillSelect = this.handleSkillSelect.bind(this);
-  }
-
-  createGradYear() {
-    var gradYears = Array();
-    for (var i = 1990; i <= 2020; i++) gradYears.push(i);
-    return gradYears;
+    this.handleMenuItemClick = this.handleMenuItemClick.bind(this);
   }
 
   handleStep(v, event) {
@@ -203,7 +219,6 @@ class FormDialog extends Component {
     } else {
       this.state.openStep += v;
     }
-    // console.log(this.state.openStep)
     this.setState({
       openStep: this.state.openStep
     });
@@ -222,7 +237,7 @@ class FormDialog extends Component {
   handleSkillSelect(v) {
     if (this.state.selectedSkills.includes(v)) {
       this.setState({
-        selectedSkills: this.state.selectedSkills.filter(function(idx) {
+        selectedSkills: this.state.selectedSkills.filter(idx => {
           return idx != v;
         })
       });
@@ -233,12 +248,9 @@ class FormDialog extends Component {
     }
   }
 
-  handleMenuItemClick(event, index) {
-    console.log(index);
-    console.log(this.state.GradYear);
+  handleMenuItemClick(name, event) {
     this.setState({
-      GradYear: gradYears[index],
-      selectedIndex: index
+      [name]: event.target.value
     });
   }
 
@@ -289,9 +301,6 @@ class FormDialog extends Component {
             />
           </DialogContent>
           <DialogActions>
-            {/* <Button className={classes.prevButton1} onClick={this.handleStep.bind(this, -1)} color="primary">
-              Cancel
-            </Button> */}
             <IconButton
               aria-label="Close"
               className={classes.closeButton}
@@ -321,7 +330,6 @@ class FormDialog extends Component {
             <Typography className={classes.topoCSS}>Sign up 2/4</Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>Second Sign up step</DialogContentText>
             {/* <form className={classes.formContainer} noValidate autoComplete="off"> */}
             <Grid container spacing={24}>
               <Grid item xs={6}>
@@ -360,57 +368,44 @@ class FormDialog extends Component {
                   value={this.state.School}
                 />
               </Grid>
-              {/* <FormControl>
-              <InputLabel>GradYear</InputLabel>
-              <Select
-                native
-                id="GradYear"
-                value={this.state.GradYear}
-                onChange={this.handleChange}
-              >
-                {gradYears.map((value, index) => (
-                  <option
-                    key={value.toString()}
-                    selected={index === this.state.selectedIndex}
-                    onClick={event =>
-                      this.handleMenuItemClick.bind(event, index)
-                    }
-                  >
-                    {value}
-                  </option>
-                ))}
-              </Select>
-            </FormControl> */}
+
               <Grid item xs={6}>
                 <TextField
                   autoFocus
                   select
                   margin="dense"
-                  id="GradYear"
+                  id="outlined-select-gradYear"
                   label="GradYear"
                   fullWidth
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleMenuItemClick.bind(this, "GradYear")}
                   value={this.state.GradYear}
+                  variant="outlined"
                 >
                   {gradYears.map((option, index) => (
-                    <MenuItem
-                      key={option.toString()}
-                      selected={index === this.state.selectedIndex}
-                      onClick={e => this.handleMenuItemClick.bind(e, index)}
-                    >
+                    <MenuItem key={option.toString()} value={option}>
                       {option}
                     </MenuItem>
                   ))}
                 </TextField>
               </Grid>
               <Grid item xs={6}>
-                <CommonInfoTextField
-                  id="Degree"
+                <TextField
+                  autoFocus
+                  select
+                  margin="dense"
+                  id="outlined-select-degree"
                   label="Degree"
-                  type="text"
-                  onChange={this.handleChange}
+                  fullWidth
+                  onChange={this.handleMenuItemClick.bind(this, "Degree")}
                   value={this.state.Degree}
-                />
+                  variant="outlined"
+                >
+                  {degrees.map((option, index) => (
+                    <MenuItem key={option.toString()} value={option}>
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
               <Grid item xs={12}>
                 <CommonInfoTextField
@@ -468,7 +463,7 @@ class FormDialog extends Component {
             <Typography className={classes.topoCSS}>Sign up 3/4</Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
+            <DialogContentText className={classes.dialogContentText}>
               Tap to define what defines you
             </DialogContentText>
             <Grid className={classes.chipRoot}>
@@ -523,8 +518,13 @@ class FormDialog extends Component {
             <Typography className={classes.topoCSS}>Sign up 4/4</Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText />
+            <DialogContentText className={classes.dialogContentText}>
+              Upload resume to help recruiter know you better
+            </DialogContentText>
             <Grid className={classes.chipRoot}>
+              <Typography className={classes.uploadResumeFont}>
+                Upload Resume
+              </Typography>
               <input
                 accept="image/*"
                 className={classes.uploadInput}
@@ -533,7 +533,11 @@ class FormDialog extends Component {
                 type="file"
               />
               <label htmlFor="contained-button-file">
-                <Button className={classes.uploadButton}>
+                <Button
+                  variant="contained"
+                  component="span"
+                  className={classes.uploadButton}
+                >
                   <AddIcon />
                 </Button>
               </label>
@@ -569,5 +573,9 @@ class FormDialog extends Component {
     );
   }
 }
+
+// const mapStateToProps = (state, ownProps) => {
+
+// }
 
 export default withStyles(style)(FormDialog);
