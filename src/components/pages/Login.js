@@ -21,6 +21,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBackIos";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Grid from "@material-ui/core/Grid";
+import AddIcon from "@material-ui/icons/Add";
 
 const gradYears = [
   2010,
@@ -128,6 +129,12 @@ const style = theme => ({
   },
   chip: {
     margin: theme.spacing.unit / 2
+  },
+  uploadButton: {
+    variant: "outlined"
+  },
+  uploadInput: {
+    display: "none"
   }
 });
 
@@ -437,9 +444,6 @@ class FormDialog extends Component {
                 root: classes.nextButtonStep2
               }}
               onClick={this.handleStep.bind(this, 1)}
-              // color="primary"
-              // size="medium"
-              // variant="contained"
             >
               <Typography className={classes.nextFont}>Next</Typography>
             </Button>
@@ -521,17 +525,18 @@ class FormDialog extends Component {
           <DialogContent>
             <DialogContentText />
             <Grid className={classes.chipRoot}>
-              {this.state.SoftwreSkills.map(data => {
-                return (
-                  <Chip
-                    key={data.key}
-                    label={data.label}
-                    className={classes.chip}
-                    // onClick={handleSkillSelect}
-                    deleteIcon={<DoneIcon />}
-                  />
-                );
-              })}
+              <input
+                accept="image/*"
+                className={classes.uploadInput}
+                id="contained-button-file"
+                multiple
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <Button className={classes.uploadButton}>
+                  <AddIcon />
+                </Button>
+              </label>
             </Grid>
           </DialogContent>
           <DialogActions>
