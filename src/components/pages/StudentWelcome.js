@@ -59,13 +59,76 @@ const styles = theme => ({
 
 class StudentWelcome extends Component {
   // props function pass way
+  //
+
+  constructor() {
+    super();
+    this.state = {
+      companies: [
+        {
+          id: 1,
+          name: "Google Inc.",
+          location: "San Francisco, CA, USA",
+          jd: "software engineer intern",
+          linkUrl: "https://www.google.com"
+        },
+        {
+          id: 2,
+          name: "Facebook Inc.",
+          location: "Melon Park, CA, USA",
+          jd: "software engineer intern",
+          linkUrl: "https://www.fb.com"
+        },
+        {
+          id: 3,
+          name: "Apple Inc.",
+          location: "Sunnyvale, CA, USA",
+          jd: "software engineer intern",
+          linkUrl: "https://www.apple.com"
+        }
+      ],
+      selectedCompanyID: 0,
+      selectedCompanyInfo: {
+        name: "Google Inc.",
+        location: "San Francisco, CA, USA",
+        jd: "software engineer intern",
+        linkUrl: "https://www.Google.com"
+      }
+    };
+    this.changeSelected = this.changeSelected.bind(this);
+  }
+
+  changeSelected(id) {
+    console.log("changeSelected to id", id);
+    this.setState((state, id) => ({
+      selectedCompanyID: id
+    }));
+
+    // const selectedCompanyInfo = {name:"Facebook Inc.",
+    //       location:"San Francisco, CA, USA",
+    //       jd:"software engineer intern",
+    //       linkUrl:"https://www.facebook.com"};
+    this.setState((state, selectedCompanyInfo) => ({
+      selectedCompanyInfo: {
+        name: "Facebook Inc.",
+        location: "San Francisco, CA, USA",
+        jd: "software engineer intern",
+        linkUrl: "https://www.facebook.com"
+      }
+    }));
+  }
   render() {
+    console.log("company info", this.state.selectedCompanyInfo);
     const { classes } = this.props;
     return (
       <div className={classes.root}>
         <Topbar />
         <Companybar />
-        <Content />
+        <Content
+          changeSelected={this.changeSelected}
+          companies={this.state.companies}
+          selectedCompanyInfo={this.state.selectedCompanyInfo}
+        />
       </div>
     );
   }

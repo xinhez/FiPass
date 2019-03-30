@@ -65,74 +65,94 @@ const styles = theme => ({
     maxHeight: "80%"
   },
   title: {
-    padding: "0 5%",
+    padding: "16px 5% 0",
+    "font-family": "Roboto",
+    "font-style": "normal",
     "font-weight": "bold",
-    "font-size": "xx-large"
+    "font-size": "20px",
+    "line-height": "normal",
+    color: "#000000"
   },
   padding5: {
     padding: "0 5% 2%"
   },
   locationText: {
-    "padding-top": "5px"
+    "padding-top": "5px",
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": 500,
+    "font-size": "16px",
+    "line-height": "normal",
+    color: "#858585"
   }
 });
 
-function CompanyDetailContent(props) {
-  const { classes } = props;
-  console.log(props);
-  return (
-    <div className={classes.root}>
-      <Paper className={`${classes.paper} ${classes.nopadding}`}>
-        <Grid item>
+class CompanyDetailContent extends React.Component {
+  render() {
+    const { classes } = this.props;
+    console.log(this.props);
+
+    return (
+      <div className={classes.root}>
+        <Paper className={`${classes.paper} ${classes.nopadding}`}>
           <Grid item>
-            <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src={props.imgSrc} />
-            </ButtonBase>
-          </Grid>
+            <Grid item>
+              <ButtonBase className={classes.image}>
+                <img
+                  className={classes.img}
+                  alt="complex"
+                  src={this.props.imgSrc}
+                />
+              </ButtonBase>
+            </Grid>
 
-          <Grid item xs container direction="column" spacing={16}>
-            <Grid item xs>
-              <Typography
-                gutterBottom
-                variant="subtitle1"
-                className={classes.title}
-              >
-                {props.name}
-              </Typography>
-
-              <Grid item xs container className={classes.padding5}>
-                <ButtonBase className={classes.locationImage}>
-                  <img
-                    className={classes.location}
-                    alt="complex"
-                    src={props.locationImg}
-                  />
-                </ButtonBase>
-                <Typography gutterBottom className={classes.locationText}>
-                  {props.location}
+            <Grid item xs container direction="column" spacing={16}>
+              <Grid item xs>
+                <Typography
+                  gutterBottom
+                  variant="subtitle1"
+                  className={classes.title}
+                >
+                  {this.props.name}
                 </Typography>
 
                 <Grid item xs container className={classes.padding5}>
-                  <ButtonBase className={classes.linkImage}>
+                  <ButtonBase className={classes.locationImage}>
                     <img
-                      className={classes.linkImg}
+                      className={classes.location}
                       alt="complex"
-                      src={props.linkImg}
+                      src={this.props.locationImg}
                     />
                   </ButtonBase>
-                  <a className={classes.locationText} href={props.linkUrl}>
-                    {props.linkUrl}
-                  </a>
-                </Grid>
-              </Grid>
+                  <Typography gutterBottom className={classes.locationText}>
+                    {this.props.location}
+                  </Typography>
 
-              <FloatingActionButtonZoom />
+                  <Grid item xs container className={classes.padding5}>
+                    <ButtonBase className={classes.linkImage}>
+                      <img
+                        className={classes.linkImg}
+                        alt="complex"
+                        src={this.props.linkImg}
+                      />
+                    </ButtonBase>
+                    <a
+                      className={classes.locationText}
+                      href={this.props.linkUrl}
+                    >
+                      {this.props.linkUrl}
+                    </a>
+                  </Grid>
+                </Grid>
+
+                <FloatingActionButtonZoom />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Paper>
-    </div>
-  );
+        </Paper>
+      </div>
+    );
+  }
 }
 
 CompanyDetailContent.propTypes = {

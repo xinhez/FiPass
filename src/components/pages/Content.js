@@ -31,13 +31,13 @@ import Topbar from "./Topbar.js";
 import Companybar from "./Companybar.js";
 import CompanyDetailContent from "./CompanyDetailContent.js";
 import LoginFormStu from "./LoginFormStu.js";
-import { Paper, Grid, Button, withStyles } from "@material-ui/core";
+import { Paper, Grid, Button, withStyles, ButtonBase } from "@material-ui/core";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 // import { fetchCompanies } from "../../actions/student";
 const styles = theme => ({
   root: {
-    "margin-right": 30
+    "margin-right": "2%"
   },
   ulmargin: {
     "margin-top": 0
@@ -53,14 +53,38 @@ class CompanyList extends Component {
   // componentDidMount() {
   //   this.props.dispatch(fetchCompanies());
   // }
-  // renderCompanies(companies){
-  //   return companies.map(company => {
-  //     return this.renderCompanyCards(company.id, company.name, company.location, company.jd);
-  //   });
-  // }
+  /*
+  <CompanyCard
+        key={company.id}
+        id={company.id}
+        imgSrc={logo}
+        heartSrc={heart}
+        name={company.name}
+        location={company.location}
+        locationImg={locationImg}
+        jd={company.jd}
+      />
+   */
+
+  renderCompanies(companies) {
+    console.log("companies:", companies);
+    const { classes } = this.props;
+    const listItems = companies.map(company =>
+      this.renderCompanyCards(
+        company.id,
+        company.name,
+        company.location,
+        company.jd
+      )
+    );
+
+    return <ul className={classes.ulmargin}>{listItems}</ul>;
+  }
   renderCompanyCards(id_, name_, location_, jd_) {
     return (
+      // <ButtonBase onClick={(e) => this.handleClick(id_, e)}>
       <CompanyCard
+        key={id_}
         id={id_}
         imgSrc={logo}
         heartSrc={heart}
@@ -68,7 +92,9 @@ class CompanyList extends Component {
         location={location_}
         locationImg={locationImg}
         jd={jd_}
+        changeSelected={this.props.changeSelected}
       />
+      // </ButtonBase>
     );
   }
 
@@ -83,82 +109,25 @@ class CompanyList extends Component {
     // if (loading) {
     //   return <div>loading...</div>;
     // }
+    /*
+    {this.renderCompanyCards(
+      1,
+      "Google",
+      "San Francisco",
+      "Technical Solution Specialist Intern Digital Sales Intern"
+    )} 
+     */
+
     const { classes } = this.props;
     return (
       <div className={this.props.className}>
-        <ul className={classes.ulmargin}>
-          {this.renderCompanyCards(
-            1,
-            "Google",
-            "San Francisco",
-            "Technical Solution Specialist Intern Digital Sales Intern"
-          )}
-          {this.renderCompanyCards(
-            1,
-            "Google",
-            "San Francisco",
-            "Technical Solution Specialist Intern Digital Sales Intern"
-          )}
-          {this.renderCompanyCards(
-            1,
-            "Google",
-            "San Francisco",
-            "Technical Solution Specialist Intern Digital Sales Intern"
-          )}
-          {this.renderCompanyCards(
-            1,
-            "Google",
-            "San Francisco",
-            "Technical Solution Specialist Intern Digital Sales Intern"
-          )}
-          {this.renderCompanyCards(
-            1,
-            "Google",
-            "San Francisco",
-            "Technical Solution Specialist Intern Digital Sales Intern"
-          )}
-          {this.renderCompanyCards(
-            1,
-            "Google",
-            "San Francisco",
-            "Technical Solution Specialist Intern Digital Sales Intern"
-          )}
-        </ul>
+        {this.renderCompanies(this.props.companies)}
       </div>
     );
   }
 }
 
 CompanyList.propTypes = {
-  classes: PropTypes.object.isRequired
-};
-
-class CompanyDetail extends Component {
-  render() {
-    return (
-      <div className={this.props.className}>
-        <img src={logo} alt="logo" />
-        <div className="CompanyDetail-name">
-          <div className="inline">
-            <p>CompanyXXX</p>
-            <p>Location</p>
-          </div>
-          <button className="right">Apply</button>
-        </div>
-        <div>
-          <button>Company</button>
-          <button>Position</button>
-        </div>
-        s
-        <div className="CompanyDetail-content">
-          <p>Content</p>
-        </div>
-      </div>
-    );
-  }
-}
-
-CompanyDetail.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
@@ -200,14 +169,21 @@ class Content extends Component {
     //   return <div>loading...</div>;
     // }
     const { classes } = this.props;
+    const { selectedCompanyInfo } = this.props;
+    // console.log(this.props)
     return (
       <div classes={classes.root}>
-        <CompanyList className={classes.CompanyList} classes={classes} />
+        <CompanyList
+          className={classes.CompanyList}
+          classes={classes}
+          companies={this.props.companies}
+          changeSelected={this.props.changeSelected}
+        />
         {this.renderCompanyDetail(
-          "google",
-          "San Francisco, CA, USA",
-          "software engineer intern",
-          "https://www.google.com"
+          selectedCompanyInfo.name,
+          selectedCompanyInfo.location,
+          selectedCompanyInfo.jd,
+          selectedCompanyInfo.linkUrl
         )}
       </div>
     );

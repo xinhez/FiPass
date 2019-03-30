@@ -76,59 +76,79 @@ const styles = theme => ({
   }
 });
 
-function CompanyCard(props) {
-  const { classes } = props;
-  console.log(props);
-  return (
-    <div key={props.id} className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container spacing={16}>
-          <Grid item xs={3}>
-            <Link to={`/testCompanyCard`} className={classes.image}>
-              <img className={classes.img} alt="complex" src={props.imgSrc} />
-            </Link>
-          </Grid>
+class CompanyCard extends React.Component {
+  constructor(props) {
+    super(props);
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-          <Grid item xs={9} sm container>
-            <Grid item xs container direction="column" spacing={16}>
-              <Grid item xs>
-                <Typography
-                  gutterBottom
-                  variant="subtitle1"
-                  className={classes.companyNameFont}
-                >
-                  {props.name}
-                </Typography>
+  handleClick(id) {
+    console.log("set id", id);
+    this.props.changeSelected(id);
+  }
 
-                <Grid item xs container>
-                  <ButtonBase className={classes.locationImage}>
-                    <img
-                      className={classes.location}
-                      alt="complex"
-                      src={props.locationImg}
-                    />
-                  </ButtonBase>
-                  <Typography gutterBottom className={classes.locationNameFont}>
-                    {props.location}
-                  </Typography>
-                </Grid>
+  render() {
+    const { classes } = this.props;
+    console.log(this.props);
+    return (
+      <div key={this.props.id} className={classes.root}>
+        <Paper className={classes.paper}>
+          <Grid container spacing={16}>
+            <Grid item xs={3}>
+              <ButtonBase onClick={e => this.handleClick(this.props.id, e)}>
+                <img
+                  className={classes.img}
+                  alt="complex"
+                  src={this.props.imgSrc}
+                />
+              </ButtonBase>
+            </Grid>
 
-                <Grid item xs container>
+            <Grid item xs={9} sm container>
+              <Grid item xs container direction="column" spacing={16}>
+                <Grid item xs>
                   <Typography
-                    color="textSecondary"
-                    className={classes.companyShortDescriptionFont}
+                    gutterBottom
+                    variant="subtitle1"
+                    className={classes.companyNameFont}
                   >
-                    {props.jd}
+                    {this.props.name}
                   </Typography>
-                  <Link to={`/more`}>and more</Link>
+
+                  <Grid item xs container>
+                    <ButtonBase className={classes.locationImage}>
+                      <img
+                        className={classes.location}
+                        alt="complex"
+                        src={this.props.locationImg}
+                      />
+                    </ButtonBase>
+                    <Typography
+                      gutterBottom
+                      className={classes.locationNameFont}
+                    >
+                      {this.props.location}
+                    </Typography>
+                  </Grid>
+
+                  <Grid item xs container>
+                    <Typography
+                      color="textSecondary"
+                      className={classes.companyShortDescriptionFont}
+                    >
+                      {this.props.jd}
+                    </Typography>
+                    <Link to={`/more`}>and more</Link>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Paper>
-    </div>
-  );
+        </Paper>
+      </div>
+    );
+  }
 }
 
 CompanyCard.propTypes = {
