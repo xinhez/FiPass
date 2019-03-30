@@ -116,7 +116,7 @@ const style = theme => ({
     width: 204,
     height: 50,
     left: 170,
-    top: 600,
+    top: 610,
     background: "#51A8DD",
     borderRadius: 5
   },
@@ -173,12 +173,13 @@ class FormDialog extends Component {
         { key: 3, label: "iOS" },
         { key: 4, label: "Java" }
       ],
-      selectedSKills: []
+      selectedSkills: [-1]
     };
 
     this.handleStep = this.handleStep.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleExit = this.handleExit.bind(this);
+    this.handleSkillSelect = this.handleSkillSelect.bind(this);
   }
 
   createGradYear() {
@@ -188,7 +189,7 @@ class FormDialog extends Component {
   }
 
   handleStep(v, event) {
-    if (this.state.openStep + v > 3) {
+    if (this.state.openStep + v > 4) {
       this.state.openStep = 0;
     } else if (this.state.openStep + v < 0) {
       this.state.openStep = 0;
@@ -211,7 +212,19 @@ class FormDialog extends Component {
     this.setState({ [event.target.id]: event.target.value });
   }
 
-  handleSkillSelect(event) {}
+  handleSkillSelect(v) {
+    if (this.state.selectedSkills.includes(v)) {
+      this.setState({
+        selectedSkills: this.state.selectedSkills.filter(function(idx) {
+          return idx != v;
+        })
+      });
+    } else {
+      this.setState({
+        selectedSkills: [...this.state.selectedSkills, v]
+      });
+    }
+  }
 
   handleMenuItemClick(event, index) {
     console.log(index);
@@ -455,6 +468,59 @@ class FormDialog extends Component {
               Tap to define what defines you
             </DialogContentText>
             <Grid className={classes.chipRoot}>
+              {this.state.SoftwreSkills.map((data, idx) => {
+                return (
+                  <Chip
+                    key={data.key}
+                    label={data.label}
+                    className={classes.chip}
+                    onClick={this.handleSkillSelect.bind(this, idx)}
+                    color={
+                      this.state.selectedSkills.includes(idx) ? "primary" : ""
+                    }
+                  />
+                );
+              })}
+            </Grid>
+          </DialogContent>
+          <DialogActions>
+            <IconButton
+              className={classes.prevButton}
+              onClick={this.handleStep.bind(this, -1)}
+            >
+              <ArrowBackIcon />
+            </IconButton>
+            <Button
+              classes={{
+                root: classes.nextButtonStep1
+              }}
+              onClick={this.handleStep.bind(this, 1)}
+            >
+              <Typography className={classes.nextFont}>Next</Typography>
+            </Button>
+            <IconButton
+              aria-label="Close"
+              className={classes.closeButton}
+              onClick={this.handleExit}
+            >
+              <CloseIcon />
+            </IconButton>
+          </DialogActions>
+        </Dialog>
+        <Dialog
+          open={this.state.openStep === 4}
+          onClose={this.handleClose}
+          aria-labelledby="form-dialog-title"
+          classes={{
+            paper: classes.dialogBoxStep4
+          }}
+        >
+          <DialogTitle id="form-dialog-title" disableTypography={true}>
+            <Typography className={classes.topoCSS}>Sign up 4/4</Typography>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText />
+            <Grid className={classes.chipRoot}>
               {this.state.SoftwreSkills.map(data => {
                 return (
                   <Chip
@@ -476,13 +542,14 @@ class FormDialog extends Component {
               <ArrowBackIcon />
             </IconButton>
             <Button
-              className={classes.nextButton}
+              classes={{
+                root: classes.nextButtonStep1
+              }}
               onClick={this.handleStep.bind(this, 1)}
-              color="primary"
-              size="medium"
-              variant="contained"
             >
-              <Typography className={classes.nextFont}>Next</Typography>
+              <Typography className={classes.nextFont}>
+                Create Account
+              </Typography>
             </Button>
             <IconButton
               aria-label="Close"
