@@ -7,11 +7,20 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import MenuItem from "@material-ui/core/MenuItem";
-import { FormControl, InputLabel, Select, withStyles } from "@material-ui/core";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  withStyles,
+  Paper
+} from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import DoneIcon from "@material-ui/icons/Done";
 import ArrowBackIcon from "@material-ui/icons/ArrowBackIos";
 import Typography from "@material-ui/core/Typography";
+import Chip from "@material-ui/core/Chip";
+import Grid from "@material-ui/core/Grid";
 
 const gradYears = [
   2010,
@@ -28,12 +37,58 @@ const gradYears = [
 ];
 
 const style = theme => ({
-  dialogTitle: {
-    // color: 'blue',
+  topoCSS: {
+    color: "#51A8DD",
     textAlign: "center",
-    color: "#2EA9DF",
-    fontFamily: "Roboto",
-    fontSize: 30
+    fontSize: 30,
+    fontStyle: "normal",
+    fontWeight: "normal"
+  },
+  formContainer: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  nextFont: {
+    color: "#FFFFFF",
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: 500
+  },
+  dialogBoxStep1: {
+    position: "absolute",
+    width: 544,
+    height: 428,
+    left: 457,
+    top: 199,
+    background: "#FFFFFF",
+    borderRadius: 15
+  },
+  dialogBoxStep2: {
+    position: "absolute",
+    width: 543,
+    height: 678,
+    left: 458,
+    top: 120,
+    background: "#FFFFFF",
+    borderRadius: 15
+  },
+  dialogBoxStep3: {
+    position: "absolute",
+    width: 543,
+    height: 464,
+    left: 458,
+    top: 200,
+    background: "#FFFFFF",
+    borderRadius: 15
+  },
+  dialogBoxStep4: {
+    position: "absolute",
+    width: 543,
+    height: 461,
+    left: 458,
+    top: 200,
+    background: "#FFFFFF",
+    borderRadius: 15
   },
   closeButton: {
     position: "absolute",
@@ -47,12 +102,32 @@ const style = theme => ({
     top: theme.spacing.unit * 2,
     color: theme.palette.grey[500]
   },
-  nextButton: {
+  nextButtonStep1: {
+    position: "absolute",
+    width: 204,
+    height: 50,
+    left: 170,
+    top: 340,
+    background: "#51A8DD",
+    borderRadius: 5
+  },
+  nextButtonStep2: {
+    position: "absolute",
+    width: 204,
+    height: 50,
+    left: 170,
+    top: 600,
+    background: "#51A8DD",
+    borderRadius: 5
+  },
+  chipRoot: {
     display: "flex",
-    flexDirection: "column",
-    margin: "auto",
-    width: "fit-content",
-    background: "#2EA9DF"
+    justifyContent: "center",
+    flexWrap: "wrap",
+    padding: theme.spacing.unit / 2
+  },
+  chip: {
+    margin: theme.spacing.unit / 2
   }
 });
 
@@ -67,6 +142,7 @@ function CommonInfoTextField(props) {
       fullWidth
       onChange={props.onChange}
       value={props.value}
+      variant="outlined"
     />
   );
 }
@@ -89,7 +165,15 @@ class FormDialog extends Component {
       Major1: "",
       Major2: "",
       Phone: "",
-      selectedIndex: -1
+      selectedIndex: -1,
+      SoftwreSkills: [
+        { key: 0, label: "JavaScript" },
+        { key: 1, label: "C++" },
+        { key: 2, label: "Android" },
+        { key: 3, label: "iOS" },
+        { key: 4, label: "Java" }
+      ],
+      selectedSKills: []
     };
 
     this.handleStep = this.handleStep.bind(this);
@@ -127,6 +211,8 @@ class FormDialog extends Component {
     this.setState({ [event.target.id]: event.target.value });
   }
 
+  handleSkillSelect(event) {}
+
   handleMenuItemClick(event, index) {
     console.log(index);
     console.log(this.state.GradYear);
@@ -152,17 +238,14 @@ class FormDialog extends Component {
         <Dialog
           open={this.state.openStep === 1}
           onClose={this.handleClose}
-          // aria-labelledby="form-dialog-title"
+          classes={{
+            paper: classes.dialogBoxStep1
+          }}
         >
-          <DialogTitle
-            id="form-dialog-title"
-            className={classes.dialogTitle}
-            disableTypography={true}
-          >
-            Sign up 1/3
+          <DialogTitle id="form-dialog-title" disableTypography={true}>
+            <Typography className={classes.topoCSS}>Sign up 1/4</Typography>
           </DialogTitle>
           <DialogContent>
-            {/* <DialogContentText>Let's get started</DialogContentText> */}
             <CommonInfoTextField
               id="email"
               label="Email"
@@ -197,13 +280,12 @@ class FormDialog extends Component {
               <CloseIcon />
             </IconButton>
             <Button
-              className={classes.nextButton}
+              classes={{
+                root: classes.nextButtonStep1
+              }}
               onClick={this.handleStep.bind(this, 1)}
-              color="primary"
-              size="medium"
-              variant="contained"
             >
-              Next Step
+              <Typography className={classes.nextFont}>Next</Typography>
             </Button>
           </DialogActions>
         </Dialog>
@@ -211,52 +293,54 @@ class FormDialog extends Component {
           open={this.state.openStep === 2}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          classes={{
+            paper: classes.dialogBoxStep2
+          }}
         >
-          <DialogTitle
-            id="form-dialog-title"
-            className={classes.dialogTitle}
-            disableTypography={true}
-          >
-            Sign up 2/3
+          <DialogTitle id="form-dialog-title" disableTypography={true}>
+            <Typography className={classes.topoCSS}>Sign up 2/4</Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContentText>Second Sign up step</DialogContentText>
-            <CommonInfoTextField
-              id="FirstName"
-              label="FirstName"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.FirstName}
-            />
-            <CommonInfoTextField
-              id="MiddleName"
-              label="MiddleName"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.MiddleName}
-            />
-            <CommonInfoTextField
-              id="LastName"
-              label="LastName"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.LastName}
-            />
-            <CommonInfoTextField
-              id="School"
-              label="School"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.School}
-            />
-            <CommonInfoTextField
-              id="Degree"
-              label="Degree"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.Degree}
-            />
-            <FormControl>
+            {/* <form className={classes.formContainer} noValidate autoComplete="off"> */}
+            <Grid container spacing={24}>
+              <Grid item xs={6}>
+                <CommonInfoTextField
+                  id="FirstName"
+                  label="FirstName"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.FirstName}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <CommonInfoTextField
+                  id="LastName"
+                  label="LastName"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.LastName}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <CommonInfoTextField
+                  id="Phone"
+                  label="Phone"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.Phone}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <CommonInfoTextField
+                  id="School"
+                  label="School"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.School}
+                />
+              </Grid>
+              {/* <FormControl>
               <InputLabel>GradYear</InputLabel>
               <Select
                 native
@@ -276,48 +360,57 @@ class FormDialog extends Component {
                   </option>
                 ))}
               </Select>
-            </FormControl>
-            <TextField
-              autoFocus
-              select
-              margin="dense"
-              id="GradYear"
-              label="GradYear"
-              fullWidth
-              onChange={this.handleChange.bind(this)}
-              value={this.state.GradYear}
-            >
-              {gradYears.map((option, index) => (
-                <MenuItem
-                  key={option.toString()}
-                  selected={index === this.state.selectedIndex}
-                  onClick={e => this.handleMenuItemClick.bind(e, index)}
+            </FormControl> */}
+              <Grid item xs={6}>
+                <TextField
+                  autoFocus
+                  select
+                  margin="dense"
+                  id="GradYear"
+                  label="GradYear"
+                  fullWidth
+                  onChange={this.handleChange.bind(this)}
+                  value={this.state.GradYear}
                 >
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
-            <CommonInfoTextField
-              id="Major1"
-              label="Major1"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.Major1}
-            />
-            <CommonInfoTextField
-              id="Major2"
-              label="Major2"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.Major2}
-            />
-            <CommonInfoTextField
-              id="Phone"
-              label="Phone"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.Phone}
-            />
+                  {gradYears.map((option, index) => (
+                    <MenuItem
+                      key={option.toString()}
+                      selected={index === this.state.selectedIndex}
+                      onClick={e => this.handleMenuItemClick.bind(e, index)}
+                    >
+                      {option}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              <Grid item xs={6}>
+                <CommonInfoTextField
+                  id="Degree"
+                  label="Degree"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.Degree}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <CommonInfoTextField
+                  id="Major1"
+                  label="Major1"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.Major1}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <CommonInfoTextField
+                  id="Major2"
+                  label="Major2"
+                  type="text"
+                  onChange={this.handleChange}
+                  value={this.state.Major2}
+                />
+              </Grid>
+            </Grid>
           </DialogContent>
           <DialogActions>
             <IconButton
@@ -327,13 +420,15 @@ class FormDialog extends Component {
               <ArrowBackIcon />
             </IconButton>
             <Button
-              className={classes.nextButton}
+              classes={{
+                root: classes.nextButtonStep2
+              }}
               onClick={this.handleStep.bind(this, 1)}
-              color="primary"
-              size="medium"
-              variant="contained"
+              // color="primary"
+              // size="medium"
+              // variant="contained"
             >
-              Next Step
+              <Typography className={classes.nextFont}>Next</Typography>
             </Button>
             <IconButton
               aria-label="Close"
@@ -348,30 +443,30 @@ class FormDialog extends Component {
           open={this.state.openStep === 3}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
+          classes={{
+            paper: classes.dialogBoxStep3
+          }}
         >
-          <DialogTitle
-            id="form-dialog-title"
-            className={classes.dialogTitle}
-            disableTypography={true}
-          >
-            Sign up 3/3
+          <DialogTitle id="form-dialog-title" disableTypography={true}>
+            <Typography className={classes.topoCSS}>Sign up 3/4</Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>Last Sign up step!</DialogContentText>
-            <CommonInfoTextField
-              id="Phone"
-              label="Phone"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.Phone}
-            />
-            <CommonInfoTextField
-              id="Phone"
-              label="Phone"
-              type="text"
-              onChange={this.handleChange}
-              value={this.state.Phone}
-            />
+            <DialogContentText>
+              Tap to define what defines you
+            </DialogContentText>
+            <Grid className={classes.chipRoot}>
+              {this.state.SoftwreSkills.map(data => {
+                return (
+                  <Chip
+                    key={data.key}
+                    label={data.label}
+                    className={classes.chip}
+                    // onClick={handleSkillSelect}
+                    deleteIcon={<DoneIcon />}
+                  />
+                );
+              })}
+            </Grid>
           </DialogContent>
           <DialogActions>
             <IconButton
@@ -387,7 +482,7 @@ class FormDialog extends Component {
               size="medium"
               variant="contained"
             >
-              Next Step
+              <Typography className={classes.nextFont}>Next</Typography>
             </Button>
             <IconButton
               aria-label="Close"
