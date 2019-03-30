@@ -4,6 +4,11 @@ import { withStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
+import PositionCard from "./PositionCard.js";
+import logo from "../test-img/test-logo.jpg";
+import linkImg from "../test-img/link.png";
+import locationImg from "../test-img/location.png";
+import heart from "../test-img/heart.png";
 
 const styles = theme => ({
   root: {
@@ -72,9 +77,44 @@ class FloatingActionButtonZoom extends React.Component {
     this.setState({ value });
   };
 
+  renderPositions(positions) {
+    console.log("positions:", positions);
+    const { classes } = this.props;
+    const listItems = positions.map(position =>
+      this.renderPositionCard(
+        position.id,
+        position.role,
+        position.location,
+        position.jd
+      )
+    );
+    return <ul className={classes.ulmargin}>{listItems}</ul>;
+  }
+
+  renderPositionCard(id_, role_, location_, jd_) {
+    console.log("renderPositionCard", this.props);
+    return (
+      // <ButtonBase onClick={(e) => this.handleClick(id_, e)}>
+      <PositionCard
+        key={id_}
+        id={id_}
+        company_id={this.props.company_id}
+        imgSrc={logo}
+        heartSrc={heart}
+        name={role_}
+        location={location_}
+        locationImg={locationImg}
+        jd={jd_}
+        likePosition={this.props.likePosition}
+      />
+      // </ButtonBase>
+    );
+  }
+
   render() {
     const { classes } = this.props;
     const { value } = this.state;
+    // const { position } = this.props;
 
     return (
       <div className={classes.root}>
@@ -99,9 +139,8 @@ class FloatingActionButtonZoom extends React.Component {
             Ant Design UI powered by Material-UI
           </Typography>
         )}
-        {value == 1 && (
-          <Typography className={classes.typography}>test</Typography>
-        )}
+
+        {value == 1 && this.renderPositions(this.props.positions)}
       </div>
     );
   }

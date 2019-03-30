@@ -6,6 +6,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import FloatingActionButtonZoom from "./FloatingActionButtonZoom.js";
+
 const styles = theme => ({
   root: {
     display: "inline-block",
@@ -145,7 +146,11 @@ class CompanyDetailContent extends React.Component {
                   </Grid>
                 </Grid>
 
-                <FloatingActionButtonZoom />
+                <FloatingActionButtonZoom
+                  company_id={this.props.id}
+                  likePosition={this.props.likePosition}
+                  positions={this.props.positions}
+                />
               </Grid>
             </Grid>
           </Grid>

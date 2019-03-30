@@ -5,6 +5,10 @@ import { Paper, Grid, Button } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { Link } from "react-router-dom";
+import heart from "../test-img/heart.png";
+import drawdown from "../test-img/drawdown.png";
+import drawup from "../test-img/drawup.png";
+
 const styles = theme => ({
   container: {
     display: "grid",
@@ -12,16 +16,17 @@ const styles = theme => ({
     gridGap: `${theme.spacing.unit * 3}px`
   },
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    margin: "2.5% 0"
   },
   paper: {
     padding: theme.spacing.unit * 2,
     margin: "auto",
-    maxWidth: 500
+    maxWidth: "90%"
   },
   image: {
-    width: 128,
-    height: 128
+    // width: 128,
+    // height: 128
   },
   img: {
     margin: "auto",
@@ -56,15 +61,15 @@ const styles = theme => ({
     "font-weight": 500,
     "font-size": "16px",
     "line-height": "normal",
-    color: "#858585"
+    color: "#A8A8A8"
   },
-  companyNameFont: {
+  PostionNameFont: {
     "font-family": "Roboto",
     "font-style": "normal",
     "font-weight": "bold",
     "font-size": "18px",
     "line-height": "normal",
-    color: "#000000"
+    color: "#51A8DD"
   },
   companyShortDescriptionFont: {
     "font-family": "Roboto",
@@ -73,63 +78,110 @@ const styles = theme => ({
     "font-size": "14px",
     "line-height": "20px",
     color: "#2e2e2e"
+  },
+  drawdownImage: {
+    width: 30,
+    height: 30
+  },
+  drawdown: {},
+  alignright: {
+    display: "flex",
+    "justify-content": "flex-end"
   }
 });
 
-function PositionCard(props) {
-  const { classes } = props;
-  console.log(props);
-  return (
-    <div key={props.id} className={classes.root}>
-      <Paper className={classes.paper}>
-        <Grid container spacing={16}>
-          <Grid item xs={3}>
-            <Link to={`/testCompanyCard`} className={classes.image}>
-              <img className={classes.img} alt="complex" src={props.imgSrc} />
-            </Link>
-          </Grid>
+class PositionCard extends React.Component {
+  constructor(props) {
+    super(props);
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-          <Grid item xs={9} sm container>
-            <Grid item xs container direction="column" spacing={16}>
-              <Grid item xs>
-                <Typography
-                  gutterBottom
-                  variant="subtitle1"
-                  className={classes.companyNameFont}
-                >
-                  {props.name}
-                </Typography>
+  handleClick(company_id, position_id) {
+    console.log("props", this.props);
+    console.log("set company_id", company_id);
+    console.log("set position_id", position_id);
+    this.props.likePosition(company_id, position_id);
+  }
 
+  render() {
+    const { classes } = this.props;
+    console.log(this.props);
+    /*
+    <Link to={`/testCompanyCard`} className={classes.image}>
+                <img className={classes.img} alt="complex" src={this.props.imgSrc} />
+              </Link>
+
+     */
+    return (
+      <div key={this.props.id} className={classes.root}>
+        <Paper className={classes.paper}>
+          <Grid container spacing={16}>
+            <Grid item xs={1}>
+              <ButtonBase className={classes.image}>
+                <img
+                  className={classes.img}
+                  alt="complex"
+                  src={this.props.imgSrc}
+                />
+              </ButtonBase>
+            </Grid>
+
+            <Grid item xs={10} sm container>
+              <Grid item xs container direction="column" spacing={16}>
                 <Grid item xs>
-                  <Typography gutterBottom className={classes.locationNameFont}>
-                    {props.location}
-                  </Typography>
-                </Grid>
-
-                <Grid item xs container>
                   <Typography
-                    color="textSecondary"
-                    className={classes.companyShortDescriptionFont}
+                    gutterBottom
+                    variant="subtitle1"
+                    className={classes.PostionNameFont}
                   >
-                    {props.jd}
+                    {this.props.name}
                   </Typography>
+
+                  <Grid item xs>
+                    <Typography
+                      gutterBottom
+                      className={classes.locationNameFont}
+                    >
+                      {this.props.location}
+                    </Typography>
+                  </Grid>
+
+                  <Grid item xs container>
+                    <Typography
+                      color="textSecondary"
+                      className={classes.companyShortDescriptionFont}
+                    >
+                      {this.props.jd}
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
+            <Grid item xs={1} className={classes.alignright}>
+              <ButtonBase
+                className={classes.heartImage}
+                onClick={e =>
+                  this.handleClick(this.props.company_id, this.props.id, e)
+                }
+              >
+                <img
+                  className={classes.heart}
+                  alt="complex"
+                  src={this.props.heartSrc}
+                />
+              </ButtonBase>
+            </Grid>
           </Grid>
-          <Grid>
-            <ButtonBase className={classes.heartImage}>
-              <img
-                className={classes.heart}
-                alt="complex"
-                src={props.heartImg}
-              />
+          <Grid className={classes.alignright}>
+            <ButtonBase className={classes.drawdownImage}>
+              <img className={classes.drawdown} alt="complex" src={drawup} />
             </ButtonBase>
           </Grid>
-        </Grid>
-      </Paper>
-    </div>
-  );
+        </Paper>
+      </div>
+    );
+  }
 }
 
 PositionCard.propTypes = {

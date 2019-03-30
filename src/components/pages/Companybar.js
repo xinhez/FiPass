@@ -78,11 +78,28 @@ const styles = theme => ({
 });
 
 class Companybar extends Component {
-  renderButton(string) {
+  constructor(props) {
+    super(props);
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(filter) {
+    console.log("set filter", filter);
+    this.props.changeFilter(filter);
+  }
+
+  renderButton(filter, string) {
     const { classes } = this.props;
     return (
       <Grid item xs={2}>
-        <button className={classes.button}> {string} </button>
+        <button
+          className={classes.button}
+          onClick={e => this.handleClick(filter, e)}
+        >
+          {" "}
+          {string}{" "}
+        </button>
       </Grid>
     );
   }
@@ -91,10 +108,10 @@ class Companybar extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={24} className={classes.marginleft}>
-          {this.renderButton("Internship")}
-          {this.renderButton("Full-Time job")}
-          {this.renderButton("Part-Time")}
-          {this.renderButton("Liked Companies")}
+          {this.renderButton("intern", "Internship")}
+          {this.renderButton("ft", "Full-Time job")}
+          {this.renderButton("pt", "Part-Time")}
+          {this.renderButton("liked", "Liked Companies")}
         </Grid>
       </div>
     );

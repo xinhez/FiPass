@@ -141,10 +141,11 @@ class Content extends Component {
   //   });
   // }
 
-  renderCompanyDetail(name_, location_, jd_, linkUrl_) {
+  renderCompanyDetail(id_, name_, location_, jd_, linkUrl_, positions_) {
     const { classes } = this.props;
     return (
       <CompanyDetailContent
+        id={id_}
         classes={classes}
         imgSrc={background}
         heartSrc={heart}
@@ -154,6 +155,8 @@ class Content extends Component {
         linkImg={linkImg}
         linkUrl={linkUrl_}
         jd={jd_}
+        positions={positions_}
+        likePosition={this.props.likePosition}
       />
     );
   }
@@ -170,7 +173,7 @@ class Content extends Component {
     // }
     const { classes } = this.props;
     const { selectedCompanyInfo } = this.props;
-    // console.log(this.props)
+    console.log("Content", this.props);
     return (
       <div classes={classes.root}>
         <CompanyList
@@ -180,10 +183,12 @@ class Content extends Component {
           changeSelected={this.props.changeSelected}
         />
         {this.renderCompanyDetail(
+          selectedCompanyInfo.id,
           selectedCompanyInfo.name,
           selectedCompanyInfo.location,
           selectedCompanyInfo.jd,
-          selectedCompanyInfo.linkUrl
+          selectedCompanyInfo.linkUrl,
+          selectedCompanyInfo.positions
         )}
       </div>
     );

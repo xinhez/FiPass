@@ -89,13 +89,32 @@ class StudentWelcome extends Component {
       ],
       selectedCompanyID: 0,
       selectedCompanyInfo: {
+        id: 3,
         name: "Google Inc.",
         location: "San Francisco, CA, USA",
         jd: "software engineer intern",
-        linkUrl: "https://www.Google.com"
+        linkUrl: "https://www.Google.com",
+        positions: [
+          {
+            id: 1,
+            role: "Lead UX Designer Lead Designer",
+            location: "San Francisco, USA",
+            jd:
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+          },
+          {
+            id: 2,
+            role: "Lead UX Designer Lead Designer",
+            location: "San Francisco, USA",
+            jd:
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+          }
+        ]
       }
     };
     this.changeSelected = this.changeSelected.bind(this);
+    this.changeFilter = this.changeFilter.bind(this);
+    this.likePosition = this.likePosition.bind(this);
   }
 
   changeSelected(id) {
@@ -110,12 +129,37 @@ class StudentWelcome extends Component {
     //       linkUrl:"https://www.facebook.com"};
     this.setState((state, selectedCompanyInfo) => ({
       selectedCompanyInfo: {
+        id: 3,
         name: "Facebook Inc.",
         location: "San Francisco, CA, USA",
         jd: "software engineer intern",
-        linkUrl: "https://www.facebook.com"
+        linkUrl: "https://www.facebook.com",
+        positions: [
+          {
+            id: 1,
+            role: "Lead UX Designer Lead Designer",
+            location: "San Francisco, USA",
+            jd:
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+          },
+          {
+            id: 2,
+            role: "Lead UX Designer Lead Designer",
+            location: "San Francisco, USA",
+            jd:
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+          }
+        ]
       }
     }));
+  }
+
+  changeFilter(filter) {
+    console.log("changeFilter", filter);
+  }
+
+  likePosition(company_id, position_id) {
+    console.log("company_id", company_id, "position_id", position_id);
   }
   render() {
     console.log("company info", this.state.selectedCompanyInfo);
@@ -123,9 +167,10 @@ class StudentWelcome extends Component {
     return (
       <div className={classes.root}>
         <Topbar />
-        <Companybar />
+        <Companybar changeFilter={this.changeFilter} />
         <Content
           changeSelected={this.changeSelected}
+          likePosition={this.likePosition}
           companies={this.state.companies}
           selectedCompanyInfo={this.state.selectedCompanyInfo}
         />
