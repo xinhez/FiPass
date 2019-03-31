@@ -1,11 +1,13 @@
 import {
   PATCN_STUDENTSETTINGS_BEGIN,
-  ATCN_STUDENTSETTINGS_SUCCESS,
+  PATCN_STUDENTSETTINGS_SUCCESS,
   PATCN_STUDENTSETTINGS_FAILURE,
-  ATCN_STUDENTSETTINGS_SAMEEMAIL
+  PATCN_STUDENTSETTINGS_SAMEEMAIL
 } from "../actions/StudentSettings";
 
-export default function signupReducer(state = initialState, action) {
+const initialState = {};
+
+export default function settingsReducer(state = initialState, action) {
   switch (action.type) {
     case PATCN_STUDENTSETTINGS_BEGIN:
       return {
@@ -15,7 +17,7 @@ export default function signupReducer(state = initialState, action) {
         sameEmail: false,
         error: null
       };
-    case ATCN_STUDENTSETTINGS_SUCCESS:
+    case PATCN_STUDENTSETTINGS_SUCCESS:
       return {
         ...state,
         patchingSettings: false,
@@ -30,7 +32,7 @@ export default function signupReducer(state = initialState, action) {
         emailValidate: false,
         error: action.payload.error
       };
-    case ATCN_STUDENTSETTINGS_SAMEEMAIL:
+    case PATCN_STUDENTSETTINGS_SAMEEMAIL:
       return {
         ...state,
         patchingSettings: false,

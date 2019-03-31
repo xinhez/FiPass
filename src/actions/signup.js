@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function postSignUpInformation(signInfo) {
-  console.log("Start Fatching Sign Up Information");
+  console.log("Start Posting Sign Up Information");
   return dispatch => {
     dispatch(postSignUpInformationBegin());
     axios({

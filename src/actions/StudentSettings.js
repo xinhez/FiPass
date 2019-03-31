@@ -3,7 +3,7 @@ import axios from "axios";
 export function patchStudentSettingsInfo(settings) {
   console.log("Start Patching Student Info Information");
   return dispatch => {
-    dispatch(postSignUpInformationBegin());
+    dispatch(patchStudentSettingsInfoBegin());
     axios({
       method: "PATCH",
       url: "haven't know yet",
@@ -22,8 +22,8 @@ export function patchStudentSettingsInfo(settings) {
         Skills: settings.Skills
       }
     })
-      .then(data => dispatch(postSignUpInformationSuccess(data.data.data)))
-      .catch(error => dispatch(postSignUpInformationFailure(error)));
+      .then(data => dispatch(patchStudentSettingsInfoSuccess(data.data.data)))
+      .catch(error => dispatch(patchStudentSettingsInfoFailure(error)));
   };
 }
 
@@ -33,16 +33,16 @@ export const PATCN_STUDENTSETTINGS_FAILURE = "PATCN_STUDENTSETTINGS_FAILURE";
 export const PATCN_STUDENTSETTINGS_SAMEEMAIL =
   "PATCN_STUDENTSETTINGS_SAMEEMAIL";
 
-export const postSignUpInformationBegin = () => ({
+export const patchStudentSettingsInfoBegin = () => ({
   type: PATCN_STUDENTSETTINGS_BEGIN
 });
 
-export const postSignUpInformationSuccess = Settings => ({
+export const patchStudentSettingsInfoSuccess = Settings => ({
   type: PATCN_STUDENTSETTINGS_SUCCESS,
   payload: { Settings }
 });
 
-export const postSignUpInformationFailure = error => ({
+export const patchStudentSettingsInfoFailure = error => ({
   type: PATCN_STUDENTSETTINGS_FAILURE,
   payload: { error }
 });
