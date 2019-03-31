@@ -4,3 +4,6 @@ package-lock.json
 
 # webpack
 build/
+
+# macOS
+*.DS_Store
