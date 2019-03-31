@@ -18,7 +18,16 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing.unit * 2,
     margin: "auto",
-    maxWidth: 500
+    height: "20%",
+    maxWidth: 500,
+    "background-color": "#FFFFFF"
+  },
+  afterpaper: {
+    padding: theme.spacing.unit * 2,
+    margin: "auto",
+    height: "20%",
+    maxWidth: 500,
+    "background-color": "#F2F2F2"
   },
   image: {
     width: 128,
@@ -87,17 +96,29 @@ class CompanyCard extends React.Component {
   handleClick(id) {
     console.log("set id", id);
     this.props.changeSelected(id);
+    console.log(
+      "this.props.condition",
+      this.props.condition,
+      "id",
+      this.props.id
+    );
   }
 
   render() {
     const { classes } = this.props;
     console.log(this.props);
     return (
-      <div key={this.props.id} className={classes.root}>
-        <Paper className={classes.paper}>
+      <div
+        key={this.props.id}
+        className={classes.root}
+        onClick={e => this.handleClick(this.props.id, e)}
+      >
+        <Paper
+          className={this.props.condition ? classes.afterpaper : classes.paper}
+        >
           <Grid container spacing={16}>
             <Grid item xs={3}>
-              <ButtonBase onClick={e => this.handleClick(this.props.id, e)}>
+              <ButtonBase>
                 <img
                   className={classes.img}
                   alt="complex"
@@ -138,9 +159,8 @@ class CompanyCard extends React.Component {
                       color="textSecondary"
                       className={classes.companyShortDescriptionFont}
                     >
-                      {this.props.jd}
+                      {this.props.description}
                     </Typography>
-                    <Link to={`/more`}>and more</Link>
                   </Grid>
                 </Grid>
               </Grid>

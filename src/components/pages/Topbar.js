@@ -55,6 +55,9 @@ const styles = theme => ({
   root: {
     background: "#FFFFFF",
     "box-shadow": "0px 2px 10px rgba(0, 0, 0, 0.05)"
+  },
+  nomargin: {
+    margin: 0
   }
 });
 
@@ -63,7 +66,7 @@ class Topbar extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <Grid container spacing={24}>
+        <Grid container spacing={24} className={classes.nomargin}>
           <Grid item xs={3}>
             <Button className={classes.left} href="/StudentWelcome">
               <img src={Fipass} alt="logo" />

@@ -69,46 +69,98 @@ class StudentWelcome extends Component {
           id: 1,
           name: "Google Inc.",
           location: "San Francisco, CA, USA",
-          jd: "software engineer intern",
-          linkUrl: "https://www.google.com"
+          description:
+            "software engineer intern;software engineer intern;software engineer intern"
         },
         {
           id: 2,
           name: "Facebook Inc.",
           location: "Melon Park, CA, USA",
-          jd: "software engineer intern",
-          linkUrl: "https://www.fb.com"
+          description: "software engineer intern"
         },
         {
           id: 3,
           name: "Apple Inc.",
           location: "Sunnyvale, CA, USA",
-          jd: "software engineer intern",
-          linkUrl: "https://www.apple.com"
+          description: "software engineer intern"
+        },
+        {
+          id: 1,
+          name: "Google Inc.",
+          location: "San Francisco, CA, USA",
+          description:
+            "software engineer intern;software engineer intern;software engineer intern"
+        },
+        {
+          id: 2,
+          name: "Facebook Inc.",
+          location: "Melon Park, CA, USA",
+          description: "software engineer intern"
+        },
+        {
+          id: 3,
+          name: "Apple Inc.",
+          location: "Sunnyvale, CA, USA",
+          description: "software engineer intern"
+        },
+        {
+          id: 1,
+          name: "Google Inc.",
+          location: "San Francisco, CA, USA",
+          description:
+            "software engineer intern;software engineer intern;software engineer intern"
+        },
+        {
+          id: 2,
+          name: "Facebook Inc.",
+          location: "Melon Park, CA, USA",
+          description: "software engineer intern"
+        },
+        {
+          id: 3,
+          name: "Apple Inc.",
+          location: "Sunnyvale, CA, USA",
+          description: "software engineer intern"
         }
       ],
-      selectedCompanyID: 0,
+      selectedCompanyID: 1,
       selectedCompanyInfo: {
         id: 3,
         name: "Google Inc.",
         location: "San Francisco, CA, USA",
-        jd: "software engineer intern",
+        description: "software engineer intern",
         linkUrl: "https://www.Google.com",
         positions: [
           {
             percent: "70",
             id: 1,
-            role: "Lead UX Designer Lead Designer",
+            name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
-            jd:
+            description:
               "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
           },
           {
             percent: "70",
             id: 2,
-            role: "Lead UX Designer Lead Designer",
+            name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
-            jd:
+            description:
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+          },
+          {
+            percent: "70",
+            id: 1,
+            name: "Lead UX Designer Lead Designer",
+            location: "San Francisco, USA",
+            description:
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+          },
+          {
+            percent: "70",
+            id: 2,
+            name: "Lead UX Designer Lead Designer",
+            location: "San Francisco, USA",
+            description:
               "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
           }
         ]
@@ -121,36 +173,36 @@ class StudentWelcome extends Component {
 
   changeSelected(id) {
     console.log("changeSelected to id", id);
-    this.setState((state, id) => ({
+    this.setState({
       selectedCompanyID: id
-    }));
+    });
 
     // const selectedCompanyInfo = {name:"Facebook Inc.",
     //       location:"San Francisco, CA, USA",
-    //       jd:"software engineer intern",
+    //       description:"software engineer intern",
     //       linkUrl:"https://www.facebook.com"};
     this.setState((state, selectedCompanyInfo) => ({
       selectedCompanyInfo: {
-        id: 3,
+        id: id,
         name: "Facebook Inc.",
         location: "San Francisco, CA, USA",
-        jd: "software engineer intern",
+        description: "software engineer intern",
         linkUrl: "https://www.facebook.com",
         positions: [
           {
             percent: "70",
             id: 1,
-            role: "Lead UX Designer Lead Designer",
+            name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
-            jd:
+            description:
               "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
           },
           {
             percent: "70",
             id: 2,
-            role: "Lead UX Designer Lead Designer",
+            name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
-            jd:
+            description:
               "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
           }
         ]
@@ -166,13 +218,14 @@ class StudentWelcome extends Component {
     console.log("company_id", company_id, "position_id", position_id);
   }
   render() {
-    console.log("company info", this.state.selectedCompanyInfo);
+    console.log("this.state.selectedCompanyID", this.state.selectedCompanyID);
     const { classes } = this.props;
     return (
       <div className={classes.root}>
         <Topbar />
         <Companybar changeFilter={this.changeFilter} />
         <Content
+          selectedCompanyID={this.state.selectedCompanyID}
           changeSelected={this.changeSelected}
           likePosition={this.likePosition}
           companies={this.state.companies}

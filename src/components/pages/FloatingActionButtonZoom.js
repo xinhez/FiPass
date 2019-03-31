@@ -9,10 +9,12 @@ import logo from "../test-img/test-logo.jpg";
 import linkImg from "../test-img/link.png";
 import locationImg from "../test-img/location.png";
 import heart from "../test-img/heart.png";
-
+import "react-perfect-scrollbar/dist/css/styles.css";
+import PerfectScrollbar from "react-perfect-scrollbar";
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    height: "60%",
     backgroundColor: theme.palette.background.paper
   },
   tabsRoot: {
@@ -83,16 +85,20 @@ class FloatingActionButtonZoom extends React.Component {
     const listItems = positions.map(position =>
       this.renderPositionCard(
         position.id,
-        position.role,
+        position.name,
         position.location,
-        position.jd,
+        position.description,
         position.percent
       )
     );
-    return <ul className={classes.ulmargin}>{listItems}</ul>;
+    return (
+      <ul className={classes.ulmargin}>
+        <PerfectScrollbar>{listItems}</PerfectScrollbar>
+      </ul>
+    );
   }
 
-  renderPositionCard(id_, role_, location_, jd_, percent_) {
+  renderPositionCard(id_, name_, location_, description_, percent_) {
     console.log("renderPositionCard", this.props);
     return (
       // <ButtonBase onClick={(e) => this.handleClick(id_, e)}>
@@ -102,10 +108,10 @@ class FloatingActionButtonZoom extends React.Component {
         company_id={this.props.company_id}
         imgSrc={logo}
         heartSrc={heart}
-        name={role_}
+        name={name_}
         location={location_}
         locationImg={locationImg}
-        jd={jd_}
+        description={description_}
         likePosition={this.props.likePosition}
         percent={percent_}
       />

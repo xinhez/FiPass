@@ -52,11 +52,12 @@ const styles = theme => ({
   },
   marginleft: {
     "margin-left": "18px",
-    width: "90%",
-    padding: "10px 0"
+    margin: 0,
+    width: "90%"
   },
   root: {
-    height: "10%"
+    height: "10%",
+    margin: "14px"
   },
   button: {
     background: "#DCDCDC",
@@ -64,6 +65,7 @@ const styles = theme => ({
     width: "100%",
     margin: "1% 8px",
     height: "60%",
+    "border-width": 0,
 
     "font-family": "Roboto",
     "font-style": "normal",
@@ -89,10 +91,10 @@ class Companybar extends Component {
     this.props.changeFilter(filter);
   }
 
-  renderButton(filter, string) {
+  renderButton(filter, string, width) {
     const { classes } = this.props;
     return (
-      <Grid item xs={2}>
+      <Grid item xs={width}>
         <button
           className={classes.button}
           onClick={e => this.handleClick(filter, e)}
@@ -108,10 +110,10 @@ class Companybar extends Component {
     return (
       <div className={classes.root}>
         <Grid container spacing={24} className={classes.marginleft}>
-          {this.renderButton("intern", "Internship")}
-          {this.renderButton("ft", "Full-Time job")}
-          {this.renderButton("pt", "Part-Time")}
-          {this.renderButton("liked", "Liked Companies")}
+          {this.renderButton("intern", "Internship", 2)}
+          {this.renderButton("ft", "Full-Time job", 3)}
+          {this.renderButton("pt", "Part-Time", 3)}
+          {this.renderButton("liked", "Liked Companies", 4)}
         </Grid>
       </div>
     );

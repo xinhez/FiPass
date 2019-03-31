@@ -47,7 +47,8 @@ const styles = theme => ({
   },
   locationImage: {
     width: 30,
-    height: 30
+    height: 30,
+    margin: "0px 12px 0 0"
   },
   location: {
     margin: "auto",
@@ -56,14 +57,17 @@ const styles = theme => ({
     maxHeight: "80%"
   },
   linkImage: {
-    width: 30,
-    height: 30
+    width: 24,
+    height: 24,
+    margin: "4px 12px 0 0"
   },
   linkImg: {
     margin: "auto",
     display: "block",
-    maxWidth: "50%",
-    maxHeight: "80%"
+    maxWidth: "100%",
+    maxHeight: "100%",
+    "margin-top": "4px",
+    margin: "4px 12px 4px"
   },
   title: {
     padding: "16px 5% 0",

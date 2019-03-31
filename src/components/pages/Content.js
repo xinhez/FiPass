@@ -34,6 +34,9 @@ import LoginFormStu from "./LoginFormStu.js";
 import { Paper, Grid, Button, withStyles, ButtonBase } from "@material-ui/core";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import "react-perfect-scrollbar/dist/css/styles.css";
+import PerfectScrollbar from "react-perfect-scrollbar";
+// import ReactScrollbar from 'react-scrollbar-js';
 // import { fetchCompanies } from "../../actions/student";
 const styles = theme => ({
   root: {
@@ -46,6 +49,10 @@ const styles = theme => ({
     float: "left",
     width: "30%",
     height: "100%"
+  },
+  myScrollbar: {
+    width: 400,
+    height: 400
   }
 });
 
@@ -62,25 +69,38 @@ class CompanyList extends Component {
         name={company.name}
         location={company.location}
         locationImg={locationImg}
-        jd={company.jd}
+        description={company.description}
       />
    */
 
+  constructor(props) {
+    super(props);
+    // This binding is necessary to make `this` work in the callback
+  }
+
   renderCompanies(companies) {
-    console.log("companies:", companies);
+    console.log("this.props.selectedCompanyID:", this.props.selectedCompanyID);
     const { classes } = this.props;
     const listItems = companies.map(company =>
       this.renderCompanyCards(
         company.id,
         company.name,
         company.location,
-        company.jd
+        company.description,
+        String(this.props.selectedCompanyID) == String(company.id)
+          ? true
+          : false
       )
     );
 
-    return <ul className={classes.ulmargin}>{listItems}</ul>;
+    return (
+      <ul className={classes.ulmargin}>
+        <PerfectScrollbar>{listItems}</PerfectScrollbar>
+      </ul>
+    );
   }
-  renderCompanyCards(id_, name_, location_, jd_) {
+  renderCompanyCards(id_, name_, location_, description_, condition_) {
+    console.log("condition:", condition_, "id:", id_);
     return (
       // <ButtonBase onClick={(e) => this.handleClick(id_, e)}>
       <CompanyCard
@@ -91,8 +111,10 @@ class CompanyList extends Component {
         name={name_}
         location={location_}
         locationImg={locationImg}
-        jd={jd_}
+        description={description_}
         changeSelected={this.props.changeSelected}
+        condition={condition_}
+        changeState={this.props.changeState}
       />
       // </ButtonBase>
     );
@@ -141,7 +163,14 @@ class Content extends Component {
   //   });
   // }
 
-  renderCompanyDetail(id_, name_, location_, jd_, linkUrl_, positions_) {
+  renderCompanyDetail(
+    id_,
+    name_,
+    location_,
+    description_,
+    linkUrl_,
+    positions_
+  ) {
     const { classes } = this.props;
     return (
       <CompanyDetailContent
@@ -154,7 +183,7 @@ class Content extends Component {
         locationImg={locationImg}
         linkImg={linkImg}
         linkUrl={linkUrl_}
-        jd={jd_}
+        description={description_}
         positions={positions_}
         likePosition={this.props.likePosition}
       />
@@ -174,11 +203,13 @@ class Content extends Component {
     const { classes } = this.props;
     const { selectedCompanyInfo } = this.props;
     console.log("Content", this.props);
+
     return (
       <div classes={classes.root}>
         <CompanyList
           className={classes.CompanyList}
           classes={classes}
+          selectedCompanyID={this.props.selectedCompanyID}
           companies={this.props.companies}
           changeSelected={this.props.changeSelected}
         />
@@ -186,7 +217,7 @@ class Content extends Component {
           selectedCompanyInfo.id,
           selectedCompanyInfo.name,
           selectedCompanyInfo.location,
-          selectedCompanyInfo.jd,
+          selectedCompanyInfo.description,
           selectedCompanyInfo.linkUrl,
           selectedCompanyInfo.positions
         )}

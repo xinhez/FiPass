@@ -169,7 +169,7 @@ class PositionCard extends React.Component {
                       color="textSecondary"
                       className={classes.companyShortDescriptionFont}
                     >
-                      {this.props.jd}
+                      {this.props.description}
                     </Typography>
                   </Grid>
                 </Grid>
