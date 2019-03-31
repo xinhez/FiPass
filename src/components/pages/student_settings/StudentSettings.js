@@ -3,21 +3,12 @@ import {
   Avatar,
   Grid,
   TextField,
-  Input,
-  FormControl,
-  InputLabel,
-  FormHelperText,
   Button,
   Paper,
   Typography,
   Card,
-  CardHeader,
   IconButton,
   Collapse,
-  CardActions,
-  ExpansionPanel,
-  ExpansionPanelSummary,
-  ExpansionPanelDetails,
   CardContent
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -29,22 +20,71 @@ import Divider from "@material-ui/core/Divider";
 import SkillsButtons from "./SkillsButtons";
 import CreateIcon from "@material-ui/icons/Create";
 
+function EditTextField(props) {
+  return (
+    <Grid
+      item
+      container
+      spacing={8}
+      alignItems="space-between"
+      alignItems="center"
+    >
+      <Grid item>
+        <Typography className={props.classes.namegrid}>{props.name}</Typography>
+      </Grid>
+      <Grid item>
+        <TextField
+          id="input-with-icon-grid"
+          defaultValue={props.defaultValue}
+          variant="outlined"
+          className={props.classes.textgrid}
+        />
+      </Grid>
+    </Grid>
+  );
+}
+
 const styles = theme => ({
+  rootPaper: {
+    backgroundColor: "#E5E5E5"
+  },
+  namegrid: {
+    fontSize: 16,
+    color: "#000000",
+    marginLeft: theme.spacing.unit * 5,
+    width: theme.spacing.unit * 10,
+    marginTop: theme.spacing.unit * 2
+    // marginRight: theme.spacing.unit * ,
+  },
+  textgrid: {
+    width: theme.spacing.unit * 70,
+    marginLeft: theme.spacing.unit
+    // height: theme.spacing.unit,
+  },
   skillsPaper: {
+    marginTop: theme.spacing.unit * 10,
     width: theme.spacing.unit * 100,
-    height: theme.spacing.unit * 30,
+    height: theme.spacing.unit * 30
+  },
+  skillsCard: {
+    top: theme.spacing.unit * 5,
     backgroundColor: "#FFFFFF",
     border: "2px solid #DCDCDC",
-    borderRadius: 5,
-    top: theme.spacing.unit * 5
-    // marginBottom: theme.spacing.unit * 10,
+    borderRadius: 5
   },
   infoPaper: {
-    width: theme.spacing.unit * 100,
-    height: theme.spacing.unit * 100,
+    // width: theme.spacing.unit * 100,
+    // height: theme.spacing.unit * 100,
+    marginTop: theme.spacing.unit * 10,
     backgroundColor: "#FFFFFF",
     border: "1px solid #DCDCDC",
-    borderRadius: 5
+    borderRadius: 5,
+    marginBottom: theme.spacing.unit * 10
+  },
+  infoCard: {
+    width: theme.spacing.unit * 100
+    // height: theme.spacing.unit * 90,
+    // marginBottom: theme.spacing.unit * 10
   },
   photoAvater: {
     position: "absolute",
@@ -72,7 +112,7 @@ const styles = theme => ({
     // height: 0,
     // left: 0,
     // top: 300,
-    top: theme.spacing.unit * 10,
+    top: theme.spacing.unit * 20,
     border: "1px solid #DCDCDC"
   },
   skillsEditButton: {
@@ -81,6 +121,7 @@ const styles = theme => ({
     top: theme.spacing.unit * 17,
     left: theme.spacing.unit * 94
   },
+
   skillsFont: {
     position: "absolute",
     fontWeight: "bold",
@@ -88,8 +129,9 @@ const styles = theme => ({
     // textAlign: "left",
     color: "#BDBDBD",
     // marginTop:  theme.spacing.unit * 10,
-    marginLeft: theme.spacing.unit * 10
+    marginLeft: theme.spacing.unit * 5
   },
+
   userName: {
     // position: "relative",
     width: theme.spacing.unit * 20,
@@ -128,25 +170,25 @@ const styles = theme => ({
     textAlign: "center",
     color: "#51A8DD"
   },
+  profileFont: {
+    // position: "absolute",
+    marginLeft: theme.spacing.unit * 5,
+    fontSize: 30,
+    // textAlign: "center",
+    color: "#6E6E6E"
+  },
+  infoEditButton: {
+    marginLeft: theme.spacing.unit * 58,
+    color: "#51A8BD"
+  },
   cardContent: {
     height: theme.spacing.unit * 20
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    margin: theme.spacing.unit * 3,
-    width: 300
-  },
-  input: {
-    width: 300,
-    margin: theme.spacing.unit * 2
-  },
-  formControl: {
-    width: 300,
-    margin: theme.spacing.unit * 2
-  },
-  button: {
-    marginLeft: theme.spacing.unit * 5
+  editTextFieldDivider: {
+    marginTop: theme.spacing.unit * 2,
+    marginBottom: theme.spacing.unit * 2
+    // width: theme.spacing.unit * 20,
+    // alignItems: "center"
   }
 });
 
@@ -197,54 +239,146 @@ class StudentSettings extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-          spacing={24}
-        >
-          <Grid item>
-            <Card id="edit-skill-paper">
-              <CardContent className={classes.skillsPaper}>
-                <Avatar className={classes.photoAvater} />
-                <input
-                  accept="image/*"
-                  className={classes.uploadInput}
-                  id="upload-avater"
-                  multiple
-                  type="file"
-                />
-                <label htmlFor="upload-avater">
+        <Paper className={classes.rootPaper}>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            spacing={24}
+          >
+            <Grid item>
+              <Card id="edit-skill-paper" className={classes.skillsCard}>
+                <CardContent className={classes.skillsPaper}>
+                  <Avatar className={classes.photoAvater} />
+                  <input
+                    accept="image/*"
+                    className={classes.uploadInput}
+                    id="upload-avater"
+                    multiple
+                    type="file"
+                  />
+                  <label htmlFor="upload-avater">
+                    <IconButton
+                      component="span"
+                      size="small"
+                      className={classes.cameraAvater}
+                    >
+                      <CameraIcon size="small" />
+                    </IconButton>
+                  </label>
+                  <Typography className={classes.userName}>
+                    Yining Yang
+                  </Typography>
+                  <Divider variant="fullwidth" className={classes.divider} />
+                  {/* <CardActions> */}
                   <IconButton
-                    component="span"
-                    size="small"
-                    className={classes.cameraAvater}
+                    className={classes.skillsEditButton}
+                    onClick={this.handleExpandClick.bind(
+                      this,
+                      "expandedSkillsEdition"
+                    )}
+                    // aria-expanded={this.state.expandedSkillsEdition}
+                    aria-label="Show Edit Buttons"
                   >
-                    <CameraIcon size="small" />
+                    <CreateIcon />
                   </IconButton>
-                </label>
-                <Typography className={classes.userName}>
-                  Yining Yang
-                </Typography>
-                <Divider variant="fullwidth" className={classes.divider} />
-                {/* <CardActions> */}
-                <IconButton
-                  className={classes.skillsEditButton}
-                  onClick={this.handleExpandClick.bind(
-                    this,
-                    "expandedSkillsEdition"
-                  )}
-                  // aria-expanded={this.state.expandedSkillsEdition}
-                  aria-label="Show Edit Buttons"
-                >
-                  <CreateIcon />
-                </IconButton>
-                {/* </CardActions> */}
-                <Typography className={classes.skillsFont}>SKILLS</Typography>
-                {/* </CardContent> */}
+                  {/* </CardActions> */}
+                  <Typography className={classes.skillsFont}>SKILLS</Typography>
+                  {/* </CardContent> */}
+                </CardContent>
+                <Collapse in={this.state.expandedSkillsEdition} timeout="auto">
+                  <CardContent>
+                    {/* <CardActions disableActionSpacing> */}
+                    <Button
+                      classes={{
+                        root: classes.skillsCancelButton
+                      }}
+                      // onClick={this.handleStep.bind(this, 1)}
+                    >
+                      <Typography className={classes.cancelFont}>
+                        Cancel
+                      </Typography>
+                    </Button>
+
+                    <Button
+                      classes={{
+                        root: classes.skillsSaveButton
+                      }}
+                      // onClick={this.handleStep.bind(this, 1)}
+                    >
+                      <Typography className={classes.saveFont}>Save</Typography>
+                    </Button>
+                    {/* </CardActions> */}
+                  </CardContent>
+                </Collapse>
+              </Card>
+            </Grid>
+            <Card id="edit-info-paper" className={classes.infoPaper}>
+              <CardContent>
+                <Grid container spacing={8} alignItems="space-between">
+                  <Grid item>
+                    <Typography className={classes.profileFont}>
+                      Profile
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <IconButton
+                      className={classes.infoEditButton}
+                      onClick={this.handleExpandClick.bind(
+                        this,
+                        "expandedInfoEdition"
+                      )}
+                      // aria-expanded={this.state.expandedSkillsEdition}
+                      aria-label="Show Edit Buttons"
+                    >
+                      <CreateIcon />
+                    </IconButton>
+                  </Grid>
+                </Grid>
               </CardContent>
-              <Collapse in={this.state.expandedSkillsEdition} timeout="auto">
+              <CardContent className={classes.infoCard}>
+                <Grid
+                  container
+                  alignItems="stretch"
+                  direction="column"
+                  justify="center"
+                >
+                  <Grid item>
+                    <EditTextField classes={classes} name={"Name"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                  <Grid item>
+                    <EditTextField classes={classes} name={"PassWord"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                  <Grid item>
+                    <EditTextField classes={classes} name={"Email"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                  <Grid item>
+                    <EditTextField classes={classes} name={"School"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                  <Grid item>
+                    <EditTextField classes={classes} name={"Degree"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                  <Grid item>
+                    <EditTextField classes={classes} name={"Grad Year"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                  <Grid item>
+                    <EditTextField classes={classes} name={"Major 1"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                  <Grid item>
+                    <EditTextField classes={classes} name={"Major 2"} />
+                    <Divider middle className={classes.editTextFieldDivider} />
+                  </Grid>
+                </Grid>
+              </CardContent>
+              <Collapse in={this.state.expandedInfoEdition} timeout="auto">
                 <CardContent>
                   {/* <CardActions disableActionSpacing> */}
                   <Button
@@ -271,87 +405,7 @@ class StudentSettings extends Component {
               </Collapse>
             </Card>
           </Grid>
-          <Paper id="edit-info-paper" className={classes.infoPaper}>
-            <Grid
-              container
-              alignItems="center"
-              direction="column"
-              justify="center"
-            >
-              <Grid item>
-                <TextField
-                  id="outlined-email-input"
-                  label="yiningya@andrew.cmu.edu"
-                  className={classes.textField}
-                  type="email"
-                  name="email"
-                  autoComplete="email"
-                  margin="normal"
-                  variant="outlined"
-                  disabled
-                />
-              </Grid>
-              <Grid item>
-                <FormControl
-                  className={classes.formControl}
-                  disabled={this.state.disableEditing}
-                >
-                  <InputLabel htmlFor="htmlfor">Name</InputLabel>
-                  <Input
-                    id="name"
-                    value={this.state.name}
-                    onChange={this.handleChange.bind(this)}
-                  />
-                  <FormHelperText>Your Name</FormHelperText>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl className={classes.formControl} disabled>
-                  <InputLabel htmlFor="htmlfor">Name</InputLabel>
-                  <Input id="PassWord" value={this.state.name} />
-                  <FormHelperText>Your Name</FormHelperText>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl className={classes.formControl} disabled>
-                  <InputLabel htmlFor="htmlfor">School</InputLabel>
-                  <Input id="School" value={this.state.school} />
-                  <FormHelperText>Your School</FormHelperText>
-                </FormControl>
-              </Grid>
-              <Grid item>
-                <FormControl className={classes.formControl} disabled>
-                  <InputLabel htmlFor="htmlfor">Major1</InputLabel>
-                  <Input id="Major" value={this.state.major} />
-                  <FormHelperText>Your Major</FormHelperText>
-                </FormControl>
-              </Grid>
-
-              <Grid item>
-                <Input value="Yining Yang" className={classes.input} disabled />
-              </Grid>
-              <Grid>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  onClick={this.enableEdit.bind(this)}
-                >
-                  Edit
-                </Button>
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.button}
-                  onClick={this.disableEdit.bind(this)}
-                >
-                  Save
-                </Button>
-              </Grid>
-            </Grid>
-          </Paper>
-        </Grid>
+        </Paper>
       </div>
     );
   }
