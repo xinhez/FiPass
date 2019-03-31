@@ -34,10 +34,12 @@ function EditTextField(props) {
       </Grid>
       <Grid item>
         <TextField
-          id="input-with-icon-grid"
-          defaultValue={props.defaultValue}
+          disabled={!props.canEdit}
+          id={props.id}
           variant="outlined"
           className={props.classes.textgrid}
+          value={props.value}
+          onChange={props.onChange}
         />
       </Grid>
     </Grid>
@@ -197,6 +199,7 @@ class StudentSettings extends Component {
     super();
     this.state = {
       name: "Yining Yang",
+      email: "xxx@gmail.com",
       password: "xxxxxx",
       school: "CMU",
       degree: "Master",
@@ -207,23 +210,12 @@ class StudentSettings extends Component {
       expandedInfoEdition: false
     };
     this.handleExpandClick = this.handleExpandClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(e) {
     this.setState({
       [e.target.id]: e.target.value
-    });
-  }
-
-  enableEdit() {
-    this.setState({
-      disableEditing: false
-    });
-  }
-
-  disableEdit() {
-    this.setState({
-      disableEditing: true
     });
   }
 
@@ -294,7 +286,10 @@ class StudentSettings extends Component {
                       classes={{
                         root: classes.skillsCancelButton
                       }}
-                      // onClick={this.handleStep.bind(this, 1)}
+                      onClick={this.handleExpandClick.bind(
+                        this,
+                        "expandedSkillsEdition"
+                      )}
                     >
                       <Typography className={classes.cancelFont}>
                         Cancel
@@ -345,31 +340,80 @@ class StudentSettings extends Component {
                   justify="center"
                 >
                   <Grid item>
-                    <EditTextField classes={classes} name={"Name"} />
+                    <EditTextField
+                      classes={classes}
+                      name={"Name"}
+                      canEdit={this.state.expandedInfoEdition}
+                      value={this.state.name}
+                      onChange={this.handleChange}
+                      id="name"
+                    />
                     <Divider middle className={classes.editTextFieldDivider} />
                   </Grid>
                   <Grid item>
-                    <EditTextField classes={classes} name={"PassWord"} />
+                    <EditTextField
+                      classes={classes}
+                      name={"PassWord"}
+                      canEdit={this.state.expandedInfoEdition}
+                      value={this.state.password}
+                      onChange={this.handleChange}
+                      id="password"
+                    />
                     <Divider middle className={classes.editTextFieldDivider} />
                   </Grid>
                   <Grid item>
-                    <EditTextField classes={classes} name={"Email"} />
+                    <EditTextField
+                      classes={classes}
+                      name={"Email"}
+                      canEdit={this.state.expandedInfoEdition}
+                      value={this.state.email}
+                      onChange={this.handleChange}
+                      id="email"
+                    />
                     <Divider middle className={classes.editTextFieldDivider} />
                   </Grid>
                   <Grid item>
-                    <EditTextField classes={classes} name={"School"} />
+                    <EditTextField
+                      classes={classes}
+                      name={"School"}
+                      canEdit={this.state.expandedInfoEdition}
+                      value={this.state.school}
+                      onChange={this.handleChange}
+                      id="school"
+                    />
                     <Divider middle className={classes.editTextFieldDivider} />
                   </Grid>
                   <Grid item>
-                    <EditTextField classes={classes} name={"Degree"} />
+                    <EditTextField
+                      classes={classes}
+                      name={"Degree"}
+                      canEdit={this.state.expandedInfoEdition}
+                      value={this.state.degree}
+                      onChange={this.handleChange}
+                      id="degree"
+                    />
                     <Divider middle className={classes.editTextFieldDivider} />
                   </Grid>
                   <Grid item>
-                    <EditTextField classes={classes} name={"Grad Year"} />
+                    <EditTextField
+                      classes={classes}
+                      name={"Grad Year"}
+                      canEdit={this.state.expandedInfoEdition}
+                      value={this.state.grad_year}
+                      onChange={this.handleChange}
+                      id="grad_year"
+                    />
                     <Divider middle className={classes.editTextFieldDivider} />
                   </Grid>
                   <Grid item>
-                    <EditTextField classes={classes} name={"Major 1"} />
+                    <EditTextField
+                      classes={classes}
+                      name={"Major 1"}
+                      canEdit={this.state.expandedInfoEdition}
+                      value={this.state.major}
+                      onChange={this.handleChange}
+                      id="major"
+                    />
                     <Divider middle className={classes.editTextFieldDivider} />
                   </Grid>
                   <Grid item>
@@ -380,12 +424,14 @@ class StudentSettings extends Component {
               </CardContent>
               <Collapse in={this.state.expandedInfoEdition} timeout="auto">
                 <CardContent>
-                  {/* <CardActions disableActionSpacing> */}
                   <Button
                     classes={{
                       root: classes.skillsCancelButton
                     }}
-                    // onClick={this.handleStep.bind(this, 1)}
+                    onClick={this.handleExpandClick.bind(
+                      this,
+                      "expandedInfoEdition"
+                    )}
                   >
                     <Typography className={classes.cancelFont}>
                       Cancel
@@ -396,11 +442,13 @@ class StudentSettings extends Component {
                     classes={{
                       root: classes.skillsSaveButton
                     }}
-                    // onClick={this.handleStep.bind(this, 1)}
+                    onClick={this.handleExpandClick.bind(
+                      this,
+                      "expandedInfoEdition"
+                    )}
                   >
                     <Typography className={classes.saveFont}>Save</Typography>
                   </Button>
-                  {/* </CardActions> */}
                 </CardContent>
               </Collapse>
             </Card>
