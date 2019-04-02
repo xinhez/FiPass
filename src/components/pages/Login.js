@@ -137,8 +137,8 @@ const style = theme => ({
     // padding: theme.spacing.unit * 4
     margin: theme.spacing.unit / 2,
     borderRadius: 5,
-    border: "1px solid #DCDCDC;",
-    backgroundColor: "#FFFFFF"
+    border: "1px solid #DCDCDC;"
+    // backgroundColor: "#FFFFFF"
   },
   chip: {
     margin: theme.spacing.unit / 2
@@ -179,11 +179,6 @@ const style = theme => ({
     alignItems: "center",
     display: "flex",
     justifyContent: "center"
-    // position: "absolute",
-    // width: 150,
-    // height: 108,
-    // left: 200,
-    // top: 135
   },
   commonInfoTextField: {
     alignItems: "center",
@@ -321,17 +316,22 @@ class FormDialog extends Component {
   }
 
   handleSkillSelect(v) {
+    console.log(v);
+    console.log(this.state.selectedSkills);
     if (this.state.selectedSkills.includes(v)) {
+      console.log(`should delete ${v}`);
       this.setState({
-        selectedSkills: this.state.selectedSkills.filter(idx => {
-          return idx != v;
+        selectedSkills: this.state.selectedSkills.filter((data, idx) => {
+          return data != v;
         })
       });
     } else {
+      console.log(`should add ${v}`);
       this.setState({
         selectedSkills: [...this.state.selectedSkills, v]
       });
     }
+    console.log(this.state.selectedSkills);
   }
 
   handleMenuItemClick(name, event) {
@@ -634,13 +634,14 @@ class FormDialog extends Component {
                     key={data.key}
                     label={data.label}
                     className={classes.chip}
-                    onClick={this.handleSkillSelect.bind(this, idx)}
+                    onClick={this.handleSkillSelect.bind(this, data.key)}
                     color={
-                      this.state.selectedSkills.includes(idx) ? "primary" : ""
+                      this.state.selectedSkills.includes(data.key)
+                        ? "primary"
+                        : "default"
                     }
                     classes={{
                       root: classes.skillsChip
-                      // label: classes.skillsChipLabel,
                     }}
                   />
                 );
