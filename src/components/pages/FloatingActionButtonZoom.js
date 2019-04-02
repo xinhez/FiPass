@@ -21,7 +21,7 @@ const styles = theme => ({
     borderBottom: "1px solid #e8e8e8"
   },
   tabsIndicator: {
-    backgroundColor: "#1890ff"
+    backgroundColor: "#000000"
   },
   tabRoot: {
     textTransform: "initial",
@@ -45,11 +45,11 @@ const styles = theme => ({
       opacity: 1
     },
     "&$tabSelected": {
-      color: "#1890ff",
+      // color: "#1890ff",
       fontWeight: theme.typography.fontWeightMedium
     },
     "&:focus": {
-      color: "#40a9ff"
+      // color: "#40a9ff"
     },
     "font-family": "Roboto",
     "font-style": "normal",
@@ -88,7 +88,8 @@ class FloatingActionButtonZoom extends React.Component {
         position.name,
         position.location,
         position.description,
-        position.percent
+        position.percent,
+        position.liked
       )
     );
     return (
@@ -98,7 +99,7 @@ class FloatingActionButtonZoom extends React.Component {
     );
   }
 
-  renderPositionCard(id_, name_, location_, description_, percent_) {
+  renderPositionCard(id_, name_, location_, description_, percent_, liked_) {
     console.log("renderPositionCard", this.props);
     return (
       // <ButtonBase onClick={(e) => this.handleClick(id_, e)}>
@@ -112,6 +113,7 @@ class FloatingActionButtonZoom extends React.Component {
         location={location_}
         locationImg={locationImg}
         description={description_}
+        liked={liked_}
         likePosition={this.props.likePosition}
         percent={percent_}
       />

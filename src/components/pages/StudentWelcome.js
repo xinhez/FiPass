@@ -35,7 +35,7 @@ import LoginFormStu from "./LoginFormStu.js";
 import { Paper, Grid, Button, withStyles } from "@material-ui/core";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-// import { fetchCompanies } from "../../actions/student";
+import { fetchCompanies } from "../../actions/company";
 const styles = theme => ({
   container: {
     display: "grid",
@@ -60,69 +60,144 @@ const styles = theme => ({
 class StudentWelcome extends Component {
   // props function pass way
   //
+  componentDidMount() {
+    // this.props.dispatch(fetchCompanies());
+    this.changeFilter("all");
+    console.log(this.state.allCompanies.all[0]);
+    const { id } = this.state.allCompanies.all[0];
+    // this.props.dispatch(fetchCompanyInfo(id));
+    this.setState({ selectedCompanyID: id });
+
+    this.setState({ loading: false });
+  }
 
   constructor() {
     super();
     this.state = {
-      companies: [
-        {
-          id: 1,
-          name: "Google Inc.",
-          location: "San Francisco, CA, USA",
-          description:
-            "software engineer intern;software engineer intern;software engineer intern"
-        },
-        {
-          id: 2,
-          name: "Facebook Inc.",
-          location: "Melon Park, CA, USA",
-          description: "software engineer intern"
-        },
-        {
-          id: 3,
-          name: "Apple Inc.",
-          location: "Sunnyvale, CA, USA",
-          description: "software engineer intern"
-        },
-        {
-          id: 1,
-          name: "Google Inc.",
-          location: "San Francisco, CA, USA",
-          description:
-            "software engineer intern;software engineer intern;software engineer intern"
-        },
-        {
-          id: 2,
-          name: "Facebook Inc.",
-          location: "Melon Park, CA, USA",
-          description: "software engineer intern"
-        },
-        {
-          id: 3,
-          name: "Apple Inc.",
-          location: "Sunnyvale, CA, USA",
-          description: "software engineer intern"
-        },
-        {
-          id: 1,
-          name: "Google Inc.",
-          location: "San Francisco, CA, USA",
-          description:
-            "software engineer intern;software engineer intern;software engineer intern"
-        },
-        {
-          id: 2,
-          name: "Facebook Inc.",
-          location: "Melon Park, CA, USA",
-          description: "software engineer intern"
-        },
-        {
-          id: 3,
-          name: "Apple Inc.",
-          location: "Sunnyvale, CA, USA",
-          description: "software engineer intern"
-        }
-      ],
+      loading: true,
+
+      allCompanies: {
+        all: [
+          {
+            id: 1,
+            name: "Google Inc.",
+            location: "San Francisco, CA, USA",
+            description:
+              "software engineer intern;software engineer intern;software engineer intern"
+          },
+          {
+            id: 2,
+            name: "Facebook Inc.",
+            location: "Melon Park, CA, USA",
+            description: "software engineer intern"
+          },
+          {
+            id: 3,
+            name: "Apple Inc.",
+            location: "Sunnyvale, CA, USA",
+            description: "software engineer intern"
+          },
+          {
+            id: 1,
+            name: "Google Inc.",
+            location: "San Francisco, CA, USA",
+            description:
+              "software engineer intern;software engineer intern;software engineer intern"
+          },
+          {
+            id: 2,
+            name: "Facebook Inc.",
+            location: "Melon Park, CA, USA",
+            description: "software engineer intern"
+          },
+          {
+            id: 3,
+            name: "Apple Inc.",
+            location: "Sunnyvale, CA, USA",
+            description: "software engineer intern"
+          },
+          {
+            id: 1,
+            name: "Google Inc.",
+            location: "San Francisco, CA, USA",
+            description:
+              "software engineer intern;software engineer intern;software engineer intern"
+          },
+          {
+            id: 2,
+            name: "Facebook Inc.",
+            location: "Melon Park, CA, USA",
+            description: "software engineer intern"
+          },
+          {
+            id: 3,
+            name: "Apple Inc.",
+            location: "Sunnyvale, CA, USA",
+            description: "software engineer intern"
+          }
+        ],
+        intern: [
+          {
+            id: 1,
+            name: "Google Inc.",
+            location: "San Francisco, CA, USA",
+            description:
+              "software engineer intern;software engineer intern;software engineer intern"
+          },
+          {
+            id: 2,
+            name: "Facebook Inc.",
+            location: "Melon Park, CA, USA",
+            description: "software engineer intern"
+          }
+        ],
+        fulltime: [
+          {
+            id: 1,
+            name: "Google Inc.",
+            location: "San Francisco, CA, USA",
+            description:
+              "software engineer intern;software engineer intern;software engineer intern"
+          },
+          {
+            id: 2,
+            name: "Facebook Inc.",
+            location: "Melon Park, CA, USA",
+            description: "software engineer intern"
+          }
+        ],
+        parttime: [
+          {
+            id: 1,
+            name: "Google Inc.",
+            location: "San Francisco, CA, USA",
+            description:
+              "software engineer intern;software engineer intern;software engineer intern"
+          },
+          {
+            id: 2,
+            name: "Facebook Inc.",
+            location: "Melon Park, CA, USA",
+            description: "software engineer intern"
+          }
+        ],
+        liked: [
+          {
+            id: 1,
+            name: "Google Inc.",
+            location: "San Francisco, CA, USA",
+            description:
+              "software engineer intern;software engineer intern;software engineer intern"
+          },
+          {
+            id: 2,
+            name: "Facebook Inc.",
+            location: "Melon Park, CA, USA",
+            description: "software engineer intern"
+          }
+        ]
+      },
+      companies: null,
       selectedCompanyID: 1,
       selectedCompanyInfo: {
         id: 3,
@@ -137,7 +212,8 @@ class StudentWelcome extends Component {
             name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
             description:
-              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio.",
+            liked: true
           },
           {
             percent: "70",
@@ -145,7 +221,8 @@ class StudentWelcome extends Component {
             name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
             description:
-              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio.",
+            liked: false
           },
           {
             percent: "70",
@@ -153,7 +230,8 @@ class StudentWelcome extends Component {
             name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
             description:
-              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio.",
+            liked: false
           },
           {
             percent: "70",
@@ -161,7 +239,8 @@ class StudentWelcome extends Component {
             name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
             description:
-              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio.",
+            liked: false
           }
         ]
       }
@@ -176,11 +255,7 @@ class StudentWelcome extends Component {
     this.setState({
       selectedCompanyID: id
     });
-
-    // const selectedCompanyInfo = {name:"Facebook Inc.",
-    //       location:"San Francisco, CA, USA",
-    //       description:"software engineer intern",
-    //       linkUrl:"https://www.facebook.com"};
+    // this.props.dispatch(fetchCompanyInfo(id));
     this.setState((state, selectedCompanyInfo) => ({
       selectedCompanyInfo: {
         id: id,
@@ -195,7 +270,8 @@ class StudentWelcome extends Component {
             name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
             description:
-              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio.",
+            liked: true
           },
           {
             percent: "70",
@@ -203,7 +279,8 @@ class StudentWelcome extends Component {
             name: "Lead UX Designer Lead Designer",
             location: "San Francisco, USA",
             description:
-              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio."
+              "The team develops practical and innovative ways to address some of the most complex business challenges to keep Google thriving. We anticipate how decisions are made, persistently explore and uncover the business needs of our key clients and understand how our range of product and service offerings can enable their business success. Responsibilities: Design and implement global security programs and solutions for a varied and complex service portfolio.",
+            liked: false
           }
         ]
       }
@@ -211,15 +288,33 @@ class StudentWelcome extends Component {
   }
 
   changeFilter(filter) {
+    // fulltime parttime intern liked
+
     console.log("changeFilter", filter);
+    if (filter == "fulltime") {
+      this.setState({ companies: this.state.allCompanies.fulltime });
+    } else if (filter == "parttime") {
+      this.setState({ companies: this.state.allCompanies.parttime });
+    } else if (filter == "intern") {
+      this.setState({ companies: this.state.allCompanies.intern });
+    } else if (filter == "liked") {
+      this.setState({ companies: this.state.allCompanies.liked });
+    } else {
+      this.setState({ companies: this.state.allCompanies.all });
+      console.log("this.state.companies", this.state.companies);
+    }
   }
 
   likePosition(company_id, position_id) {
+    // stu_id, position_id
     console.log("company_id", company_id, "position_id", position_id);
   }
   render() {
     console.log("this.state.selectedCompanyID", this.state.selectedCompanyID);
     const { classes } = this.props;
+    if (this.state.loading) {
+      return <div> Loading </div>;
+    }
     return (
       <div className={classes.root}>
         <Topbar />
@@ -238,12 +333,13 @@ class StudentWelcome extends Component {
 // const mapStateToProps = state => {
 //   console.log("mapping state", state);
 //   return {
-//     students: state.company.companies,
+//     allCompanies: state.company.companies,
+//     selectedCompanyInfo: state.company.selectedCompanyInfo,
 //     loading: state.company.fetchingCompanies,
 //     error: state.company.error
 //   };
 // };
-// export default connect(mapStateToProps)(StudentWelcome);
+// export default connect(mapStateToProps)(withStyles(styles)(StudentWelcome));
 //
 StudentWelcome.propTypes = {
   classes: PropTypes.object.isRequired

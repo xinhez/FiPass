@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { Link } from "react-router-dom";
 import heart from "../test-img/heart.png";
+import heart_liked from "../test-img/heart_liked.png";
 import drawdown from "../test-img/drawdown.png";
 import drawup from "../test-img/drawup.png";
 
@@ -119,6 +120,7 @@ class PositionCard extends React.Component {
   render() {
     const { classes } = this.props;
     console.log(this.props);
+    console.log(this.props.liked == true ? "true" : "false");
     /*
     <Link to={`/testCompanyCard`} className={classes.image}>
                 <img className={classes.img} alt="complex" src={this.props.imgSrc} />
@@ -185,7 +187,7 @@ class PositionCard extends React.Component {
                 <img
                   className={classes.heart}
                   alt="complex"
-                  src={this.props.heartSrc}
+                  src={this.props.liked == true ? heart_liked : heart}
                 />
               </ButtonBase>
             </Grid>

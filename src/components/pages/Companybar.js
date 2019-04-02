@@ -111,8 +111,8 @@ class Companybar extends Component {
       <div className={classes.root}>
         <Grid container spacing={24} className={classes.marginleft}>
           {this.renderButton("intern", "Internship", 2)}
-          {this.renderButton("ft", "Full-Time job", 3)}
-          {this.renderButton("pt", "Part-Time", 3)}
+          {this.renderButton("fulltime", "Full-Time job", 3)}
+          {this.renderButton("parttime", "Part-Time", 3)}
           {this.renderButton("liked", "Liked Companies", 4)}
         </Grid>
       </div>
