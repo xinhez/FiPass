@@ -150,18 +150,21 @@ const style = theme => ({
     justifyContent: "center",
     width: theme.spacing.unit * 20,
     height: theme.spacing.unit * 15,
-    marginLeft: theme.spacing.unit * 11,
-    marginTop: theme.spacing.unit
+    marginTop: theme.spacing.unit * 2,
+    border: "1px solid #51A8DD"
   },
   uploadButtonColor: {
-    color: "#FFFFFF"
+    backgroundColor: "#FFFFFF"
   },
   uploadInput: {
     display: "none"
   },
   dialogContentText: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: theme.spacing.unit,
+    fontSize: 16,
+    color: "#333333"
   },
   uploadResumeFont: {
     marginTop: theme.spacing.unit,
@@ -616,11 +619,11 @@ class FormDialog extends Component {
         >
           <DialogTitle id="form-dialog-title" disableTypography={true}>
             <Typography className={classes.topoCSS}>Sign up 3/4</Typography>
+            <Typography className={classes.dialogContentText}>
+              Tap to define what defines you
+            </Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText className={classes.dialogContentText}>
-              Tap to define what defines you
-            </DialogContentText>
             <Grid className={classes.chipRoot}>
               {this.state.SoftwreSkills.map((data, idx) => {
                 return (
@@ -675,12 +678,11 @@ class FormDialog extends Component {
         >
           <DialogTitle id="form-dialog-title" disableTypography={true}>
             <Typography className={classes.topoCSS}>Sign up 4/4</Typography>
+            <Typography className={classes.dialogContentText}>
+              Upload resume to help recruiter know you better
+            </Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText className={classes.dialogContentText}>
-              Upload resume to help recruiter know you better
-            </DialogContentText>
-            {/* <Grid className={classes.chipRoot}> */}
             <Typography className={classes.uploadResumeFont}>
               Upload Resume
             </Typography>
@@ -691,14 +693,17 @@ class FormDialog extends Component {
               multiple
               type="file"
             />
-            <label htmlFor="contained-button-file">
+            <label
+              className={classes.uploadButtonColor}
+              htmlFor="contained-button-file"
+            >
               <Button
                 variant="contained"
                 component="span"
                 // className={classes.uploadButton}
                 classes={{
                   root: classes.uploadButton,
-                  containd: classes.uploadButtonColor
+                  contained: classes.uploadButtonColor
                 }}
               >
                 <AddIcon />
