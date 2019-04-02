@@ -12,7 +12,8 @@ import {
   InputLabel,
   Select,
   withStyles,
-  Paper
+  Paper,
+  InputBase
 } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
@@ -58,38 +59,41 @@ const style = theme => ({
     fontWeight: 500
   },
   dialogBoxStep1: {
-    position: "absolute",
-    width: 544,
-    height: 428,
-    left: 457,
-    top: 199,
+    // position: "absolute",
+    width: theme.spacing.unit * 80,
+    height: theme.spacing.unit * 50,
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    // left: 457,
+    // top: 199,
     background: "#FFFFFF",
     borderRadius: 15
   },
   dialogBoxStep2: {
-    position: "absolute",
-    width: 543,
-    height: 678,
-    left: 458,
-    top: 120,
+    width: theme.spacing.unit * 80,
+    height: theme.spacing.unit * 90,
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
     background: "#FFFFFF",
     borderRadius: 15
   },
   dialogBoxStep3: {
-    position: "absolute",
-    width: 543,
-    height: 464,
-    left: 458,
-    top: 200,
+    width: theme.spacing.unit * 80,
+    height: theme.spacing.unit * 50,
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
     background: "#FFFFFF",
     borderRadius: 15
   },
   dialogBoxStep4: {
-    position: "absolute",
-    width: 543,
-    height: 461,
-    left: 458,
-    top: 200,
+    width: theme.spacing.unit * 80,
+    height: theme.spacing.unit * 50,
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
     background: "#FFFFFF",
     borderRadius: 15
   },
@@ -106,20 +110,20 @@ const style = theme => ({
     color: theme.palette.grey[500]
   },
   nextButtonStep1: {
-    position: "absolute",
-    width: 204,
-    height: 50,
-    left: 170,
-    top: 340,
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    width: theme.spacing.unit * 20,
+    marginBottom: theme.spacing.unit * 2,
     background: "#51A8DD",
     borderRadius: 5
   },
   nextButtonStep2: {
-    position: "absolute",
-    width: 204,
-    height: 50,
-    left: 170,
-    top: 610,
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    width: theme.spacing.unit * 20,
+    marginBottom: theme.spacing.unit * 4,
     background: "#51A8DD",
     borderRadius: 5
   },
@@ -129,16 +133,28 @@ const style = theme => ({
     flexWrap: "wrap",
     padding: theme.spacing.unit / 2
   },
+  skillsChip: {
+    // padding: theme.spacing.unit * 4
+    margin: theme.spacing.unit / 2,
+    borderRadius: 5,
+    border: "1px solid #DCDCDC;",
+    backgroundColor: "#FFFFFF"
+  },
   chip: {
     margin: theme.spacing.unit / 2
   },
   uploadButton: {
     variant: "outlined",
-    position: "absolute",
-    width: 204,
-    height: 108,
-    left: 173,
-    top: 170
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    width: theme.spacing.unit * 20,
+    height: theme.spacing.unit * 15,
+    marginLeft: theme.spacing.unit * 11,
+    marginTop: theme.spacing.unit
+  },
+  uploadButtonColor: {
+    color: "#FFFFFF"
   },
   uploadInput: {
     display: "none"
@@ -148,32 +164,96 @@ const style = theme => ({
     justifyContent: "center"
   },
   uploadResumeFont: {
+    marginTop: theme.spacing.unit,
     color: "#51A8DD",
     textAlign: "center",
     fontSize: 20,
     fontStyle: "normal",
     fontWeight: "normal",
-    position: "absolute",
-    width: 150,
-    height: 108,
-    left: 200,
-    top: 135
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center"
+    // position: "absolute",
+    // width: 150,
+    // height: 108,
+    // left: 200,
+    // top: 135
+  },
+  commonInfoTextField: {
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "center",
+    width: theme.spacing.unit * 50,
+    marginBottom: theme.spacing.unit * 2
+  },
+  commonInfoTextFieldInput: {
+    border: "1px solid #AEAEAE",
+    borderRadius: 5
+  },
+  commonInfoTextFieldTypo: {
+    fontSize: 16,
+    color: "#333333"
+  },
+  inputBaseRoot: {
+    "label + &": {
+      marginTop: theme.spacing.unit * 6
+    },
+    width: theme.spacing.unit * 24
+  },
+  commonInfoTextFieldTypoLeft: {
+    float: "Left",
+    marginBottom: theme.spacing.unit * 2
+  },
+  commonInfoTextFieldTypoRight: {
+    float: "right",
+    marginBottom: theme.spacing.unit * 2
+  },
+  inputBaseInput: {
+    border: "1px solid #AEAEAE",
+    borderRadius: 5,
+    paddingLeft: 10
   }
 });
 
+const BootstrapInput = withStyles(theme => ({
+  root: {
+    "label + &": {
+      marginTop: theme.spacing.unit * 5
+    }
+  },
+  input: {
+    border: "1px solid #AEAEAE",
+    borderRadius: 5,
+    paddingLeft: 10
+  }
+}))(InputBase);
+
 function CommonInfoTextField(props) {
   return (
-    <TextField
-      autoFocus
-      margin="dense"
-      id={props.id}
-      label={props.label}
-      type={props.type}
-      fullWidth
-      onChange={props.onChange}
-      value={props.value}
-      variant="outlined"
-    />
+    <div>
+      <Typography
+        classes={{
+          root: props.classes.commonInfoTextFieldTypo
+        }}
+      >
+        {props.labelName}
+      </Typography>
+      <InputBase
+        autoFocus
+        margin="dense"
+        id={props.id}
+        // label={props.label}
+        // type={props.type}
+        fullWidth
+        onChange={props.onChange}
+        value={props.value}
+        variant="outlined"
+        classes={{
+          root: props.classes.commonInfoTextField,
+          input: props.classes.inputBaseInput
+        }}
+      />
+    </div>
   );
 }
 
@@ -284,6 +364,8 @@ class FormDialog extends Component {
               type="email"
               onChange={this.handleChange}
               value={this.state.email}
+              classes={classes}
+              labelName={"Email"}
             />
             <CommonInfoTextField
               id="PassWord"
@@ -291,6 +373,8 @@ class FormDialog extends Component {
               type="password"
               onChange={this.handleChange}
               value={this.state.PassWord}
+              classes={classes}
+              labelName={"PassWord"}
             />
             <CommonInfoTextField
               id="ComfirmedPassWord"
@@ -298,6 +382,8 @@ class FormDialog extends Component {
               type="password"
               onChange={this.handleChange}
               value={this.state.ComfirmedPassWord}
+              classes={classes}
+              labelName={"Comfirm PassWord"}
             />
           </DialogContent>
           <DialogActions>
@@ -331,101 +417,170 @@ class FormDialog extends Component {
           </DialogTitle>
           <DialogContent>
             {/* <form className={classes.formContainer} noValidate autoComplete="off"> */}
-            <Grid container spacing={24}>
-              <Grid item xs={6}>
-                <CommonInfoTextField
-                  id="FirstName"
-                  label="FirstName"
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.FirstName}
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <CommonInfoTextField
-                  id="LastName"
-                  label="LastName"
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.LastName}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <CommonInfoTextField
-                  id="Phone"
-                  label="Phone"
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.Phone}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <CommonInfoTextField
-                  id="School"
-                  label="School"
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.School}
-                />
-              </Grid>
+            <Grid
+              container
+              direction="column"
+              justify="flex-start"
+              alignItems="stretch"
+            >
+              <Grid item>
+                <FormControl className={classes.commonInfoTextFieldTypoLeft}>
+                  <InputLabel
+                    disableAnimation={true}
+                    shrink={false}
+                    className={classes.commonInfoTextFieldTypo}
+                  >
+                    First Name
+                  </InputLabel>
+                  <InputBase
+                    id="FirstName"
+                    onChange={this.handleChange}
+                    value={this.state.FirstName}
+                    classes={{
+                      root: classes.inputBaseRoot,
+                      input: classes.inputBaseInput
+                    }}
+                  />
+                </FormControl>
 
-              <Grid item xs={6}>
-                <TextField
-                  autoFocus
-                  select
-                  margin="dense"
-                  id="outlined-select-gradYear"
-                  label="GradYear"
-                  fullWidth
-                  onChange={this.handleMenuItemClick.bind(this, "GradYear")}
-                  value={this.state.GradYear}
-                  variant="outlined"
-                >
-                  {gradYears.map((option, index) => (
-                    <MenuItem key={option.toString()} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  autoFocus
-                  select
-                  margin="dense"
-                  id="outlined-select-degree"
-                  label="Degree"
-                  fullWidth
-                  onChange={this.handleMenuItemClick.bind(this, "Degree")}
-                  value={this.state.Degree}
-                  variant="outlined"
-                >
-                  {degrees.map((option, index) => (
-                    <MenuItem key={option.toString()} value={option}>
-                      {option}
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Grid>
-              <Grid item xs={12}>
-                <CommonInfoTextField
-                  id="Major1"
-                  label="Major1"
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.Major1}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <CommonInfoTextField
-                  id="Major2"
-                  label="Major2"
-                  type="text"
-                  onChange={this.handleChange}
-                  value={this.state.Major2}
-                />
+                <FormControl className={classes.commonInfoTextFieldTypoRight}>
+                  <InputLabel
+                    disableAnimation={true}
+                    shrink={false}
+                    className={classes.commonInfoTextFieldTypo}
+                  >
+                    Last Name
+                  </InputLabel>
+                  <InputBase
+                    id="LastName"
+                    type="text"
+                    onChange={this.handleChange}
+                    value={this.state.FirstName}
+                    classes={{
+                      root: classes.inputBaseRoot,
+                      input: classes.inputBaseInput
+                    }}
+                  />
+                </FormControl>
               </Grid>
             </Grid>
+
+            <CommonInfoTextField
+              id="Phone"
+              label="Phone"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Phone}
+              classes={classes}
+              labelName={"Phone"}
+            />
+
+            <CommonInfoTextField
+              id="School"
+              label="School"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.School}
+              classes={classes}
+              labelName={"School"}
+            />
+
+            <Grid
+              container
+              direction="column"
+              justify="flex-start"
+              alignItems="stretch"
+            >
+              <Grid item>
+                <FormControl className={classes.commonInfoTextFieldTypoLeft}>
+                  <InputLabel
+                    disableAnimation={true}
+                    shrink={false}
+                    className={classes.commonInfoTextFieldTypo}
+                  >
+                    Graduation Year
+                  </InputLabel>
+                  <Select
+                    autoFocus
+                    select
+                    margin="dense"
+                    id="outlined-select-gradYear"
+                    label="GradYear"
+                    onChange={this.handleMenuItemClick.bind(this, "GradYear")}
+                    value={this.state.GradYear}
+                    // variant="outlined"
+                    classes={{
+                      root: classes.inputBaseRoot
+                      // select: classes.inputBaseInput
+                    }}
+                    input={
+                      <BootstrapInput name="" id="age-customized-select" />
+                    }
+                  >
+                    {gradYears.map((option, index) => (
+                      <MenuItem key={option.toString()} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+
+                <FormControl className={classes.commonInfoTextFieldTypoRight}>
+                  <InputLabel
+                    disableAnimation={true}
+                    shrink={false}
+                    className={classes.commonInfoTextFieldTypo}
+                  >
+                    Degree
+                  </InputLabel>
+                  <Select
+                    autoFocus
+                    select
+                    margin="dense"
+                    id="outlined-select-degree"
+                    label="Degree"
+                    onChange={this.handleMenuItemClick.bind(this, "Degree")}
+                    value={this.state.Degree}
+                    // variant="outlined"
+                    classes={{
+                      root: classes.inputBaseRoot
+                      // select: classes.inputBaseInput
+                    }}
+                    input={
+                      <BootstrapInput name="" id="age-customized-select" />
+                    }
+                  >
+                    {degrees.map((option, index) => (
+                      <MenuItem key={option.toString()} value={option}>
+                        {option}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+            </Grid>
+
+            <CommonInfoTextField
+              id="Major1"
+              label="Major1"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Major1}
+              labelName={"Major 1"}
+              classes={classes}
+              isFloat={false}
+            />
+
+            <CommonInfoTextField
+              id="Major2"
+              label="Major2"
+              type="text"
+              onChange={this.handleChange}
+              value={this.state.Major2}
+              labelName={"Major 2"}
+              classes={classes}
+              isFloat={false}
+            />
           </DialogContent>
           <DialogActions>
             <IconButton
@@ -477,6 +632,10 @@ class FormDialog extends Component {
                     color={
                       this.state.selectedSkills.includes(idx) ? "primary" : ""
                     }
+                    classes={{
+                      root: classes.skillsChip
+                      // label: classes.skillsChipLabel,
+                    }}
                   />
                 );
               })}
@@ -521,27 +680,31 @@ class FormDialog extends Component {
             <DialogContentText className={classes.dialogContentText}>
               Upload resume to help recruiter know you better
             </DialogContentText>
-            <Grid className={classes.chipRoot}>
-              <Typography className={classes.uploadResumeFont}>
-                Upload Resume
-              </Typography>
-              <input
-                accept="image/*"
-                className={classes.uploadInput}
-                id="contained-button-file"
-                multiple
-                type="file"
-              />
-              <label htmlFor="contained-button-file">
-                <Button
-                  variant="contained"
-                  component="span"
-                  className={classes.uploadButton}
-                >
-                  <AddIcon />
-                </Button>
-              </label>
-            </Grid>
+            {/* <Grid className={classes.chipRoot}> */}
+            <Typography className={classes.uploadResumeFont}>
+              Upload Resume
+            </Typography>
+            <input
+              accept="image/*"
+              className={classes.uploadInput}
+              id="contained-button-file"
+              multiple
+              type="file"
+            />
+            <label htmlFor="contained-button-file">
+              <Button
+                variant="contained"
+                component="span"
+                // className={classes.uploadButton}
+                classes={{
+                  root: classes.uploadButton,
+                  containd: classes.uploadButtonColor
+                }}
+              >
+                <AddIcon />
+              </Button>
+            </label>
+            {/* </Grid> */}
           </DialogContent>
           <DialogActions>
             <IconButton
