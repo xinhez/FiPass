@@ -149,12 +149,15 @@ const style = theme => ({
     display: "flex",
     justifyContent: "center",
     width: theme.spacing.unit * 20,
-    height: theme.spacing.unit * 15,
+    height: theme.spacing.unit * 13,
     marginTop: theme.spacing.unit * 2,
-    border: "1px solid #51A8DD"
+    border: "1px solid #51A8DD",
+    elevation: 0
   },
   uploadButtonColor: {
-    backgroundColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF",
+    boxShadow: "0px 0px 0px 0px rgba(0,0,0,0.2)",
+    elevation: 0
   },
   uploadInput: {
     display: "none"
@@ -693,10 +696,7 @@ class FormDialog extends Component {
               multiple
               type="file"
             />
-            <label
-              className={classes.uploadButtonColor}
-              htmlFor="contained-button-file"
-            >
+            <label htmlFor="contained-button-file">
               <Button
                 variant="contained"
                 component="span"
