@@ -9,15 +9,16 @@ import {
   Card,
   IconButton,
   Collapse,
-  CardContent
+  CardContent,
+  Input,
+  InputLabel,
+  InputBase,
+  Chip,
+  CardMedia
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CameraIcon from "@material-ui/icons/CameraAlt";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-import SkillsButtons from "./SkillsButtons";
 import CreateIcon from "@material-ui/icons/Create";
 
 function EditTextField(props) {
@@ -33,11 +34,24 @@ function EditTextField(props) {
         <Typography className={props.classes.namegrid}>{props.name}</Typography>
       </Grid>
       <Grid item>
-        <TextField
+        <InputBase
+          // color='#FFFFFF'
+          disableOutlined={!props.canEdit}
           disabled={!props.canEdit}
           id={props.id}
-          variant="outlined"
-          className={props.classes.textgrid}
+          variant="filled"
+          // className={props.classes.textgrid}
+          classes={
+            props.canEdit
+              ? {
+                  root: props.classes.textgrid,
+                  input: props.classes.bootstrapInput
+                }
+              : {
+                  root: props.classes.textgrid,
+                  input: props.classes.bootstrapNotInput
+                }
+          }
           value={props.value}
           onChange={props.onChange}
         />
@@ -46,22 +60,40 @@ function EditTextField(props) {
   );
 }
 
+const skills = [
+  "JavaScript",
+  "C++",
+  "Java",
+  "React",
+  "PhotoShop",
+  "LeaderShip",
+  "Deep Learning",
+  "AutoCAD"
+];
+
 const styles = theme => ({
   rootPaper: {
     backgroundColor: "#E5E5E5"
+  },
+  bootstrapInput: {
+    // border: '1px solid #ced4da',
+    backgroundColor: "#F4F4F4",
+    borderRadius: 5,
+    paddingLeft: 10
+  },
+  bootstrapNotInput: {
+    paddingLeft: 10
   },
   namegrid: {
     fontSize: 16,
     color: "#000000",
     marginLeft: theme.spacing.unit * 5,
-    width: theme.spacing.unit * 10,
-    marginTop: theme.spacing.unit * 2
-    // marginRight: theme.spacing.unit * ,
+    width: theme.spacing.unit * 10
   },
   textgrid: {
+    border: 0,
     width: theme.spacing.unit * 70,
     marginLeft: theme.spacing.unit
-    // height: theme.spacing.unit,
   },
   skillsPaper: {
     marginTop: theme.spacing.unit * 10,
@@ -100,9 +132,7 @@ const styles = theme => ({
     position: "absolute",
     width: theme.spacing.unit,
     height: theme.spacing.unit,
-    // marginBottom: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 48,
-    // marginTop: theme.spacing.unit ,
     top: theme.spacing.unit * 9
   },
   uploadInput: {
@@ -110,28 +140,23 @@ const styles = theme => ({
   },
   divider: {
     position: "absolute",
-    // width: 876,
-    // height: 0,
-    // left: 0,
-    // top: 300,
     top: theme.spacing.unit * 20,
     border: "1px solid #DCDCDC"
   },
   skillsEditButton: {
-    position: "absolute",
     color: "#51A8BD",
-    top: theme.spacing.unit * 17,
-    left: theme.spacing.unit * 94
+    float: "right",
+    marginRight: theme.spacing.unit * 3
   },
 
   skillsFont: {
-    position: "absolute",
     fontWeight: "bold",
     fontSize: 20,
-    // textAlign: "left",
     color: "#BDBDBD",
-    // marginTop:  theme.spacing.unit * 10,
-    marginLeft: theme.spacing.unit * 5
+    // float: 'left',
+    marginLeft: theme.spacing.unit * 4,
+    marginTop: theme.spacing.unit
+    // marginLeft: theme.spacing.unit * 5
   },
 
   userName: {
@@ -139,7 +164,7 @@ const styles = theme => ({
     width: theme.spacing.unit * 20,
     // height: theme.spacing.unit * 2,
     marginLeft: theme.spacing.unit * 40,
-    marginTop: theme.spacing.unit * 12,
+    marginTop: theme.spacing.unit * 1,
     // left: 345,
     // top: 210,
     fontWeight: "bold",
@@ -152,7 +177,7 @@ const styles = theme => ({
     borderRadius: 5,
     width: theme.spacing.unit * 20,
     heithg: theme.spacing.unit * 5,
-    marginLeft: theme.spacing.unit * 10
+    marginLeft: theme.spacing.unit * 3
   },
   saveFont: {
     fontSize: 20,
@@ -165,7 +190,7 @@ const styles = theme => ({
     borderRadius: 5,
     width: theme.spacing.unit * 20,
     heithg: theme.spacing.unit * 5,
-    marginLeft: theme.spacing.unit * 25
+    marginLeft: theme.spacing.unit * 30
   },
   cancelFont: {
     fontSize: 20,
@@ -174,14 +199,18 @@ const styles = theme => ({
   },
   profileFont: {
     // position: "absolute",
-    marginLeft: theme.spacing.unit * 5,
+    // marginLeft: theme.spacing.unit * 5,
     fontSize: 30,
     // textAlign: "center",
-    color: "#6E6E6E"
+    color: "#6E6E6E",
+    float: "left",
+    padding: theme.spacing.unit * 4
   },
   infoEditButton: {
-    marginLeft: theme.spacing.unit * 58,
-    color: "#51A8BD"
+    float: "right",
+    // marginRight: theme.spacing.unit * 3,
+    color: "#51A8BD",
+    padding: theme.spacing.unit * 4
   },
   cardContent: {
     height: theme.spacing.unit * 20
@@ -189,8 +218,23 @@ const styles = theme => ({
   editTextFieldDivider: {
     marginTop: theme.spacing.unit * 2,
     marginBottom: theme.spacing.unit * 2
-    // width: theme.spacing.unit * 20,
-    // alignItems: "center"
+  },
+  skillsChip: {
+    // padding: theme.spacing.unit * 4
+    margin: theme.spacing.unit / 2,
+    borderRadius: 5,
+    border: "1px solid #DCDCDC;",
+    backgroundColor: "#FFFFFF"
+  },
+  skillsChipPaper: {
+    display: "flex",
+    // justifyContent: 'center',
+    flexWrap: "wrap",
+    // width: theme.spacing.unit * 100,
+    marginTop: theme.spacing.unit * 2,
+    // float: 'left'
+    marginLeft: theme.spacing.unit * 4
+    // padding: theme.spacing.unit / 2,
   }
 });
 
@@ -205,12 +249,29 @@ class StudentSettings extends Component {
       degree: "Master",
       grad_year: 2019,
       major: "CS",
+      skills: [
+        { key: 0, label: "JavaScript" },
+        { key: 1, label: "C++" },
+        { key: 2, label: "Android" },
+        { key: 3, label: "iOS" },
+        { key: 4, label: "Java" },
+        { key: 5, label: "React" },
+        { key: 6, label: "LeaderShip" },
+        { key: 7, label: "Mache Leanring" },
+        { key: 8, label: "Deep Learning" },
+        { key: 9, label: "AutoCAD" },
+        { key: 10, label: "AutoCAD" },
+        { key: 11, label: "CAD" },
+        { key: 12, label: "ADC" }
+      ],
+
       disableEditing: true,
       expandedSkillsEdition: false,
       expandedInfoEdition: false
     };
     this.handleExpandClick = this.handleExpandClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSkillDelete = this.handleSkillDelete.bind(this);
   }
 
   handleChange(e) {
@@ -224,6 +285,15 @@ class StudentSettings extends Component {
     console.log(`state ${this.state[name]}`);
     this.setState({
       [name]: !this.state[name]
+    });
+  }
+
+  handleSkillDelete(data, event) {
+    // console.log(data)
+    this.setState({
+      skills: this.state.skills.filter(d => {
+        return d.key != data.key;
+      })
     });
   }
 
@@ -243,22 +313,6 @@ class StudentSettings extends Component {
               <Card id="edit-skill-paper" className={classes.skillsCard}>
                 <CardContent className={classes.skillsPaper}>
                   <Avatar className={classes.photoAvater} />
-                  <input
-                    accept="image/*"
-                    className={classes.uploadInput}
-                    id="upload-avater"
-                    multiple
-                    type="file"
-                  />
-                  <label htmlFor="upload-avater">
-                    <IconButton
-                      component="span"
-                      size="small"
-                      className={classes.cameraAvater}
-                    >
-                      <CameraIcon size="small" />
-                    </IconButton>
-                  </label>
                   <Typography className={classes.userName}>
                     Yining Yang
                   </Typography>
@@ -270,14 +324,34 @@ class StudentSettings extends Component {
                       this,
                       "expandedSkillsEdition"
                     )}
-                    // aria-expanded={this.state.expandedSkillsEdition}
                     aria-label="Show Edit Buttons"
                   >
                     <CreateIcon />
                   </IconButton>
-                  {/* </CardActions> */}
                   <Typography className={classes.skillsFont}>SKILLS</Typography>
-                  {/* </CardContent> */}
+                  <Paper
+                    justifyContent="center"
+                    elevation={0}
+                    className={classes.skillsChipPaper}
+                  >
+                    {this.state.skills.map((data, idx) => {
+                      return (
+                        <Chip
+                          key={data.key}
+                          label={data.label}
+                          onDelete={
+                            this.state.expandedSkillsEdition
+                              ? this.handleSkillDelete.bind(this, data)
+                              : null
+                          }
+                          classes={{
+                            root: classes.skillsChip
+                            // label: classes.skillsChipLabel,
+                          }}
+                        />
+                      );
+                    })}
+                  </Paper>
                 </CardContent>
                 <Collapse in={this.state.expandedSkillsEdition} timeout="auto">
                   <CardContent>
@@ -301,6 +375,10 @@ class StudentSettings extends Component {
                         root: classes.skillsSaveButton
                       }}
                       // onClick={this.handleStep.bind(this, 1)}
+                      onClick={this.handleExpandClick.bind(
+                        this,
+                        "expandedSkillsEdition"
+                      )}
                     >
                       <Typography className={classes.saveFont}>Save</Typography>
                     </Button>
@@ -311,26 +389,24 @@ class StudentSettings extends Component {
             </Grid>
             <Card id="edit-info-paper" className={classes.infoPaper}>
               <CardContent>
-                <Grid container spacing={8} alignItems="space-between">
-                  <Grid item>
-                    <Typography className={classes.profileFont}>
-                      Profile
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <IconButton
-                      className={classes.infoEditButton}
-                      onClick={this.handleExpandClick.bind(
-                        this,
-                        "expandedInfoEdition"
-                      )}
-                      // aria-expanded={this.state.expandedSkillsEdition}
-                      aria-label="Show Edit Buttons"
-                    >
-                      <CreateIcon />
-                    </IconButton>
-                  </Grid>
-                </Grid>
+                {/* <Grid container spacing={8} alignItems="space-between"> */}
+                {/* <Grid item> */}
+                <Typography className={classes.profileFont}>Profile</Typography>
+                {/* </Grid> */}
+                {/* <Grid item> */}
+                <IconButton
+                  className={classes.infoEditButton}
+                  onClick={this.handleExpandClick.bind(
+                    this,
+                    "expandedInfoEdition"
+                  )}
+                  // aria-expanded={this.state.expandedSkillsEdition}
+                  aria-label="Show Edit Buttons"
+                >
+                  <CreateIcon />
+                </IconButton>
+                {/* </Grid> */}
+                {/* </Grid> */}
               </CardContent>
               <CardContent className={classes.infoCard}>
                 <Grid
