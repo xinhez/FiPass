@@ -73,6 +73,21 @@ const styles = theme => ({
     "font-size": "20px",
     "line-height": "normal",
     color: "#000000"
+  },
+  buttonChoose: {
+    background: "#51A8DD",
+    "border-radius": "5px",
+    width: "100%",
+    margin: "1% 8px",
+    height: "60%",
+    "border-width": 0,
+
+    "font-family": "Roboto",
+    "font-style": "normal",
+    "font-weight": 300,
+    "font-size": "20px",
+    "line-height": "normal",
+    color: "#FFFFFF"
   }
   // first:{
   //   'margin': '1% 8px 1% 30px'
@@ -92,11 +107,14 @@ class Companybar extends Component {
   }
 
   renderButton(filter, string, width) {
+    console.log("this.props.filter", this.props.filter);
     const { classes } = this.props;
     return (
       <Grid item xs={width}>
         <button
-          className={classes.button}
+          className={
+            this.props.filter == filter ? classes.buttonChoose : classes.button
+          }
           onClick={e => this.handleClick(filter, e)}
         >
           {" "}

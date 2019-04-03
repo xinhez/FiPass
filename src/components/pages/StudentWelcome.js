@@ -74,8 +74,8 @@ class StudentWelcome extends Component {
   constructor() {
     super();
     this.state = {
+      filter: null,
       loading: true,
-
       allCompanies: {
         all: [
           {
@@ -289,7 +289,15 @@ class StudentWelcome extends Component {
 
   changeFilter(filter) {
     // fulltime parttime intern liked
+    //
+    //
+    if (this.state.filter == filter) {
+      this.setState({ filter: "all" });
+      this.setState({ companies: this.state.allCompanies.all });
+      return;
+    }
 
+    this.setState({ filter: filter });
     console.log("changeFilter", filter);
     if (filter == "fulltime") {
       this.setState({ companies: this.state.allCompanies.fulltime });
@@ -318,7 +326,10 @@ class StudentWelcome extends Component {
     return (
       <div className={classes.root}>
         <Topbar />
-        <Companybar changeFilter={this.changeFilter} />
+        <Companybar
+          changeFilter={this.changeFilter}
+          filter={this.state.filter}
+        />
         <Content
           selectedCompanyID={this.state.selectedCompanyID}
           changeSelected={this.changeSelected}
