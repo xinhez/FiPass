@@ -38,7 +38,8 @@ const styles = theme => ({
     fontSize: 18,
     color: "#51A8DD",
     marginTop: theme.spacing.unit * 5,
-    marginLeft: theme.spacing.unit * 4
+    // marginLeft: theme.spacing.unit * 4
+    marginLeft: 27
   },
   locationIcon: {
     display: "block",
@@ -91,11 +92,11 @@ function PositionCard(props) {
       />
       <CardContent className={classes.subContent}>
         <Typography className={classes.subTitle}>Skills</Typography>
-        sdf;dsajf;kasdjfl;ksdjlf;kj
+        {props.skills}
       </CardContent>
       <CardContent className={classes.subContent}>
         <Typography className={classes.subTitle}>Job Description</Typography>
-        sdlfkjsdlfjlsdkjflksj
+        {props.Job}
       </CardContent>
     </Card>
   );

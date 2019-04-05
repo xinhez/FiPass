@@ -324,6 +324,16 @@ class CompanyProfile extends Component {
             skills: ["Java", "C++"],
             JD: "Love Working"
           }
+        },
+        {
+          key: 4,
+          value: {
+            role: "SDE4",
+            kind: "ft",
+            location: "Pitts",
+            skills: ["Java", "C++"],
+            JD: "Love Working"
+          }
         }
       ],
 
@@ -334,6 +344,47 @@ class CompanyProfile extends Component {
     this.handleExpandClick = this.handleExpandClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSkillDelete = this.handleSkillDelete.bind(this);
+  }
+
+  createPorision(classes) {
+    let grid = [];
+    for (let pidx = 0; pidx < this.state.position.length; pidx += 3) {
+      let children = [];
+      let cidx = pidx;
+      for (; cidx < pidx + 3 && cidx < this.state.position.length; cidx += 1) {
+        // console.log(this.state.position[cidx].value.role)
+        children.push(
+          <Grid item md={3}>
+            <PositionCard
+              title={this.state.position[cidx].value.role}
+              role={this.state.position[cidx].value.role}
+              location={this.state.position[cidx].value.location}
+              skills={this.state.position[cidx].value.skills}
+              Job={this.state.position[cidx].value.JD}
+            />
+          </Grid>
+        );
+      }
+      for (; cidx < pidx + 3; cidx += 1) {
+        children.push(<Grid item md={3} />);
+      }
+
+      grid.push(
+        <Grid item className={classes.positionGrid}>
+          {" "}
+          <Grid
+            container
+            spacing={16}
+            justify="space-evenly"
+            alignItems="center"
+            className={classes.positionInnerGrid}
+          >
+            {children}
+          </Grid>
+        </Grid>
+      );
+    }
+    return grid;
   }
 
   handleChange(e) {
@@ -394,96 +445,8 @@ class CompanyProfile extends Component {
                 Position(s)
               </Typography>
             </Grid>
-            <Grid item className={classes.positionGrid}>
-              <Grid
-                container
-                spacing={16}
-                justify="space-evenly"
-                alignItems="center"
-                className={classes.positionInnerGrid}
-              >
-                <Grid item md={3}>
-                  <PositionCard
-                    title={"test"}
-                    role={"ft"}
-                    location={"location"}
-                    skills={"1 2 3 4 r"}
-                    Job={"dsfsdfsdfsdfdsf"}
-                  />
-                </Grid>
-                <Grid item md={3}>
-                  <PositionCard
-                    title={"test"}
-                    role={"ft"}
-                    location={"location"}
-                    skills={"1 2 3 4 r"}
-                    Job={"dsfsdfsdfsdfdsf"}
-                  />
-                </Grid>
-                <Grid item md={3}>
-                  <PositionCard
-                    title={"test"}
-                    role={"ft"}
-                    location={"location"}
-                    skills={"1 2 3 4 r"}
-                    Job={"dsfsdfsdfsdfdsf"}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item className={classes.positionGrid}>
-              <Grid
-                container
-                spacing={16}
-                justify="space-evenly"
-                alignItems="center"
-                className={classes.positionInnerGrid}
-              >
-                <Grid item md={3}>
-                  <PositionCard
-                    title={"test"}
-                    role={"ft"}
-                    location={"location"}
-                    skills={"1 2 3 4 r"}
-                    Job={"dsfsdfsdfsdfdsf"}
-                  />
-                </Grid>
-                <Grid item md={3}>
-                  <PositionCard
-                    title={"test"}
-                    role={"ft"}
-                    location={"location"}
-                    skills={"1 2 3 4 r"}
-                    Job={"dsfsdfsdfsdfdsf"}
-                  />
-                </Grid>
-                <Grid item md={3}>
-                  <PositionCard
-                    title={"test"}
-                    role={"ft"}
-                    location={"location"}
-                    skills={"1 2 3 4 r"}
-                    Job={"dsfsdfsdfsdfdsf"}
-                  />
-                </Grid>
-              </Grid>
-            </Grid>
+            {this.createPorision(classes)}
           </Grid>
-
-          {/* <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            spacing={24}
-          >
-            <Card id="edit-info-paper" className={classes.infoPaper}>
-              <CardContent className={classes.infoCard}>
-                <PositionCard />
-              </CardContent>
-            </Card>
-          </Grid> */}
         </Paper>
       </div>
     );
