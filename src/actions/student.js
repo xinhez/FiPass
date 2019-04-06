@@ -1,14 +1,15 @@
 import axios from "axios";
 
 export function fetchStudents() {
-  console.log("fetching student");
   return dispatch => {
     dispatch(fetchStudentsBegin());
     axios({
       method: "GET",
-      url: "/api/student"
+      url: "http://localhost:3000/students"
     })
-      .then(data => dispatch(fetchStudentsSuccess(data.data.data)))
+      .then(response => {
+        dispatch(fetchStudentsSuccess(response.data));
+      })
       .catch(error => dispatch(fetchStudentsFailure(error)));
   };
 }

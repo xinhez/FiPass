@@ -26,7 +26,6 @@ class Student extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(ownProps);
   let id = ownProps.match.params.student_id;
   return {
     student: state.student.students.find(student => student.id === id)
