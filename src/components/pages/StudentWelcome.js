@@ -21,7 +21,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../css/studentwelcome.css";
 import logo from "../test-img/test-logo.jpg";
-import Fipass from "../test-img/Fipass.png";
+import FiPass from "../test-img/FiPass.png";
 import heart from "../test-img/heart.png";
 import locationImg from "../test-img/location.png";
 import background from "../test-img/background.png";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import EmployerHome from "./components/pages/EmployerHome";
-import StudentHome from "./components/pages/StudentHome";
+import CompanyWelcome from "./components/pages/CompanyWelcome";
+import StudentWelcome from "./components/pages/StudentWelcome";
 import Student from "./components/Student";
 
 class App extends Component {
@@ -9,8 +9,8 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Route exact path="/" component={StudentHome} />
-          <Route exact path="/employer" component={EmployerHome} />
+          <Route exact path="/" component={StudentWelcome} />
+          <Route exact path="/employer" component={CompanyWelcome} />
           <Route exact path="/student/:student_id" component={Student} />
         </div>
       </Router>
