@@ -1,10 +1,7 @@
 import {
   FETCH_COMPANIES_BEGIN,
   FETCH_COMPANIES_SUCCESS,
-  FETCH_COMPANIES_FAILURE,
-  FETCH_COMPANYINFO_BEGIN,
-  FETCH_COMPANYINFO_SUCCESS,
-  FETCH_COMPANYINFO_FAILURE
+  FETCH_COMPANIES_FAILURE
 } from "../actions/company";
 
 const initialState = {
@@ -34,25 +31,6 @@ export default function companyReducer(state = initialState, action) {
         ...state,
         fetchingCompanies: false,
         companies: [],
-        error: action.payload.error
-      };
-    case FETCH_COMPANYINFO_BEGIN:
-      return {
-        ...state,
-        fetchingCompanyInfo: true,
-        error: null
-      };
-    case FETCH_COMPANYINFO_SUCCESS:
-      return {
-        ...state,
-        fetchingCompanyInfo: false,
-        companyInfo: action.payload.companyInfo
-      };
-    case FETCH_COMPANYINFO_FAILURE:
-      return {
-        ...state,
-        fetchingCompanyInfo: false,
-        companyInfo: [],
         error: action.payload.error
       };
     default:
