@@ -1,43 +1,16 @@
-/*
-Top bar: logo (left)   |  (username email login signup) (right)
-Company bar: second bar
-Content: 
-            Company List
-                    company
-                        Img |  3 lines
-            Company detail
-                    Img
-                    CompanyXXX    |   send code
-                    Location 
-                    Company | position
-                    detail
-*/
-
-// src/components/Home.js
-
-// Import react
-import axios from "axios";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../css/studentwelcome.css";
 import logo from "../test-img/test-logo.jpg";
-import Fipass from "../test-img/FiPass.png";
 import heart from "../test-img/heart.png";
 import locationImg from "../test-img/location.png";
 import background from "../test-img/background.png";
 import linkImg from "../test-img/link.png";
 import CompanyCard from "./CompanyCard.js";
-import Topbar from "./Topbar.js";
-import Companybar from "./Companybar.js";
 import CompanyDetailContent from "./CompanyDetailContent.js";
-import LoginFormStu from "./LoginFormStu.js";
-import { Paper, Grid, Button, withStyles, ButtonBase } from "@material-ui/core";
-import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import PerfectScrollbar from "react-perfect-scrollbar";
-// import ReactScrollbar from 'react-scrollbar-js';
-// import { fetchCompanies } from "../../actions/student";
 const styles = theme => ({
   root: {
     "margin-right": "2%"
@@ -57,27 +30,6 @@ const styles = theme => ({
 });
 
 class CompanyList extends Component {
-  // componentDidMount() {
-  //   this.props.dispatch(fetchCompanies());
-  // }
-  /*
-  <CompanyCard
-        key={company.id}
-        id={company.id}
-        imgSrc={logo}
-        heartSrc={heart}
-        name={company.name}
-        location={company.location}
-        locationImg={locationImg}
-        description={company.description}
-      />
-   */
-
-  constructor(props) {
-    super(props);
-    // This binding is necessary to make `this` work in the callback
-  }
-
   renderCompanies(companies) {
     console.log("this.props.selectedCompanyID:", this.props.selectedCompanyID);
     const { classes } = this.props;
@@ -87,7 +39,7 @@ class CompanyList extends Component {
         company.name,
         company.location,
         company.description,
-        String(this.props.selectedCompanyID) == String(company.id)
+        String(this.props.selectedCompanyID) === String(company.id)
           ? true
           : false
       )
@@ -121,26 +73,6 @@ class CompanyList extends Component {
   }
 
   render() {
-    // const { error, loading, students } = this.props;
-    // console.log(error, loading, students);
-
-    // if (error) {
-    //   return <div>Error {error.message}</div>;
-    // }
-
-    // if (loading) {
-    //   return <div>loading...</div>;
-    // }
-    /*
-    {this.renderCompanyCards(
-      1,
-      "Google",
-      "San Francisco",
-      "Technical Solution Specialist Intern Digital Sales Intern"
-    )} 
-     */
-
-    const { classes } = this.props;
     return (
       <div className={this.props.className}>
         {this.renderCompanies(this.props.companies)}
@@ -155,14 +87,6 @@ CompanyList.propTypes = {
 
 class Content extends Component {
   // componentDidMount() {
-  //   this.props.dispatch(fetchCompany(this.props.id));
-  // }
-  // renderCompanies(companies){
-  //   return companies.map(company => {
-  //     return this.renderCompanyDetail(xxxx);
-  //   });
-  // }
-
   renderCompanyDetail(
     id_,
     name_,
@@ -226,18 +150,7 @@ class Content extends Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   console.log("mapping state", state);
-//   return {
-//     students: state.company.companies,
-//     loading: state.company.fetchingCompanies,
-//     error: state.company.error
-//   };
-// };
-// export default connect(mapStateToProps)(StudentWelcome);
-//
 Content.propTypes = {
   classes: PropTypes.object.isRequired
 };
 export default withStyles(styles)(Content);
-// export default StudentWelcome;

@@ -16,26 +16,11 @@ Content:
 // src/components/Home.js
 
 // Import react
-import axios from "axios";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "../css/studentwelcome.css";
-import logo from "../test-img/test-logo.jpg";
-import FiPass from "../test-img/FiPass.png";
-import heart from "../test-img/heart.png";
-import locationImg from "../test-img/location.png";
-import background from "../test-img/background.png";
-import linkImg from "../test-img/link.png";
-import CompanyCard from "./CompanyCard.js";
-import Topbar from "./Topbar.js";
-import Companybar from "./Companybar.js";
 import Content from "./Content.js";
-import CompanyDetailContent from "./CompanyDetailContent.js";
-import LoginFormStu from "./LoginFormStu.js";
-import { Paper, Grid, Button, withStyles } from "@material-ui/core";
-import { connect } from "react-redux";
+import { withStyles } from "@material-ui/core";
 import PropTypes from "prop-types";
-import { fetchCompanies } from "../../actions/company";
 const styles = theme => ({
   container: {
     display: "grid",
@@ -51,15 +36,11 @@ const styles = theme => ({
   },
   divider: {
     margin: `${theme.spacing.unit * 2}px 0`
-  },
-  root: {
-    background: "#E5E5E5"
   }
 });
 
 class StudentWelcome extends Component {
   // props function pass way
-  //
   componentDidMount() {
     // this.props.dispatch(fetchCompanies());
     this.changeFilter("all");
@@ -246,7 +227,6 @@ class StudentWelcome extends Component {
       }
     };
     this.changeSelected = this.changeSelected.bind(this);
-    this.changeFilter = this.changeFilter.bind(this);
     this.likePosition = this.likePosition.bind(this);
   }
 
@@ -291,7 +271,7 @@ class StudentWelcome extends Component {
     // fulltime parttime intern liked
     //
     //
-    if (this.state.filter == filter) {
+    if (this.state.filter === filter) {
       this.setState({ filter: "all" });
       this.setState({ companies: this.state.allCompanies.all });
       return;
@@ -299,13 +279,13 @@ class StudentWelcome extends Component {
 
     this.setState({ filter: filter });
     console.log("changeFilter", filter);
-    if (filter == "fulltime") {
+    if (filter === "fulltime") {
       this.setState({ companies: this.state.allCompanies.fulltime });
-    } else if (filter == "parttime") {
+    } else if (filter === "parttime") {
       this.setState({ companies: this.state.allCompanies.parttime });
-    } else if (filter == "intern") {
+    } else if (filter === "intern") {
       this.setState({ companies: this.state.allCompanies.intern });
-    } else if (filter == "liked") {
+    } else if (filter === "liked") {
       this.setState({ companies: this.state.allCompanies.liked });
     } else {
       this.setState({ companies: this.state.allCompanies.all });
@@ -325,11 +305,6 @@ class StudentWelcome extends Component {
     }
     return (
       <div className={classes.root}>
-        <Topbar />
-        <Companybar
-          changeFilter={this.changeFilter}
-          filter={this.state.filter}
-        />
         <Content
           selectedCompanyID={this.state.selectedCompanyID}
           changeSelected={this.changeSelected}
