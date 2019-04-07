@@ -1,15 +1,19 @@
 import axios from "axios";
+const BASE_URL = "http://localhost:3000/";
 
 export function fetchCompanies() {
-  console.log("fetching company");
   return dispatch => {
     dispatch(fetchCompaniesBegin());
     axios({
       method: "GET",
-      url: "/api/company"
+      url: BASE_URL + "companies"
     })
-      .then(data => dispatch(fetchCompaniesSuccess(data.data.data)))
-      .catch(error => dispatch(fetchCompaniesFailure(error)));
+      .then(response => {
+        dispatch(fetchCompaniesSuccess(response.data));
+      })
+      .catch(error => {
+        dispatch(fetchCompaniesFailure(error));
+      });
   };
 }
 
@@ -28,36 +32,5 @@ export const fetchCompaniesSuccess = companies => ({
 
 export const fetchCompaniesFailure = error => ({
   type: FETCH_COMPANIES_FAILURE,
-  payload: { error }
-});
-
-export function fetchCompanyInfo(id) {
-  console.log("fetching fetchCompanyInfo");
-  return dispatch => {
-    dispatch(fetchCompanyInfoBegin());
-    axios({
-      method: "GET",
-      url: "/api/companyInfo/" + String(id)
-    })
-      .then(data => dispatch(fetchCompanyInfoSuccess(data.data.data)))
-      .catch(error => dispatch(fetchCompanyInfoFailure(error)));
-  };
-}
-
-export const FETCH_COMPANYINFO_BEGIN = "FETCH_COMPANYINFO_BEGIN";
-export const FETCH_COMPANYINFO_SUCCESS = "FETCH_COMPANYINFO_SUCCESS";
-export const FETCH_COMPANYINFO_FAILURE = "FETCH_COMPANYINFO_FAILURE";
-
-export const fetchCompanyInfoBegin = () => ({
-  type: FETCH_COMPANYINFO_BEGIN
-});
-
-export const fetchCompanyInfoSuccess = companyInfo => ({
-  type: FETCH_COMPANYINFO_SUCCESS,
-  payload: { companyInfo }
-});
-
-export const fetchCompanyInfoFailure = error => ({
-  type: FETCH_COMPANYINFO_FAILURE,
   payload: { error }
 });
