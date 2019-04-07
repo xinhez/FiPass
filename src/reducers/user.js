@@ -8,10 +8,10 @@ export const USER_ROLE_COMPANY = false;
 export const USER_ROLE_STUDENT = true;
 
 const initialState = {
-  id: 0,
-  token: null,
   loggingInUser: false,
-  role: USER_ROLE_STUDENT,
+  id: null,
+  token: null,
+  role: null,
   error: null
 };
 
@@ -21,6 +21,9 @@ export default function companyReducer(state = initialState, action) {
       return {
         ...state,
         loggingInUser: true,
+        id: null,
+        token: null,
+        role: null,
         error: null
       };
     case USER_LOGIN_SUCCESS:
@@ -35,8 +38,9 @@ export default function companyReducer(state = initialState, action) {
       return {
         ...state,
         loggingInUser: false,
-        id: -1,
+        id: null,
         token: null,
+        role: null,
         error: action.payload.error
       };
     default:

@@ -1,12 +1,15 @@
 import axios from "axios";
 const BASE_URL = "http://localhost:3000/";
 
-export function fetchStudents() {
+export function fetchStudents(Authorization) {
   return dispatch => {
     dispatch(fetchStudentsBegin());
     axios({
       method: "GET",
-      url: BASE_URL + "students"
+      url: BASE_URL + "students",
+      headers: {
+        Authorization
+      }
     })
       .then(response => {
         dispatch(fetchStudentsSuccess(response.data));

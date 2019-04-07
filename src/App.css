@@ -1,0 +1,13 @@
+.app {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.subtitle {
+  color: #838383 !important;
+}
+
+.subtitle-icon {
+  fill: #838383 !important;
+}
