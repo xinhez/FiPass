@@ -122,7 +122,8 @@ class FloatingActionButtonZoom extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    console.log("about:", this.props);
+    const { classes, description } = this.props;
     const { value } = this.state;
     // const { position } = this.props;
 
@@ -146,7 +147,7 @@ class FloatingActionButtonZoom extends React.Component {
         </Tabs>
         {value == 0 && (
           <Typography className={classes.typography}>
-            Ant Design UI powered by Material-UI
+            {this.props.description}
           </Typography>
         )}
 

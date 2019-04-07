@@ -6,9 +6,9 @@ export function fetchCompanies() {
     dispatch(fetchCompaniesBegin());
     axios({
       method: "GET",
-      url: "/api/company"
+      url: "http://localhost:3000/companies"
     })
-      .then(data => dispatch(fetchCompaniesSuccess(data.data.data)))
+      .then(response => dispatch(fetchCompaniesSuccess(response.data)))
       .catch(error => dispatch(fetchCompaniesFailure(error)));
   };
 }
@@ -37,9 +37,9 @@ export function fetchCompanyInfo(id) {
     dispatch(fetchCompanyInfoBegin());
     axios({
       method: "GET",
-      url: "/api/companyInfo/" + String(id)
+      url: "http://localhost:3000/companies/" + String(id)
     })
-      .then(data => dispatch(fetchCompanyInfoSuccess(data.data.data)))
+      .then(response => dispatch(fetchCompanyInfoSuccess(response.data)))
       .catch(error => dispatch(fetchCompanyInfoFailure(error)));
   };
 }
@@ -59,5 +59,40 @@ export const fetchCompanyInfoSuccess = companyInfo => ({
 
 export const fetchCompanyInfoFailure = error => ({
   type: FETCH_COMPANYINFO_FAILURE,
+  payload: { error }
+});
+
+export function postlikePosition(stu_id, pos_id) {
+  console.log("likePosition");
+  return dispatch => {
+    dispatch(postlikePositionBegin());
+    axios({
+      method: "POST",
+      url: "http://localhost:3000/likes",
+      data: {
+        student_id: stu_id,
+        position_id: pos_id
+      }
+    })
+      .then(response => dispatch(postlikePositionSuccess(response.data)))
+      .catch(error => dispatch(postlikePositionFailure(error)));
+  };
+}
+
+export const POST_LIKEPOSTION_BEGIN = "POST_LIKEPOSTION_BEGIN";
+export const POST_LIKEPOSTION_SUCCESS = "POST_LIKEPOSTION_SUCCESS";
+export const POST_LIKEPOSTION_FAILURE = "POST_LIKEPOSTION_FAILURE";
+
+export const postlikePositionBegin = () => ({
+  type: POST_LIKEPOSTION_BEGIN
+});
+
+export const postlikePositionSuccess = companyInfo => ({
+  type: POST_LIKEPOSTION_SUCCESS,
+  payload: { companyInfo }
+});
+
+export const postlikePositionFailure = error => ({
+  type: POST_LIKEPOSTION_FAILURE,
   payload: { error }
 });

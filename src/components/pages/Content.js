@@ -83,7 +83,7 @@ class CompanyList extends Component {
     const { classes } = this.props;
     const listItems = companies.map(company =>
       this.renderCompanyCards(
-        company.id,
+        company.user_id,
         company.name,
         company.location,
         company.description,
@@ -214,7 +214,7 @@ class Content extends Component {
           changeSelected={this.props.changeSelected}
         />
         {this.renderCompanyDetail(
-          selectedCompanyInfo.id,
+          selectedCompanyInfo.user_id,
           selectedCompanyInfo.name,
           selectedCompanyInfo.location,
           selectedCompanyInfo.description,

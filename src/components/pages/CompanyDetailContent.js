@@ -151,6 +151,7 @@ class CompanyDetailContent extends React.Component {
                 </Grid>
 
                 <FloatingActionButtonZoom
+                  description={this.props.description}
                   company_id={this.props.id}
                   likePosition={this.props.likePosition}
                   positions={this.props.positions}
