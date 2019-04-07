@@ -39,17 +39,15 @@ const style = theme => ({
     fontStyle: "normal",
     fontWeight: "bold"
   },
-  // action: {
-  //     marginBotton: theme.spacing.unit * 10,
-  // }
   addButton: {
-    marginBottom: theme.spacing.unit * 6,
+    marginBottom: theme.spacing.unit * 3,
     background: "#51A8DD",
     borderRadius: 5,
     width: theme.spacing.unit * 15,
     color: "#FFFFFF",
     fontSize: 20,
-    fontWeight: 500
+    fontWeight: 500,
+    textTransform: "none"
   }
 });
 
@@ -57,14 +55,29 @@ class AddStudent extends Component {
   constructor() {
     super();
     this.state = {
-      open: false
+      open: false,
+      code: ""
     };
     this.handleOpen = this.handleOpen.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleAdd = this.handleAdd.bind(this);
   }
 
   handleOpen() {
     this.setState({
       open: true
+    });
+  }
+
+  handleChange(e) {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  }
+
+  handleAdd() {
+    this.setState({
+      open: false
     });
   }
 
@@ -97,11 +110,16 @@ class AddStudent extends Component {
                   root: classes.inputBaseRoot,
                   input: classes.inputBaseInput
                 }}
+                id="code"
+                value={this.state.code}
+                onChange={this.handleChange}
               />
             </FormControl>
           </DialogContent>
           <DialogActions className={classes.action}>
-            <Button className={classes.addButton}>Add</Button>
+            <Button className={classes.addButton} onClick={this.handlelsAdd}>
+              Add
+            </Button>
           </DialogActions>
         </Dialog>
       </div>
