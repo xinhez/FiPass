@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import CompanyWelcome from "./components/pages/CompanyWelcome";
-import StudentWelcome from "./components/pages/StudentWelcome";
-import Student from "./components/Student";
+import CompanyWelcome from "./pages/CompanyWelcome";
+import StudentWelcome from "./pages/StudentWelcome";
+import Student from "./Student";
 
 class App extends Component {
   render() {
