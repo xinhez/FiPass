@@ -1,0 +1,48 @@
+.positionList-card {
+  border-style: solid !important;
+  border: 1px;
+  border-color: #dcdcdc;
+  border-radius: 5px !important;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05) !important;
+  display: flex;
+  padding: 15px;
+}
+
+.positionList-card-center {
+  width: 100%;
+}
+
+.positionList-card-title {
+  color: #4d9fd1 !important;
+  padding-bottom: 3px;
+}
+
+.positionList-card-title-container {
+  display: flex;
+}
+
+.positionList-card-description {
+  padding-top: 3px;
+}
+
+.positionList-card-match {
+  color: #ffffff !important;
+  background: #4d9fd1 !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+  margin-left: 10px !important;
+}
+
+.positionList-card-liked {
+  float: right;
+  padding-left: 5px;
+  fill: #ef6682 !important;
+}
+
+.positionList-card-notLiked {
+  float: right;
+  padding-left: 5px;
+  fill: #838383 !important;
+}

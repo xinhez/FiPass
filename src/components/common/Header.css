@@ -1,0 +1,22 @@
+.header {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  height: 55px;
+  background: #ffffff;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header-left {
+  float: left;
+  padding-top: 15px;
+  padding-left: 30px;
+}
+
+.header-right {
+  float: right;
+  padding-top: 10px;
+  padding-right: 30px;
+}

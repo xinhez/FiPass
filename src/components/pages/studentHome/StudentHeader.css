@@ -1,0 +1,23 @@
+.studentHeader-button-login {
+  color: #51a8dd !important;
+  border-color: #51a8dd !important;
+  margin-right: 10px;
+  min-width: 120px !important;
+}
+
+.studentHeader-button-signup {
+  background: #51a8dd !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 0 !important;
+  margin-left: 15px !important;
+  min-width: 120px !important;
+}
+
+.studentHeader-login {
+}
+
+.studentHeader-login-text-field {
+  margin-left: 30px !important;
+  margin-right: 30px !important;
+  width: 300px !important;
+}
