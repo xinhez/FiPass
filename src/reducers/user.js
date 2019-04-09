@@ -1,9 +1,7 @@
 import {
   USER_LOGIN_BEGIN,
   USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE,
-  USER_ROLE_COMPANY,
-  USER_ROLE_STUDENT
+  USER_LOGIN_FAILURE
 } from "../actions/user";
 
 const initialState = {

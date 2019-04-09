@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
 import StudentLogIn from "./StudentLogIn";
 import StudentSignUp from "./StudentSignUp";
 import { fetchSkills } from "../../../actions/skill";
 import { createStudent } from "../../../actions/student";
-import { USER_ROLE_COMPANY, loginStudentUser } from "../../../actions/user";
+import {
+  USER_ROLE_STUDENT,
+  USER_ROLE_COMPANY,
+  loginStudentUser
+} from "../../../actions/user";
 import "../../common/Button.css";
+import "../../common/Dialog.css";
 import "./StudentHeader.css";
 
 class StudentHeader extends Component {
@@ -24,6 +29,17 @@ class StudentHeader extends Component {
 
   componentDidMount() {
     this.props.dispatch(fetchSkills());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.id !== null &&
+      nextProps.role === USER_ROLE_STUDENT &&
+      nextProps.token !== null
+    ) {
+      this._handleClickLogInForm(false);
+      this._handleClickSignUpForm(false);
+    }
   }
 
   _handleClickLogInForm(open: boolean) {
@@ -45,51 +61,60 @@ class StudentHeader extends Component {
 
   render() {
     const { showLoginDialog, showSignUpDialog } = this.state;
-    const { role, skills } = this.props;
+    const { id, token, role, skills } = this.props;
     if (role === USER_ROLE_COMPANY) {
       return null;
     }
-
-    return (
-      <div className="studentHeader">
-        <Button
-          variant="outlined"
-          className="Button-secondary studentHeader-button-login"
-          onClick={_ => this._handleClickLogInForm(true)}
-        >
-          Log in
-        </Button>
-        <Button
-          variant="contained"
-          className="Button-primary studentHeader-button-signup"
-          onClick={_ => this._handleClickSignUpForm(true)}
-        >
-          Sign up
-        </Button>
-        {
-          <StudentLogIn
-            closeForm={_ => this._handleClickLogInForm(false)}
-            onClickLogIn={this.onClickLogIn}
-            open={showLoginDialog}
-          />
-        }
-        {
-          <StudentSignUp
-            closeForm={_ => this._handleClickSignUpForm(false)}
-            onClickSignUp={this.onClickSignUp}
-            open={showSignUpDialog}
-            skills={skills}
-          />
-        }
-      </div>
-    );
+    if (id === null || token === null || role === null) {
+      return (
+        <div className="studentHeader-unLoggedIn">
+          <Button
+            variant="outlined"
+            className="Button-secondary studentHeader-button-login"
+            onClick={_ => this._handleClickLogInForm(true)}
+          >
+            Log in
+          </Button>
+          <Button
+            variant="contained"
+            className="Button-primary studentHeader-button-signup"
+            onClick={_ => this._handleClickSignUpForm(true)}
+          >
+            Sign up
+          </Button>
+          {
+            <StudentLogIn
+              closeForm={_ => this._handleClickLogInForm(false)}
+              onClickLogIn={this.onClickLogIn}
+              open={showLoginDialog}
+            />
+          }
+          {
+            <StudentSignUp
+              closeForm={_ => this._handleClickSignUpForm(false)}
+              onClickSignUp={this.onClickSignUp}
+              open={showSignUpDialog}
+              skills={skills}
+            />
+          }
+        </div>
+      );
+    } else {
+      return (
+        <Typography variant="title" className="Dialog-title">
+          {id}
+        </Typography>
+      );
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
     skills: state.skill.skills,
-    role: state.user.role
+    id: state.user.id,
+    role: state.user.role,
+    token: state.user.token
   };
 };
 

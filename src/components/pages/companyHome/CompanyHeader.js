@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Dialog, TextField } from "@material-ui/core";
-import { USER_ROLE_COMPANY, loginUser } from "../../../actions/user";
+import { USER_ROLE_COMPANY } from "../../../actions/user";
 import "./CompanyHeader.css";
 class StudentHeader extends Component {
   constructor(props) {

@@ -78,7 +78,6 @@ class StudentHome extends Component {
             <CompanyList
               companies={companies[selectedFilter]}
               selectedCompany={selectedCompany || {}}
-              selectedFilter={selectedFilter}
               onSelectedCompanyChange={this.onSelectedCompanyChange}
             />
           </div>
