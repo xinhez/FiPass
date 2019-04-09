@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "@material-ui/core";
-import "./../../common/Filter.css";
+import "../../common/Button.css";
+import "../../common/Filter.css";
 
 class CompanyFilter extends Component {
   render() {
@@ -14,7 +15,7 @@ class CompanyFilter extends Component {
       if (filters[name].length > 0) {
         var className = ["Filter-button"];
         if (selectedFilter === name) {
-          className.push("Filter-button-selected");
+          className.push("Button-primary");
         }
         return (
           <Button

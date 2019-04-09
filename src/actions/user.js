@@ -1,7 +1,10 @@
 import axios from "axios";
 const BASE_URL = "http://localhost:3000/";
 
-export function loginUser(userInfo) {
+export const USER_ROLE_COMPANY = false;
+export const USER_ROLE_STUDENT = true;
+
+export function loginStudentUser(userInfo) {
   return dispatch => {
     dispatch(loginUserBegin());
     axios({
@@ -10,8 +13,40 @@ export function loginUser(userInfo) {
       data: userInfo
     })
       .then(response => {
-        console.log("success", response.data);
-        dispatch(loginUserSuccess(response.data));
+        if (
+          response.data === null ||
+          response.data.role !== USER_ROLE_STUDENT
+        ) {
+          dispatch(loginUserFailure({}));
+        } else {
+          console.log("success", response.data);
+          dispatch(loginUserSuccess(response.data));
+        }
+      })
+      .catch(error => {
+        dispatch(loginUserFailure(error));
+      });
+  };
+}
+
+export function loginCompanyUser(userInfo) {
+  return dispatch => {
+    dispatch(loginUserBegin());
+    axios({
+      method: "POST",
+      url: BASE_URL + "authenticate",
+      data: userInfo
+    })
+      .then(response => {
+        if (
+          response.data === null ||
+          response.data.role !== USER_ROLE_COMPANY
+        ) {
+          dispatch(loginUserFailure({}));
+        } else {
+          console.log("success", response.data);
+          dispatch(loginUserSuccess(response.data));
+        }
       })
       .catch(error => {
         dispatch(loginUserFailure(error));

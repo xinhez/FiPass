@@ -11,10 +11,10 @@ import "./CompanyList.css";
 
 class CompanyList extends Component {
   renderCompanies() {
-    const { companies, selectedCompany } = this.props;
+    const { companies, selectedCompany, selectedFilter } = this.props;
     const companyCards = companies.map(company => {
       var className = ["companyList-card"];
-      if (selectedCompany.user_id === company.user_id) {
+      if (selectedCompany.id === company.id) {
         className.push("companyList-card-selected");
       }
       return (
@@ -39,6 +39,7 @@ class CompanyList extends Component {
             </div>
             {company.positions.map(position => (
               <Typography
+                key={position.id}
                 variant="body1"
                 className="companyList-card-description"
               >
@@ -60,6 +61,7 @@ class CompanyList extends Component {
 CompanyList.propTypes = {
   companies: PropTypes.array.isRequired,
   selectedCompany: PropTypes.object.isRequired,
+  selectedFilter: PropTypes.string.isRequired,
   onSelectedCompanyChange: PropTypes.func.isRequired
 };
 

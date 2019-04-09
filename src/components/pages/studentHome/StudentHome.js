@@ -29,7 +29,6 @@ class StudentHome extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (
       this.state.selectedCompany === null &&
       nextProps.companies !== null &&
@@ -79,6 +78,7 @@ class StudentHome extends Component {
             <CompanyList
               companies={companies[selectedFilter]}
               selectedCompany={selectedCompany || {}}
+              selectedFilter={selectedFilter}
               onSelectedCompanyChange={this.onSelectedCompanyChange}
             />
           </div>
@@ -93,7 +93,7 @@ class StudentHome extends Component {
                 {selectedCompany.name}
               </Typography>
               <div className="studentHome-subtitle studentHome-subtitle-container">
-                <LocationOn className="subtitle-icon" color="textSecondary" />
+                <LocationOn className="subtitle-icon" />
                 <Typography
                   className="subtitle studentHome-subtitle-text"
                   variant="subheading"
@@ -102,7 +102,7 @@ class StudentHome extends Component {
                 </Typography>
                 {selectedCompany.url && (
                   <div className="studentHome-subtitle-container">
-                    <Link className="subtitle-icon" color="textSecondary" />
+                    <Link className="subtitle-icon" />
                     <a
                       className="studentHome-subtitle-link"
                       href={selectedCompany.url}
@@ -153,74 +153,6 @@ class StudentHome extends Component {
 
 const mapStateToProps = state => {
   return {
-    // companies: {
-    //   all: [
-    //     {
-    //       id: 1,
-    //       user_id: 1,
-    //       name: "test company 1",
-    //       location: "Pittsburgh, PA",
-    //       banner_img: null,
-    //       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    //       contact_name: "testperson",
-    //       active: true,
-    //       created_at: "2019-04-07T04:28:17.799Z",
-    //       updated_at: "2019-04-07T04:28:17.799Z",
-    //       url: "https://www.test.com",
-    // "positions": [
-    //     {
-    //       "id": 1,
-    //       "name": "software engineer",
-    //       "job_type": "fulltime",
-    //       "location": null,
-    //       "application_deadline": null,
-    //       "description": null
-    //     }
-    //   ]
-    //     },
-    //     {
-    //       id: 2,
-    //       user_id: 2,
-    //       name: "test company 2",
-    //       location: "Pittsburgh, PA",
-    //       banner_img: null,
-    //       description: "placeholder",
-    //       contact_name: "testperson",
-    //       active: true,
-    //       created_at: "2019-04-07T04:28:17.799Z",
-    //       updated_at: "2019-04-07T04:28:17.799Z",
-    //       url: null
-    //     },
-    //     {
-    //       id: 3,
-    //       user_id: 3,
-    //       name: "test company 3",
-    //       location: "Pittsburgh, PA",
-    //       banner_img: null,
-    //       description: "placeholder",
-    //       contact_name: "testperson",
-    //       active: true,
-    //       created_at: "2019-04-07T04:28:17.799Z",
-    //       updated_at: "2019-04-07T04:28:17.799Z",
-    //       url: null
-    //     }
-    //   ],
-    //   other: [
-    //     {
-    //       id: 4,
-    //       user_id: 4,
-    //       name: "test company 4",
-    //       location: "Pittsburgh, PA",
-    //       banner_img: null,
-    //       description: "placeholder",
-    //       contact_name: "testperson",
-    //       active: true,
-    //       created_at: "2019-04-07T04:28:17.799Z",
-    //       updated_at: "2019-04-07T04:28:17.799Z",
-    //       url: null
-    //     }
-    //   ]
-    // },
     companies: state.company.companies || {},
     loading: state.company.fetchingCompanies,
     error: state.company.error || state.user.error

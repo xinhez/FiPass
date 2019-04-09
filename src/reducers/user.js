@@ -1,11 +1,10 @@
 import {
   USER_LOGIN_BEGIN,
   USER_LOGIN_SUCCESS,
-  USER_LOGIN_FAILURE
+  USER_LOGIN_FAILURE,
+  USER_ROLE_COMPANY,
+  USER_ROLE_STUDENT
 } from "../actions/user";
-
-export const USER_ROLE_COMPANY = false;
-export const USER_ROLE_STUDENT = true;
 
 const initialState = {
   loggingInUser: false,

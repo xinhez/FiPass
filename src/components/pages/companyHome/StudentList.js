@@ -12,7 +12,6 @@ class StudentList extends Component {
   renderStudents() {
     const { students, selectedStudent } = this.props;
     const studentCards = students.map(student => {
-      console.log("student", student);
       var className = ["studentList-card"];
       if (selectedStudent.id === student.id) {
         className.push("studentList-card-selected");
