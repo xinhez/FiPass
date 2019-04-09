@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import { Card, Typography } from "@material-ui/core";
 import logo from "../../img/test-logo.jpg";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "./StudentList.css";
@@ -12,7 +10,6 @@ class StudentList extends Component {
   renderStudents() {
     const { students, selectedStudent } = this.props;
     const studentCards = students.map(student => {
-      console.log("student", student);
       var className = ["studentList-card"];
       if (selectedStudent.id === student.id) {
         className.push("studentList-card-selected");

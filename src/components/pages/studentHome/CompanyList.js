@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import { Card, Typography } from "@material-ui/core";
 import LocationOn from "@material-ui/icons/LocationOn";
 import logo from "../../img/test-logo.jpg";
 import "react-perfect-scrollbar/dist/css/styles.css";
@@ -14,7 +12,7 @@ class CompanyList extends Component {
     const { companies, selectedCompany } = this.props;
     const companyCards = companies.map(company => {
       var className = ["companyList-card"];
-      if (selectedCompany.user_id === company.user_id) {
+      if (selectedCompany.id === company.id) {
         className.push("companyList-card-selected");
       }
       return (
@@ -39,6 +37,7 @@ class CompanyList extends Component {
             </div>
             {company.positions.map(position => (
               <Typography
+                key={position.id}
                 variant="body1"
                 className="companyList-card-description"
               >

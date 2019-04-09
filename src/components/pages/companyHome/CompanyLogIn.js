@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, TextField } from "@material-ui/core";
-import { loginUser } from "../../../actions/user";
+import { loginCompanyUser } from "../../../actions/user";
 import "./CompanyLogIn.css";
 
 class CompanyLogIn extends Component {
@@ -21,7 +21,7 @@ class CompanyLogIn extends Component {
   handleClickLogIn() {
     const { email, password } = this.state;
     this.props.dispatch(
-      loginUser({
+      loginCompanyUser({
         email,
         password
       })
@@ -54,6 +54,7 @@ class CompanyLogIn extends Component {
         <TextField
           id="password"
           label="Password"
+          type="password"
           value={password}
           onChange={e => this.handlePasswordChange(e.target.value)}
           fullWidth
