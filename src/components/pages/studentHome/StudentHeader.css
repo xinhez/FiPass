@@ -8,3 +8,11 @@
   margin-left: 15px !important;
   min-width: 120px !important;
 }
+
+.studentHeader-loggedIn {
+  display: flex;
+}
+
+.studentHeader-code {
+  padding-right: 10px;
+}

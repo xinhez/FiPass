@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, Tab, Tabs, Typography } from "@material-ui/core";
-import Link from "@material-ui/icons/Link";
-import LocationOn from "@material-ui/icons/LocationOn";
+import { Link, LocationOn } from "@material-ui/icons";
 import CompanyList from "./CompanyList";
 import CompanyFilter from "./CompanyFilter";
 import PositionList from "./PositionList";
 import background from "../../img/background.png";
 import { fetchCompanies } from "../../../actions/company";
-import "../../common/Home.css";
+import "../../common/Component.css";
 import "./StudentHome.css";
 
 class StudentHome extends Component {

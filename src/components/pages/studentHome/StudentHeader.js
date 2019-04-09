@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, Typography } from "@material-ui/core";
+import { AccountCircle } from "@material-ui/icons";
 import StudentLogIn from "./StudentLogIn";
 import StudentSignUp from "./StudentSignUp";
 import { fetchSkills } from "../../../actions/skill";
@@ -10,8 +11,7 @@ import {
   USER_ROLE_COMPANY,
   loginStudentUser
 } from "../../../actions/user";
-import "../../common/Button.css";
-import "../../common/Dialog.css";
+import "../../common/Component.css";
 import "./StudentHeader.css";
 
 class StudentHeader extends Component {
@@ -101,9 +101,15 @@ class StudentHeader extends Component {
       );
     } else {
       return (
-        <Typography variant="title" className="Dialog-title">
-          {id}
-        </Typography>
+        <div className="studentHeader-loggedIn">
+          <Typography
+            variant="display1"
+            className="Dialog-title studentHeader-code"
+          >
+            {id}
+          </Typography>
+          <AccountCircle className="Profile-icon" />
+        </div>
       );
     }
   }

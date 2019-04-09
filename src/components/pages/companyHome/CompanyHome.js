@@ -4,7 +4,8 @@ import Card from "@material-ui/core/Card";
 import CompanyLogIn from "./CompanyLogIn";
 import StudentList from "./StudentList";
 import { fetchStudents } from "../../../actions/student";
-import "../../common/Home.css";
+import { fetchTags } from "../../../actions/tag";
+import "../../common/Component.css";
 
 class CompanyHome extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class CompanyHome extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.token === null && nextProps.token !== null) {
       this.props.dispatch(fetchStudents(nextProps.token));
+      this.props.dispatch(fetchTags(nextProps.token));
     }
     if (
       this.state.selectedStudent === null &&

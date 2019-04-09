@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button, Dialog, TextField, Typography } from "@material-ui/core";
 import { loginStudentUser } from "../../../actions/user";
-import "../../common/Dialog.css";
+import "../../common/Component.css";
 import "./StudentLogIn.css";
 
 class StudentLogIn extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "@material-ui/core";
-import "./../../common/Filter.css";
+import "./../../common/Component.css";
 
 class StudentFilter extends Component {
   render() {

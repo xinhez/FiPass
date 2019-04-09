@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import {
   Button,
+  ButtonBase,
   Dialog,
   FormControl,
   InputLabel,
@@ -11,7 +12,8 @@ import {
   TextField,
   Typography
 } from "@material-ui/core";
-import "../../common/Dialog.css";
+import { Close, NavigateBefore } from "@material-ui/icons";
+import "../../common/Component.css";
 import "./StudentSignUp.css";
 
 const initialState = {
@@ -48,7 +50,23 @@ class StudentSignUp extends Component {
     const { step } = this.state;
     const { open } = this.props;
     return (
-      <Dialog className="studentSignUp" maxWidth={"md"} open={open}>
+      <Dialog className="studentSignUp" fullWidth maxWidth={"sm"} open={open}>
+        <div className="studentSignUp-button-top-container">
+          {step !== 1 && (
+            <ButtonBase className="studentSignUp-before">
+              <NavigateBefore
+                className="Button-icon"
+                onClick={_ => this._handleValueChange({ step: step - 1 })}
+              />
+            </ButtonBase>
+          )}
+          <ButtonBase className="studentSignUp-close">
+            <Close
+              className="Button-icon"
+              onClick={_ => this.props.closeForm()}
+            />
+          </ButtonBase>
+        </div>
         {step === 1 && this.renderStepOne()}
         {step === 2 && this.renderStepTwo()}
         {step === 3 && this.renderStepThree()}
@@ -60,9 +78,12 @@ class StudentSignUp extends Component {
   renderStepOne() {
     const { email, password, password_confirmation, step } = this.state;
     return (
-      <div>
-        <Typography className="Dialog-title" variant="title">
-          Sign Up 1/4
+      <div className="studentSignUp-Dialog">
+        <Typography
+          className="Dialog-title studentSignUp-title"
+          variant="title"
+        >
+          Sign Up 1 / 4
         </Typography>
         <TextField
           className="Dialog-textField"
@@ -102,15 +123,12 @@ class StudentSignUp extends Component {
           fullWidth
         />
         <Button
-          className="Button-primary"
+          className="Button-primary studentSignUp-bottom-button"
           variant="contained"
           onClick={_ => this._handleValueChange({ step: step + 1 })}
           color="primary"
         >
-          Continue
-        </Button>
-        <Button onClick={_ => this.props.closeForm()} color="primary">
-          Cancel
+          Next
         </Button>
       </div>
     );
@@ -129,9 +147,12 @@ class StudentSignUp extends Component {
       step
     } = this.state;
     return (
-      <div>
-        <Typography className="Dialog-title" variant="title">
-          Sign Up 2/4
+      <div className="studentSignUp-Dialog">
+        <Typography
+          className="Dialog-title studentSignUp-title"
+          variant="title"
+        >
+          Sign Up 2 / 4
         </Typography>
         <TextField
           className="Dialog-textField"
@@ -179,47 +200,45 @@ class StudentSignUp extends Component {
           label="School"
           fullWidth
         />
-        <FormControl variant="outlined">
-          <InputLabel
-            ref={ref => {
-              this.InputLabelRef = ref;
-            }}
-          >
-            Graduation Year
-          </InputLabel>
-          <Select
+        <div className="studentSignUp-row">
+          <TextField
+            className="studentSignUp-row-left"
+            select
+            variant="outlined"
+            margin="normal"
+            required
             value={graduation_year}
             onChange={e =>
               this._handleValueChange({ graduation_year: e.target.value })
             }
-            input={
-              <OutlinedInput
-                labelWidth={20}
-                name="Graduation Year"
-                id="graduation_year"
-              />
-            }
+            id="graduation_year"
+            label="Graduation Year"
+            fullWidth
           >
             {[...Array(20).keys()].map(x => (
               <MenuItem key={x} value={2009 + x}>
                 {2009 + x}
               </MenuItem>
             ))}
-          </Select>
-        </FormControl>
-        <FormControl variant="outlined">
-          <InputLabel>Degree</InputLabel>
-          <Select
+          </TextField>
+          <TextField
+            className="studentSignUp-row-right"
+            select
+            variant="outlined"
+            margin="normal"
+            required
             value={degree}
             onChange={e => this._handleValueChange({ degree: e.target.value })}
-            input={<OutlinedInput labelWidth={20} name="Degree" id="degree" />}
+            id="degree"
+            label="Degree"
+            fullWidth
           >
             <MenuItem value={0}>Undergraudate</MenuItem>
             <MenuItem value={1}>Master</MenuItem>
             <MenuItem value={2}>PhD</MenuItem>
             <MenuItem value={3}>Other</MenuItem>
-          </Select>
-        </FormControl>
+          </TextField>
+        </div>
         <TextField
           className="Dialog-textField"
           variant="outlined"
@@ -242,12 +261,12 @@ class StudentSignUp extends Component {
           fullWidth
         />
         <Button
-          className="Button-primary"
+          className="Button-primary studentSignUp-bottom-button"
           variant="contained"
           onClick={_ => this._handleValueChange({ step: step + 1 })}
           color="primary"
         >
-          Continue
+          Next
         </Button>
       </div>
     );
@@ -266,39 +285,44 @@ class StudentSignUp extends Component {
     const { skillIds, step } = this.state;
     const { skills } = this.props;
     return (
-      <div>
-        <Typography className="Dialog-title" variant="title">
-          Sign Up 3/4
+      <div className="studentSignUp-Dialog">
+        <Typography
+          className="Dialog-title studentSignUp-title"
+          variant="title"
+        >
+          Sign Up 3 / 4
         </Typography>
         <Typography variant="body1">Tap to Select what defines you</Typography>
-        {skills.map(skill =>
-          skillIds.has(skill.id) ? (
-            <Button
-              variant="contained"
-              className="Button-primary"
-              key={skill.id}
-              onClick={_ => this._handleSelectSkill(skillIds, skill.id)}
-            >
-              {skill.name}
-            </Button>
-          ) : (
-            <Button
-              variant="outlined"
-              className="Button-secondary"
-              key={skill.id}
-              onClick={_ => this._handleSelectSkill(skillIds, skill.id)}
-            >
-              {skill.name}
-            </Button>
-          )
-        )}
+        <div className="studentSignUp-table">
+          {skills.map(skill =>
+            skillIds.has(skill.id) ? (
+              <Button
+                variant="contained"
+                className="Button-primary studentSignUp-skill"
+                key={skill.id}
+                onClick={_ => this._handleSelectSkill(skillIds, skill.id)}
+              >
+                {skill.name}
+              </Button>
+            ) : (
+              <Button
+                variant="outlined"
+                className="Button-secondary studentSignUp-skill"
+                key={skill.id}
+                onClick={_ => this._handleSelectSkill(skillIds, skill.id)}
+              >
+                {skill.name}
+              </Button>
+            )
+          )}
+        </div>
         <Button
-          className="Button-primary"
+          className="Button-primary studentSignUp-bottom-button"
           variant="contained"
           onClick={_ => this._handleValueChange({ step: step + 1 })}
           color="primary"
         >
-          Continue
+          Next
         </Button>
       </div>
     );
@@ -307,17 +331,20 @@ class StudentSignUp extends Component {
   renderStepFour() {
     const { step } = this.state;
     return (
-      <div>
-        <Typography className="Dialog-title" variant="title">
-          Sign Up 4/4
+      <div className="studentSignUp-Dialog">
+        <Typography
+          className="Dialog-title studentSignUp-title"
+          variant="title"
+        >
+          Sign Up 4 / 4
         </Typography>
         <Typography variant="body1">
           Upload resume to help recruiter know you better
         </Typography>
-        <Typography className="Dialog-title" variant="body2">
+        <Typography className="Dialog-title studentSignUp-body" variant="body2">
           Upload Resume
         </Typography>
-        <form ref={el => (this.form = el)}>
+        <form className="studentSignUp-form" ref={el => (this.form = el)}>
           <input
             type="file"
             name="resume"
@@ -326,7 +353,7 @@ class StudentSignUp extends Component {
           />
         </form>
         <Button
-          className="Button-primary"
+          className="Button-primary studentSignUp-bottom-button"
           variant="contained"
           onClick={_ => {
             const resume = new FormData(this.form);

@@ -2,6 +2,71 @@
   width: 100%;
 }
 
+.studentSignUp-button-top-container {
+  width: 100%;
+}
+
+.studentSignUp-before {
+  float: left;
+  padding-left: 15px !important;
+  padding-top: 15px !important;
+}
+
+.studentSignUp-close {
+  float: right;
+  padding-right: 15px !important;
+  padding-top: 15px !important;
+}
+
 .studentSignUp-title {
-  width: 550px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.studentSignUp-Dialog {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.studentSignUp-row {
+  width: 300px;
+}
+
+.studentSignUp-row-left {
+  float: left;
+  width: 48% !important;
+}
+
+.studentSignUp-row-right {
+  float: right;
+  width: 48% !important;
+}
+
+.studentSignUp-table {
+  display: table;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+.studentSignUp-skill {
+  margin: 5px !important;
+}
+
+.studentSignUp-bottom-button {
+  width: 180px;
+  margin-top: 20px !important;
+  margin-bottom: 25px !important;
+  padding: 6px 10px !important;
+}
+
+.studentSignUp-body {
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+.studentSignUp-form {
 }

@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
+import { Button, TextField, Typography } from "@material-ui/core";
 import { loginCompanyUser } from "../../../actions/user";
 import "./CompanyLogIn.css";
+import "../../common/Component.css";
 
 class CompanyLogIn extends Component {
   constructor(props) {
@@ -41,26 +42,33 @@ class CompanyLogIn extends Component {
 
     return (
       <div className="companyLogIn">
-        {this.renderError()}
+        <Typography className="Dialog-title" variant="display1">
+          Welcome to FiPass
+        </Typography>
         {this.renderLoading()}
         <TextField
+          className="companyLogIn-textField"
           id="email"
           label="Email"
           value={email}
+          variant="outlined"
           onChange={e => this.handleEmailChange(e.target.value)}
           fullWidth
           required
         />
         <TextField
+          className="companyLogIn-textField"
           id="password"
           label="Password"
           type="password"
+          variant="outlined"
           value={password}
           onChange={e => this.handlePasswordChange(e.target.value)}
           fullWidth
           required
         />
-        <Button onClick={this.handleClickLogIn} color="primary">
+        {this.renderError()}
+        <Button className="Button-primary" onClick={this.handleClickLogIn}>
           Continue
         </Button>
       </div>
@@ -70,9 +78,9 @@ class CompanyLogIn extends Component {
   renderError() {
     const { error } = this.props;
     if (error) {
-      return <div>Incorrect User Information</div>;
-    } else {
-      return <div>Log in</div>;
+      return (
+        <Typography variant="body1">Incorrect User Information</Typography>
+      );
     }
   }
   renderLoading() {

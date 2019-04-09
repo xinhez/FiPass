@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { AccountCircle, PersonAdd } from "@material-ui/icons";
 import { USER_ROLE_COMPANY } from "../../../actions/user";
+import "../../common/Component.css";
 import "./CompanyHeader.css";
 class StudentHeader extends Component {
   constructor(props) {
@@ -14,7 +16,12 @@ class StudentHeader extends Component {
       return null;
     }
 
-    return <div className="companyHeader">Company Header</div>;
+    return (
+      <div className="companyHeader">
+        <PersonAdd className="companyHeader-add Profile-icon" />
+        <AccountCircle className="Profile-icon" />
+      </div>
+    );
   }
 }
 
