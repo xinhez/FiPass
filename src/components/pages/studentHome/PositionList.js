@@ -9,7 +9,7 @@ import "./PositionList.css";
 
 class PositionList extends Component {
   renderPositions() {
-    const { positions, likedPositions } = this.props;
+    const { id, positions, likedPositions } = this.props;
     const liked = new Set(likedPositions);
     const positionCards = positions.map(position => (
       <div key={position.id}>
@@ -60,6 +60,7 @@ class PositionList extends Component {
 }
 
 PositionList.propTypes = {
+  id: PropTypes.number,
   positions: PropTypes.array.isRequired,
   likedPositions: PropTypes.array.isRequired
 };

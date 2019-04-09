@@ -11,6 +11,8 @@
   border-left: 0;
   border-right: 0;
   box-shadow: 0 0 0 0 !important;
+  display: flex;
+  padding: 15px;
 }
 
 .companyList-card-location {
@@ -22,11 +24,10 @@
 }
 
 .companyList-card-logo {
-  padding: 22px;
-  position: relative;
-  float: left;
+  padding-right: 15px;
+  width: 25%;
+  height: fit-content;
 }
 
 .companyList-card-title {
-  padding-top: 15px;
 }

@@ -52,7 +52,7 @@ class StudentHome extends Component {
 
   render() {
     const { selectedCompany, selectedFilter, selectedTab } = this.state;
-    const { error, loading, companies } = this.props;
+    const { error, loading, companies, id } = this.props;
 
     if (error) {
       return <div>Error {error.message}</div>;
@@ -136,6 +136,7 @@ class StudentHome extends Component {
               {selectedTab === 1 && (
                 <div className="studentHome-selectedTab">
                   <PositionList
+                    id={id}
                     positions={selectedCompany.positions}
                     likedPositions={likedPositions}
                   />
@@ -153,7 +154,8 @@ const mapStateToProps = state => {
   return {
     companies: state.company.companies || {},
     loading: state.company.fetchingCompanies,
-    error: state.company.error || state.user.error
+    error: state.company.error || state.user.error,
+    id: state.user.id
   };
 };
 

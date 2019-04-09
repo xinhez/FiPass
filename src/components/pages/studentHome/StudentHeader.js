@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Button, Typography } from "@material-ui/core";
+import { Button, ButtonBase, Typography } from "@material-ui/core";
 import { AccountCircle } from "@material-ui/icons";
 import StudentLogIn from "./StudentLogIn";
 import StudentSignUp from "./StudentSignUp";
@@ -108,7 +108,9 @@ class StudentHeader extends Component {
           >
             {id}
           </Typography>
-          <AccountCircle className="Profile-icon" />
+          <ButtonBase>
+            <AccountCircle className="Profile-icon" />
+          </ButtonBase>
         </div>
       );
     }

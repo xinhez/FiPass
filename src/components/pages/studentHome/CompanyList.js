@@ -26,24 +26,29 @@ class CompanyList extends Component {
               alt="Company Logo"
               src={logo}
             />
-            <Typography variant="subtitle1" className="companyList-card-title">
-              {company.name}
-            </Typography>
-            <div className="companyList-card-location">
-              <LocationOn className="subtitle-icon" />
-              <Typography className="subtitle" variant="subheading">
-                {company.location}
-              </Typography>
-            </div>
-            {company.positions.map(position => (
+            <div>
               <Typography
-                key={position.id}
-                variant="body1"
-                className="companyList-card-description"
+                variant="subtitle1"
+                className="companyList-card-title"
               >
-                {position.name}
+                {company.name}
               </Typography>
-            ))}
+              <div className="companyList-card-location">
+                <LocationOn className="subtitle-icon" />
+                <Typography className="subtitle" variant="subheading">
+                  {company.location}
+                </Typography>
+              </div>
+              {company.positions.map(position => (
+                <Typography
+                  key={position.id}
+                  variant="body1"
+                  className="companyList-card-description"
+                >
+                  {position.name}
+                </Typography>
+              ))}
+            </div>
           </Card>
         </div>
       );
