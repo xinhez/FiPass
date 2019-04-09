@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Button, Dialog, TextField, Typography } from "@material-ui/core";
+import {
+  Button,
+  ButtonBase,
+  Dialog,
+  TextField,
+  Typography
+} from "@material-ui/core";
+import { Close } from "@material-ui/icons";
 import { loginStudentUser } from "../../../actions/user";
 import "../../common/Component.css";
 import "./StudentLogIn.css";
@@ -40,44 +47,51 @@ class StudentLogIn extends Component {
     const { open } = this.props;
 
     return (
-      <Dialog className="studentLogIn" open={open}>
-        <Typography className="Dialog-title" variant="title">
-          Welcome
-        </Typography>
-        <TextField
-          className="Dialog-textField"
-          variant="outlined"
-          margin="normal"
-          required
-          id="email"
-          value={email}
-          onChange={e => this.handleEmailChange(e.target.value)}
-          label="Email"
-          fullWidth
-        />
-        <TextField
-          className="Dialog-textField"
-          variant="outlined"
-          margin="normal"
-          required
-          value={password}
-          onChange={e => this.handlePasswordChange(e.target.value)}
-          id="password"
-          label="Password"
-          type="password"
-          fullWidth
-        />
-        <Button onClick={_ => this.props.closeForm()} color="primary">
-          Cancel
-        </Button>
-        <Button
-          className="Button-primary"
-          variant="contained"
-          onClick={_ => this.props.onClickLogIn({ email, password })}
-          color="primary"
-        >
-          Continue
-        </Button>
+      <Dialog fullWidth maxWidth="sm" open={open}>
+        <div className="studentLogIn-top">
+          <ButtonBase className="studentLogIn-close">
+            <Close
+              className="Button-icon"
+              onClick={_ => this.props.closeForm()}
+            />
+          </ButtonBase>
+        </div>
+        <div className="studentLogIn">
+          <Typography className="Dialog-title" variant="title">
+            Welcome
+          </Typography>
+          <TextField
+            className="Dialog-textField"
+            variant="outlined"
+            margin="normal"
+            required
+            id="email"
+            value={email}
+            onChange={e => this.handleEmailChange(e.target.value)}
+            label="Email"
+            fullWidth
+          />
+          <TextField
+            className="Dialog-textField"
+            variant="outlined"
+            margin="normal"
+            required
+            value={password}
+            onChange={e => this.handlePasswordChange(e.target.value)}
+            id="password"
+            label="Password"
+            type="password"
+            fullWidth
+          />
+          <Button
+            className="Button-primary studentLogIn-bottom-button"
+            variant="contained"
+            onClick={_ => this.props.onClickLogIn({ email, password })}
+            color="primary"
+          >
+            Continue
+          </Button>
+        </div>
       </Dialog>
     );
   }
