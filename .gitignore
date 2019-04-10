@@ -8,5 +8,3 @@ build/
 # macOS
 *.DS_Store
 
-#aws
-buildspec.yml
