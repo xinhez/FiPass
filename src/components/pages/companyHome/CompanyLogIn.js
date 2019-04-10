@@ -41,7 +41,7 @@ class CompanyLogIn extends Component {
     const { email, password } = this.state;
 
     return (
-      <div className="companyLogIn">
+      <div className="companyLogIn Card-centered">
         <Typography className="Dialog-title" variant="display1">
           Welcome to FiPass
         </Typography>
@@ -91,7 +91,7 @@ class CompanyLogIn extends Component {
   renderLoading() {
     const { loggingIn } = this.props;
     if (loggingIn) {
-      return <div className="companyLogIn"> loading... </div>;
+      return <div className="companyLogIn Card-centered"> loading... </div>;
     }
   }
 }

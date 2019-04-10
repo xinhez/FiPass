@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { Button, Card, Typography } from "@material-ui/core";
+import { Button, ButtonBase, Card, Typography } from "@material-ui/core";
 import FavoriteRounded from "@material-ui/icons/FavoriteRounded";
 import FavoriteBorderRounded from "@material-ui/icons/FavoriteBorderRounded";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import "../../common/Component.css";
 import "./PositionList.css";
 
 class PositionList extends Component {
@@ -43,10 +44,14 @@ class PositionList extends Component {
             )}
           </div>
           {liked.has(position.id) && (
-            <FavoriteRounded className="positionList-card-liked" />
+            <ButtonBase disableRipple className="Button-base">
+              <FavoriteRounded className="positionList-card-liked" />
+            </ButtonBase>
           )}
           {!liked.has(position.id) && (
-            <FavoriteBorderRounded className="positionList-card-notLiked" />
+            <ButtonBase disableRipple className="Button-base">
+              <FavoriteBorderRounded className="positionList-card-notLiked" />
+            </ButtonBase>
           )}
         </Card>
       </div>

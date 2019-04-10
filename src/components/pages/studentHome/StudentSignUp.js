@@ -331,7 +331,7 @@ class StudentSignUp extends Component {
   renderStepFour() {
     const { step } = this.state;
     return (
-      <div className="studentSignUp-Dialog">
+      <div className="studentSignUp-Dialog Card-centered">
         <Typography
           className="Dialog-title studentSignUp-title"
           variant="title"

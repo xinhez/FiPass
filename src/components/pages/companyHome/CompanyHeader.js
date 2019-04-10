@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { AccountCircle, PersonAdd } from "@material-ui/icons";
+import { ButtonBase } from "@material-ui/core";
+import { Settings, PersonAdd } from "@material-ui/icons";
 import { USER_ROLE_COMPANY } from "../../../actions/user";
 import "../../common/Component.css";
 import "./CompanyHeader.css";
@@ -18,8 +19,12 @@ class StudentHeader extends Component {
 
     return (
       <div className="companyHeader">
-        <PersonAdd className="companyHeader-add Profile-icon" />
-        <AccountCircle className="Profile-icon" />
+        <ButtonBase disableRipple className="Button-base">
+          <PersonAdd className="companyHeader-add Profile-icon" />
+        </ButtonBase>
+        <ButtonBase disableRipple className="Button-base">
+          <Settings className="Profile-icon" />
+        </ButtonBase>
       </div>
     );
   }

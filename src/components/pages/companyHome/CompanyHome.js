@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Card from "@material-ui/core/Card";
+import { Card, Typography } from "@material-ui/core";
 import CompanyLogIn from "./CompanyLogIn";
 import StudentList from "./StudentList";
 import FilterBar from "../../common/FilterBar";
 import { fetchApplications } from "../../../actions/application";
 import { fetchStudents } from "../../../actions/student";
 import { fetchTags } from "../../../actions/tag";
+import avatar from "../../img/avatar.png";
 import "../../common/Component.css";
+import "./CompanyHome.css";
 
 class CompanyHome extends Component {
   constructor(props) {
@@ -69,7 +71,7 @@ class CompanyHome extends Component {
     if (loading || filters === null) {
       return <div>loading...</div>;
     }
-
+    console.log(selectedStudent);
     return (
       <div className="Home">
         <FilterBar
@@ -88,10 +90,44 @@ class CompanyHome extends Component {
           <div className="Home-right">
             <Card className="Home-right-card">
               {selectedStudent && (
-                <h1>
-                  {selectedStudent.first_name} {selectedStudent.last_name}{" "}
-                  Student
-                </h1>
+                <div className="Card-centered">
+                  <img
+                    className="Profile-avatar Image-avatar"
+                    alt="Student Avatar"
+                    src={selectedStudent.avatar || avatar}
+                  />
+                  <Typography variant="title">
+                    {selectedStudent.first_name} {selectedStudent.last_name}
+                  </Typography>
+                  <Typography className="subtitle" variant="subtitle2">
+                    {selectedStudent.major_2 === null
+                      ? `${selectedStudent.major_1}`
+                      : `${selectedStudent.major_1} | ${
+                          selectedStudent.major_2
+                        }`}
+                  </Typography>
+                  <Typography variant="caption">
+                    {selectedStudent.school}, {selectedStudent.graduation_year}
+                  </Typography>
+                  <div>
+                    <div>
+                      <Card>
+                        <Typography variant="headline">Skills</Typography>
+                        <Typography variant="caption">
+                          {selectedStudent.skills
+                            .map(skill => skill.name)
+                            .join(", ")}
+                        </Typography>
+                      </Card>
+                      <Card>
+                        <Typography variant="headline">Resume</Typography>
+                      </Card>
+                    </div>
+                    <Card>
+                      <Typography variant="headline">Tags</Typography>
+                    </Card>
+                  </div>
+                </div>
               )}
               <h2>TODO: swap in selected student information</h2>
             </Card>

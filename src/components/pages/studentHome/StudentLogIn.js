@@ -56,7 +56,7 @@ class StudentLogIn extends Component {
             />
           </ButtonBase>
         </div>
-        <div className="studentLogIn">
+        <div className="studentLogIn Card-centered">
           <Typography className="Dialog-title" variant="title">
             Welcome
           </Typography>
