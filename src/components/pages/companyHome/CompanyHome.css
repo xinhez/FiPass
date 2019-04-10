@@ -1,0 +1,35 @@
+.CompanyHome-card {
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 15px;
+}
+
+.CompanyHome-profile-top {
+  margin-top: 20px;
+}
+
+.CompanyHome-profile-bottom {
+  margin-bottom: 10px !important;
+}
+
+.CompanyHome-card-box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.CompanyHome-card-inner-left {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.CompanyHome-card-inner-right {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.CompanyHome-card-column {
+}

@@ -85,7 +85,11 @@ class StudentHome extends Component {
               <img
                 className="studentHome-img"
                 alt="Company Overview"
-                src={selectedCompany.banner_img || background}
+                src={
+                  (selectedCompany.banner_img &&
+                    selectedCompany.banner_img.url) ||
+                  background
+                }
               />
               <Typography className="studentHome-title" variant="title">
                 {selectedCompany.name}

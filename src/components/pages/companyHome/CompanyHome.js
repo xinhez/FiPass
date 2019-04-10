@@ -90,9 +90,9 @@ class CompanyHome extends Component {
           <div className="Home-right">
             <Card className="Home-right-card">
               {selectedStudent && (
-                <div className="Card-centered">
+                <div className="Card-centered CompanyHome-card">
                   <img
-                    className="Profile-avatar Image-avatar"
+                    className="Profile-avatar Image-avatar CompanyHome-profile-top"
                     alt="Student Avatar"
                     src={selectedStudent.avatar || avatar}
                   />
@@ -106,13 +106,16 @@ class CompanyHome extends Component {
                           selectedStudent.major_2
                         }`}
                   </Typography>
-                  <Typography variant="caption">
+                  <Typography
+                    className="CompanyHome-profile-bottom"
+                    variant="caption"
+                  >
                     {selectedStudent.school}, {selectedStudent.graduation_year}
                   </Typography>
-                  <div>
-                    <div>
+                  <div className="CompanyHome-card-box">
+                    <div className="CompanyHome-card-inner-left">
                       {selectedStudent.skills && (
-                        <Card>
+                        <Card className="Box-no-shadow">
                           <Typography variant="headline">Skills</Typography>
                           <Typography variant="caption">
                             {selectedStudent.skills
@@ -121,17 +124,18 @@ class CompanyHome extends Component {
                           </Typography>
                         </Card>
                       )}
-                      <Card>
+                      <Card className="Box-no-shadow">
                         <Typography variant="headline">Resume</Typography>
                       </Card>
                     </div>
-                    <Card>
-                      <Typography variant="headline">Tags</Typography>
-                    </Card>
+                    <div className="CompanyHome-card-inner-right">
+                      <Card className="Box-no-shadow CompanyHome-card-column">
+                        <Typography variant="headline">Tags</Typography>
+                      </Card>
+                    </div>
                   </div>
                 </div>
               )}
-              <h2>TODO: swap in selected student information</h2>
             </Card>
           </div>
         </div>

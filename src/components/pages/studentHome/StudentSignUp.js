@@ -78,7 +78,7 @@ class StudentSignUp extends Component {
   renderStepOne() {
     const { email, password, password_confirmation, step } = this.state;
     return (
-      <div className="studentSignUp-Dialog">
+      <div className="studentSignUp-Dialog Card-centered">
         <Typography
           className="Dialog-title studentSignUp-title"
           variant="title"
@@ -147,7 +147,7 @@ class StudentSignUp extends Component {
       step
     } = this.state;
     return (
-      <div className="studentSignUp-Dialog">
+      <div className="studentSignUp-Dialog Card-centered">
         <Typography
           className="Dialog-title studentSignUp-title"
           variant="title"
@@ -285,7 +285,7 @@ class StudentSignUp extends Component {
     const { skillIds, step } = this.state;
     const { skills } = this.props;
     return (
-      <div className="studentSignUp-Dialog">
+      <div className="studentSignUp-Dialog Card-centered">
         <Typography
           className="Dialog-title studentSignUp-title"
           variant="title"
