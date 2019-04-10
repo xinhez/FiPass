@@ -4,4 +4,4 @@ phases:
         commands:
         - npm install
         - npm run build
-        - npm run deploy --delete
+        - aws s3 sync build/ s3://staging.fipassapp.com --delete
