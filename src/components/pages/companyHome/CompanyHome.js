@@ -111,14 +111,16 @@ class CompanyHome extends Component {
                   </Typography>
                   <div>
                     <div>
-                      <Card>
-                        <Typography variant="headline">Skills</Typography>
-                        <Typography variant="caption">
-                          {selectedStudent.skills
-                            .map(skill => skill.name)
-                            .join(", ")}
-                        </Typography>
-                      </Card>
+                      {selectedStudent.skills && (
+                        <Card>
+                          <Typography variant="headline">Skills</Typography>
+                          <Typography variant="caption">
+                            {selectedStudent.skills
+                              .map(skill => skill.name)
+                              .join(", ")}
+                          </Typography>
+                        </Card>
+                      )}
                       <Card>
                         <Typography variant="headline">Resume</Typography>
                       </Card>
