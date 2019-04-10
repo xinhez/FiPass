@@ -84,7 +84,7 @@ class StudentLogIn extends Component {
             fullWidth
           />
           <Button
-            className="Button-primary studentLogIn-bottom-button"
+            className="Button-primary Dialog-bottom-button"
             variant="contained"
             onClick={_ => this.props.onClickLogIn({ email, password })}
             color="primary"

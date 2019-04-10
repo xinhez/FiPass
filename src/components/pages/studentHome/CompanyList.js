@@ -26,7 +26,7 @@ class CompanyList extends Component {
               alt="Company Logo"
               src={logo}
             />
-            <div>
+            <div className="List-card-body">
               <Typography
                 variant="subtitle1"
                 className="companyList-card-title"
@@ -42,7 +42,6 @@ class CompanyList extends Component {
               {company.positions.map(position => (
                 <Typography
                   key={position.id}
-                  variant="body1"
                   className="companyList-card-description"
                 >
                   {position.name}

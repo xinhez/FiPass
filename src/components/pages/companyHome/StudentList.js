@@ -4,15 +4,15 @@ import PerfectScrollbar from "react-perfect-scrollbar";
 import { Card, Typography } from "@material-ui/core";
 import logo from "../../img/test-logo.jpg";
 import "react-perfect-scrollbar/dist/css/styles.css";
-import "./StudentList.css";
+import "../../common/Component.css";
 
 class StudentList extends Component {
   renderStudents() {
     const { students, selectedStudent } = this.props;
     const studentCards = students.map(student => {
-      var className = ["studentList-card"];
+      var className = ["List-card"];
       if (selectedStudent.id === student.id) {
-        className.push("studentList-card-selected");
+        className.push("List-card-selected");
       }
       return (
         <div key={student.id}>
@@ -20,18 +20,23 @@ class StudentList extends Component {
             className={className.join(" ")}
             onClick={_ => this.props.onSelectedStudentChange(student)}
           >
-            <img
-              className="studentList-card-logo"
-              alt="Student Avatar"
-              src={logo}
-            />
-            <Typography variant="subtitle1" className="studentList-card-title">
-              {student.first_name} {student.last_name}
-            </Typography>
-            <Typography className="subtitle" variant="subtitle2">
-              {student.major_1}
-            </Typography>
-            <Typography variant="body1">{student.school}</Typography>
+            <img className="List-card-logo" alt="Student Avatar" src={logo} />
+            <div className="List-card-body">
+              <Typography variant="subtitle1" className="List-card-title">
+                {student.first_name} {student.last_name}
+              </Typography>
+              <Typography className="subtitle" variant="subtitle2">
+                {student.major_1}
+              </Typography>
+              {student.major_2 && (
+                <Typography className="subtitle" variant="subtitle2">
+                  {student.major_2}
+                </Typography>
+              )}
+              <Typography variant="caption">
+                {student.school}, {student.graduation_year}
+              </Typography>
+            </div>
           </Card>
         </div>
       );
@@ -40,7 +45,7 @@ class StudentList extends Component {
   }
 
   render() {
-    return <div className="studentList">{this.renderStudents()}</div>;
+    return <div className="List">{this.renderStudents()}</div>;
   }
 }
 

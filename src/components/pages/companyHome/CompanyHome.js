@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import Card from "@material-ui/core/Card";
 import CompanyLogIn from "./CompanyLogIn";
 import StudentList from "./StudentList";
+import FilterBar from "../../common/FilterBar";
+import { fetchApplications } from "../../../actions/application";
 import { fetchStudents } from "../../../actions/student";
 import { fetchTags } from "../../../actions/tag";
 import "../../common/Component.css";
@@ -11,23 +13,42 @@ class CompanyHome extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedStudent: null
+      selectedStudent: null,
+      selectedFilter: "All",
+      filters: null
     };
+    this.onSelectedFilterChange = this.onSelectedFilterChange.bind(this);
     this.onSelectedStudentChange = this.onSelectedStudentChange.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.token === null && nextProps.token !== null) {
+      this.props.dispatch(fetchApplications(nextProps.token));
       this.props.dispatch(fetchStudents(nextProps.token));
       this.props.dispatch(fetchTags(nextProps.token));
     }
     if (
-      this.state.selectedStudent === null &&
-      nextProps.students !== null &&
-      nextProps.students.length > 0
+      this.props.applications != nextProps.applications ||
+      this.props.students != nextProps.students ||
+      this.props.tags != nextProps.tags
     ) {
-      this.setState({ selectedStudent: nextProps.students[0] });
+      const { applications, students, tags } = nextProps;
+      const applicationIds = new Set(
+        applications.map(application => application.student_id)
+      );
+      var filters = {
+        All: students.filter(student => applicationIds.has(student.id))
+      };
+      tags.forEach(tag => (filters[tag.name] = tag.students));
+      this.setState({ filters });
+      if (this.state.selectedStudent === null && filters["All"].length > 0) {
+        this.setState({ selectedStudent: filters["All"][0] });
+      }
     }
+  }
+
+  onSelectedFilterChange(selectedFilter) {
+    this.setState({ selectedFilter });
   }
 
   onSelectedStudentChange(selectedStudent) {
@@ -35,8 +56,8 @@ class CompanyHome extends Component {
   }
 
   render() {
-    const { selectedStudent } = this.state;
-    const { token, error, loading, students } = this.props;
+    const { selectedStudent, selectedFilter, filters } = this.state;
+    const { token, error, loading, students, applications, tags } = this.props;
     if (error) {
       return <div>Error {error.message}</div>;
     }
@@ -45,25 +66,33 @@ class CompanyHome extends Component {
       return <CompanyLogIn />;
     }
 
-    if (loading || selectedStudent === null) {
+    if (loading || filters === null) {
       return <div>loading...</div>;
     }
 
     return (
       <div className="Home">
+        <FilterBar
+          filters={filters}
+          onSelectedFilterChange={this.onSelectedFilterChange}
+          selectedFilter={selectedFilter}
+        />
         <div className="Home-body">
           <div className="Home-left">
             <StudentList
-              students={students}
+              students={filters[selectedFilter]}
               selectedStudent={selectedStudent || {}}
               onSelectedStudentChange={this.onSelectedStudentChange}
             />
           </div>
           <div className="Home-right">
             <Card className="Home-right-card">
-              <h1>
-                {selectedStudent.first_name} {selectedStudent.last_name} Student
-              </h1>
+              {selectedStudent && (
+                <h1>
+                  {selectedStudent.first_name} {selectedStudent.last_name}{" "}
+                  Student
+                </h1>
+              )}
               <h2>TODO: swap in selected student information</h2>
             </Card>
           </div>
@@ -75,10 +104,12 @@ class CompanyHome extends Component {
 
 const mapStateToProps = state => {
   return {
+    applications: state.application.applications,
     token: state.user.token,
     students: state.student.students,
     loading: state.student.fetchingStudents,
-    error: state.student.error
+    error: state.student.error,
+    tags: state.tag.tags
   };
 };
 

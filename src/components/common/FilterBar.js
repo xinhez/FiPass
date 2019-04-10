@@ -1,29 +1,29 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "@material-ui/core";
-import "../../common/Component.css";
+import "./Component.css";
 
-class CompanyFilter extends Component {
+class FilterBar extends Component {
   render() {
     return <div className="Filter">{this.renderButtons()}</div>;
   }
 
   renderButtons() {
     const { filters, selectedFilter } = this.props;
-    return Object.keys(filters).map(name => {
-      if (filters[name].length > 0) {
+    return Object.keys(filters).map(filter => {
+      if (filters[filter].length > 0) {
         var className = ["Filter-button"];
-        if (selectedFilter === name) {
+        if (selectedFilter === filter) {
           className.push("Button-primary");
         }
         return (
           <Button
-            key={name}
+            key={filter}
             variant="contained"
             className={className.join(" ")}
-            onClick={_ => this.props.onSelectedFilterChange(name)}
+            onClick={_ => this.props.onSelectedFilterChange(filter)}
           >
-            {name}
+            {filter}
           </Button>
         );
       }
@@ -31,10 +31,10 @@ class CompanyFilter extends Component {
   }
 }
 
-CompanyFilter.propTypes = {
+FilterBar.propTypes = {
   filters: PropTypes.object.isRequired,
   onSelectedFilterChange: PropTypes.func.isRequired,
   selectedFilter: PropTypes.string.isRequired
 };
 
-export default CompanyFilter;
+export default FilterBar;

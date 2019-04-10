@@ -123,7 +123,7 @@ class StudentSignUp extends Component {
           fullWidth
         />
         <Button
-          className="Button-primary studentSignUp-bottom-button"
+          className="Button-primary Dialog-bottom-button"
           variant="contained"
           onClick={_ => this._handleValueChange({ step: step + 1 })}
           color="primary"
@@ -261,7 +261,7 @@ class StudentSignUp extends Component {
           fullWidth
         />
         <Button
-          className="Button-primary studentSignUp-bottom-button"
+          className="Button-primary Dialog-bottom-button"
           variant="contained"
           onClick={_ => this._handleValueChange({ step: step + 1 })}
           color="primary"
@@ -317,7 +317,7 @@ class StudentSignUp extends Component {
           )}
         </div>
         <Button
-          className="Button-primary studentSignUp-bottom-button"
+          className="Button-primary Dialog-bottom-button"
           variant="contained"
           onClick={_ => this._handleValueChange({ step: step + 1 })}
           color="primary"
@@ -353,7 +353,7 @@ class StudentSignUp extends Component {
           />
         </form>
         <Button
-          className="Button-primary studentSignUp-bottom-button"
+          className="Button-primary Dialog-bottom-button"
           variant="contained"
           onClick={_ => {
             const resume = new FormData(this.form);

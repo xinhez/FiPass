@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:3000/";
+import { BASE_URL } from "./config";
 
 export function fetchCompanies() {
   return dispatch => {

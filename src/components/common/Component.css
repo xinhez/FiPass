@@ -13,6 +13,13 @@
   border-color: #51a8dd !important;
 }
 
+.Dialog-bottom-button {
+  width: 180px;
+  margin-top: 20px !important;
+  margin-bottom: 25px !important;
+  padding: 6px 10px !important;
+}
+
 .Dialog-title {
   color: #51a8dd !important;
 }
@@ -73,6 +80,40 @@
   border-bottom: 0;
   box-shadow: 0 0 0 0 !important;
   height: 100%;
+}
+
+.List {
+  height: 100%;
+}
+
+.List-card {
+  border-radius: 0 !important;
+  border-style: solid !important;
+  border-color: #cccccc !important;
+  border-bottom: 1px;
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  padding: 15px !important;
+  box-shadow: 0 0 0 0 !important;
+}
+
+.List-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.List-card-selected {
+  background: #dcdcdc !important;
+}
+
+.List-card-logo {
+  padding-right: 22px;
+  position: relative;
+  float: left;
+}
+
+.List-card-title {
 }
 
 .Profile-icon {

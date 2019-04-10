@@ -50,6 +50,7 @@ class CompanyLogIn extends Component {
           className="companyLogIn-textField"
           id="email"
           label="Email"
+          margin="normal"
           value={email}
           variant="outlined"
           onChange={e => this.handleEmailChange(e.target.value)}
@@ -60,6 +61,7 @@ class CompanyLogIn extends Component {
           className="companyLogIn-textField"
           id="password"
           label="Password"
+          margin="normal"
           type="password"
           variant="outlined"
           value={password}
@@ -68,8 +70,11 @@ class CompanyLogIn extends Component {
           required
         />
         {this.renderError()}
-        <Button className="Button-primary" onClick={this.handleClickLogIn}>
-          Continue
+        <Button
+          className="Button-primary Dialog-bottom-button"
+          onClick={this.handleClickLogIn}
+        >
+          Log In
         </Button>
       </div>
     );

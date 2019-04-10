@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:3000/";
+import { BASE_URL } from "./config";
 
 export function fetchTags(Authorization) {
   return dispatch => {
@@ -13,7 +13,7 @@ export function fetchTags(Authorization) {
       }
     })
       .then(response => {
-        console.log("success", response);
+        console.log("success tag", response);
         dispatch(fetchTagsSuccess(response.data));
       })
       .catch(error => dispatch(fetchTagsFailure(error)));

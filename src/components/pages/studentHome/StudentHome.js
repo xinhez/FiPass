@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { Card, Tab, Tabs, Typography } from "@material-ui/core";
 import { Link, LocationOn } from "@material-ui/icons";
 import CompanyList from "./CompanyList";
-import CompanyFilter from "./CompanyFilter";
 import PositionList from "./PositionList";
+import FilterBar from "../../common/FilterBar";
 import background from "../../img/background.png";
 import { fetchCompanies } from "../../../actions/company";
 import "../../common/Component.css";
@@ -67,7 +67,7 @@ class StudentHome extends Component {
 
     return (
       <div className="Home">
-        <CompanyFilter
+        <FilterBar
           filters={companies}
           onSelectedFilterChange={this.onSelectedFilterChange}
           selectedFilter={selectedFilter}
