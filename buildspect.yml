@@ -1,0 +1,7 @@
+version: 0.1
+phases:
+    install:
+        commands:
+        - npm install
+        - npm run build
+        - npm run deploy --delete
