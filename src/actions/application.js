@@ -3,7 +3,6 @@ import { BASE_URL } from "./config";
 
 export function fetchApplications(Authorization) {
   return dispatch => {
-    console.log("fetchApplications");
     dispatch(fetchApplicationsBegin());
     axios({
       method: "GET",
@@ -13,7 +12,6 @@ export function fetchApplications(Authorization) {
       }
     })
       .then(response => {
-        console.log("success application", response);
         dispatch(fetchApplicationsSuccess(response.data));
       })
       .catch(error => dispatch(fetchApplicationsFailure(error)));

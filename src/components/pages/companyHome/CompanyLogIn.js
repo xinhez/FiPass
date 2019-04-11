@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Button, TextField, Typography } from "@material-ui/core";
-import { loginCompanyUser } from "../../../actions/user";
+import { loginCompanyUser, USER_ROLE_COMPANY } from "../../../actions/user";
 import "./CompanyLogIn.css";
 import "../../common/Component.css";
 

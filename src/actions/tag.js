@@ -3,7 +3,6 @@ import { BASE_URL } from "./config";
 
 export function fetchTags(Authorization) {
   return dispatch => {
-    console.log("fetchTags");
     dispatch(fetchTagsBegin());
     axios({
       method: "GET",
@@ -13,7 +12,6 @@ export function fetchTags(Authorization) {
       }
     })
       .then(response => {
-        console.log("success tag", response);
         dispatch(fetchTagsSuccess(response.data));
       })
       .catch(error => dispatch(fetchTagsFailure(error)));

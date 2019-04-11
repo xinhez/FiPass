@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withCookies } from "react-cookie";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import CompanyHome from "./components/pages/companyHome/CompanyHome";
 import StudentHome from "./components/pages/studentHome/StudentHome";
@@ -13,11 +14,15 @@ class App extends Component {
         <div className="app">
           <Header />
           <Route exact path="/" component={StudentHome} />
-          <Route exact path="/company" component={CompanyHome} />
+          <Route
+            exact
+            path="/company"
+            render={() => <CompanyHome cookies={this.props.cookies} />}
+          />
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+export default withCookies(App);

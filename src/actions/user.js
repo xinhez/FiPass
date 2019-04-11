@@ -4,6 +4,12 @@ import { BASE_URL } from "./config";
 export const USER_ROLE_COMPANY = false;
 export const USER_ROLE_STUDENT = true;
 
+export function loginUserFromCookie(userInfo) {
+  return dispatch => {
+    dispatch(loginUserSuccess(userInfo));
+  };
+}
+
 export function loginStudentUser(userInfo) {
   return dispatch => {
     dispatch(loginUserBegin());
@@ -19,7 +25,6 @@ export function loginStudentUser(userInfo) {
         ) {
           dispatch(loginUserFailure({}));
         } else {
-          console.log("success", response.data);
           dispatch(loginUserSuccess(response.data));
         }
       })

@@ -1,4 +1,5 @@
 import React from "react";
+import { CookiesProvider } from "react-cookie";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
@@ -12,8 +13,10 @@ import "./index.css";
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <CookiesProvider>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </CookiesProvider>,
   document.getElementById("root")
 );

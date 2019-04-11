@@ -7,6 +7,7 @@ import FilterBar from "../../common/FilterBar";
 import { fetchApplications } from "../../../actions/application";
 import { fetchStudents } from "../../../actions/student";
 import { fetchTags } from "../../../actions/tag";
+import { loginUserFromCookie, USER_ROLE_COMPANY } from "../../../actions/user";
 import avatar from "../../img/avatar.png";
 import "../../common/Component.css";
 import "./CompanyHome.css";
@@ -21,10 +22,29 @@ class CompanyHome extends Component {
     };
     this.onSelectedFilterChange = this.onSelectedFilterChange.bind(this);
     this.onSelectedStudentChange = this.onSelectedStudentChange.bind(this);
+
+    const cookies = this.props.cookies;
+    if (cookies !== null) {
+      const id = parseInt(cookies.get("id"));
+      const token = cookies.get("token");
+      const role = cookies.get("role") == "true";
+      if (
+        typeof id === "number" &&
+        typeof token === "string" &&
+        role === USER_ROLE_COMPANY
+      ) {
+        this.props.dispatch(
+          loginUserFromCookie({ id, auth_token: token, role })
+        );
+      }
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.token === null && nextProps.token !== null) {
+    if (
+      typeof this.props.token !== "string" &&
+      typeof nextProps.token === "string"
+    ) {
       this.props.dispatch(fetchApplications(nextProps.token));
       this.props.dispatch(fetchStudents(nextProps.token));
       this.props.dispatch(fetchTags(nextProps.token));
@@ -47,6 +67,33 @@ class CompanyHome extends Component {
         this.setState({ selectedStudent: filters["All"][0] });
       }
     }
+
+    const { cookies, id, token, role } = nextProps;
+    const idCookie = cookies.get("id");
+    const roleCookie = cookies.get("role");
+    const tokenCookie = cookies.get("token");
+    if (
+      typeof id === "number" &&
+      typeof role === "boolean" &&
+      typeof token === "string"
+    ) {
+      const noCookie =
+        idCookie === undefined &&
+        roleCookie === undefined &&
+        tokenCookie === undefined;
+      const newCookie =
+        id !== parseInt(idCookie) ||
+        (role ? roleCookie !== "true" : roleCookie !== "false") ||
+        token !== tokenCookie;
+      if (noCookie || newCookie) {
+        cookies.remove("id");
+        cookies.set("id", id, { path: "/company", maxage: 7200 });
+        cookies.remove("role");
+        cookies.set("role", role, { path: "/company", maxage: 7200 });
+        cookies.remove("token");
+        cookies.set("token", token, { path: "/company", maxage: 7200 });
+      }
+    }
   }
 
   onSelectedFilterChange(selectedFilter) {
@@ -59,19 +106,31 @@ class CompanyHome extends Component {
 
   render() {
     const { selectedStudent, selectedFilter, filters } = this.state;
-    const { token, error, loading, students, applications, tags } = this.props;
+    const {
+      id,
+      role,
+      token,
+      error,
+      loading,
+      students,
+      applications,
+      tags
+    } = this.props;
     if (error) {
       return <div>Error {error.message}</div>;
     }
 
-    if (token === null) {
+    if (
+      typeof id !== "number" ||
+      typeof role != "boolean" ||
+      typeof token !== "string"
+    ) {
       return <CompanyLogIn />;
     }
 
     if (loading || filters === null) {
       return <div>loading...</div>;
     }
-    console.log(selectedStudent);
     return (
       <div className="Home">
         <FilterBar
@@ -144,14 +203,17 @@ class CompanyHome extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
     applications: state.application.applications,
+    id: state.user.id,
+    role: state.user.role,
     token: state.user.token,
     students: state.student.students,
     loading: state.student.fetchingStudents,
     error: state.student.error,
-    tags: state.tag.tags
+    tags: state.tag.tags,
+    cookies: ownProps.cookies
   };
 };
 
