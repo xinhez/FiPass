@@ -29,6 +29,7 @@ class StudentHome extends Component {
     this.onSelectedTabChange = this.onSelectedTabChange.bind(this);
     this.likePositions = this.likePositions.bind(this);
     this.getStudentLike = this.getStudentLike.bind(this);
+    this.getCompanies = this.getCompanies.bind(this);
   }
 
   componentDidMount() {
@@ -96,6 +97,28 @@ class StudentHome extends Component {
     }
     return likesStu;
   }
+
+  getCompanies() {
+    const { companies } = this.props;
+    if (this.props.likes == null) {
+      return companies;
+    }
+    var res = companies;
+    var likeCompanies = [];
+    const liked = new Set(this.getStudentLike().map(like => like.position_id));
+    console.log("liked:", liked);
+    const all = companies["all"];
+    for (var i = all.length - 1; i >= 0; i--) {
+      for (var j = all[i].positions.length - 1; j >= 0; j--) {
+        if (liked.has(all[i].positions[j].id)) {
+          likeCompanies.push(all[i]);
+          break;
+        }
+      }
+    }
+    res["like"] = likeCompanies;
+    return res;
+  }
   render() {
     const { selectedCompany, selectedFilter, selectedTab } = this.state;
     const { error, loading, companies, id } = this.props;
@@ -107,17 +130,18 @@ class StudentHome extends Component {
     if (loading || selectedCompany === null) {
       return <div>loading...</div>;
     }
+
     return (
       <div className="Home">
         <FilterBar
-          filters={companies}
+          filters={this.getCompanies()}
           onSelectedFilterChange={this.onSelectedFilterChange}
           selectedFilter={selectedFilter}
         />
         <div className="Home-body">
           <div className="Home-left">
             <CompanyList
-              companies={companies[selectedFilter]}
+              companies={this.getCompanies()[selectedFilter]}
               selectedCompany={selectedCompany || {}}
               onSelectedCompanyChange={this.onSelectedCompanyChange}
             />
