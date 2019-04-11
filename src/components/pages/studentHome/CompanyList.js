@@ -33,12 +33,14 @@ class CompanyList extends Component {
               >
                 {company.name}
               </Typography>
-              <div className="companyList-card-location">
-                <LocationOn className="subtitle-icon" />
-                <Typography className="subtitle" variant="subheading">
-                  {company.location}
-                </Typography>
-              </div>
+              {company.location && (
+                <div className="companyList-card-location">
+                  <LocationOn className="subtitle-icon" />
+                  <Typography className="subtitle" variant="subheading">
+                    {company.location}
+                  </Typography>
+                </div>
+              )}
               {company.positions.map(position => (
                 <Typography
                   key={position.id}

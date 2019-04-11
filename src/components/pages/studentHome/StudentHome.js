@@ -161,13 +161,17 @@ class StudentHome extends Component {
                 {selectedCompany.name}
               </Typography>
               <div className="studentHome-subtitle studentHome-subtitle-container">
-                <LocationOn className="subtitle-icon" />
-                <Typography
-                  className="subtitle studentHome-subtitle-text"
-                  variant="subheading"
-                >
-                  {selectedCompany.location}
-                </Typography>
+                {selectedCompany.location && (
+                  <LocationOn className="subtitle-icon" />
+                )}
+                {selectedCompany.location && (
+                  <Typography
+                    className="subtitle studentHome-subtitle-text"
+                    variant="subheading"
+                  >
+                    {selectedCompany.location}
+                  </Typography>
+                )}
                 {selectedCompany.url && (
                   <div className="studentHome-subtitle-container">
                     <Link className="subtitle-icon" />
