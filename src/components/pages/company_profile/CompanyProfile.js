@@ -15,68 +15,25 @@ import {
   InputBase,
   Chip,
   CardMedia,
-  CardHeader
+  CardHeader,
+  Dialog,
+  ButtonBase,
+  AppBar,
+  Toolbar
 } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CameraIcon from "@material-ui/icons/CameraAlt";
 import Divider from "@material-ui/core/Divider";
 import CreateIcon from "@material-ui/icons/Create";
 import LocationIcon from "@material-ui/icons/LocationOn";
-
+import CloseIcon from "@material-ui/icons/Close";
 import PositionCard from "./position_card";
-
-function EditTextField(props) {
-  return (
-    <Grid
-      item
-      container
-      spacing={8}
-      alignItems="space-between"
-      alignItems="center"
-    >
-      <Grid item>
-        <Typography className={props.classes.namegrid}>{props.name}</Typography>
-      </Grid>
-      <Grid item>
-        <InputBase
-          // color='#FFFFFF'
-          disableOutlined={!props.canEdit}
-          disabled={!props.canEdit}
-          id={props.id}
-          variant="filled"
-          // className={props.classes.textgrid}
-          classes={
-            props.canEdit
-              ? {
-                  root: props.classes.textgrid,
-                  input: props.classes.bootstrapInput
-                }
-              : {
-                  root: props.classes.textgrid,
-                  input: props.classes.bootstrapNotInput
-                }
-          }
-          value={props.value}
-          onChange={props.onChange}
-        />
-      </Grid>
-    </Grid>
-  );
-}
-
-const skills = [
-  "JavaScript",
-  "C++",
-  "Java",
-  "React",
-  "PhotoShop",
-  "LeaderShip",
-  "Deep Learning",
-  "AutoCAD"
-];
+import Slide from "@material-ui/core/Slide";
 
 const styles = theme => ({
   rootPaper: {
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 5,
     backgroundColor: "#E5E5E5"
   },
   bootstrapInput: {
@@ -273,13 +230,25 @@ const styles = theme => ({
   },
   positionInnerGrid: {
     margin: -16
+  },
+  appbar: {
+    position: "relative",
+    background: "#51A8DD"
+  },
+  toolbar: {
+    background: "#51A8DD"
   }
 });
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 class CompanyProfile extends Component {
   constructor() {
     super();
     this.state = {
+      open: false,
       name: "Google",
       location: "SF, Mountain View, CA",
       description:
@@ -337,7 +306,7 @@ class CompanyProfile extends Component {
         }
       ],
 
-      disableEditing: true,
+      openPositionEdit: false,
       expandedSkillsEdition: false,
       expandedInfoEdition: false
     };
@@ -361,6 +330,7 @@ class CompanyProfile extends Component {
               location={this.state.position[cidx].value.location}
               skills={this.state.position[cidx].value.skills}
               Job={this.state.position[cidx].value.JD}
+              open={this.state.openPositionEdit}
             />
           </Grid>
         );
@@ -411,43 +381,56 @@ class CompanyProfile extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, open } = this.props;
     return (
       <div>
-        <Paper className={classes.rootPaper}>
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-            spacing={24}
-          >
-            <Grid item>
-              <Card id="Company Profile" className={classes.skillsCard}>
-                <CardMedia className={classes.companyCardMedia}>
-                  <Avatar className={classes.photoAvater} />
-                </CardMedia>
-                <CardContent className={classes.skillsPaper}>
-                  <Typography className={classes.userName}>
-                    {this.state.name}
-                  </Typography>
-                  <li className={classes.locationLi}>
-                    <LocationIcon className={classes.locationIcon} />
-                    <Typography className={classes.locationName}>
-                      {this.state.location}
+        <Dialog fullScreen open={open} TransitionComponent={Transition}>
+          <AppBar className={classes.appbar}>
+            <Toolbar classname={classes.toolbar}>
+              <IconButton
+                color="inherit"
+                onClick={_ => this.props.closeForm()}
+                aria-label="Close"
+              >
+                <CloseIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Paper className={classes.rootPaper}>
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+              spacing={24}
+            >
+              <Grid item>
+                <Card id="Company Profile" className={classes.skillsCard}>
+                  <CardMedia className={classes.companyCardMedia}>
+                    <Avatar className={classes.photoAvater} />
+                  </CardMedia>
+                  <CardContent className={classes.skillsPaper}>
+                    <Typography className={classes.userName}>
+                      {this.state.name}
                     </Typography>
-                  </li>
-                </CardContent>
-              </Card>
+                    <li className={classes.locationLi}>
+                      <LocationIcon className={classes.locationIcon} />
+                      <Typography className={classes.locationName}>
+                        {this.state.location}
+                      </Typography>
+                    </li>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item className={classes.positionTitleGrid}>
+                <Typography className={classes.positionTitleFont}>
+                  Position(s)
+                </Typography>
+              </Grid>
+              {this.createPorision(classes)}
             </Grid>
-            <Grid item className={classes.positionTitleGrid}>
-              <Typography className={classes.positionTitleFont}>
-                Position(s)
-              </Typography>
-            </Grid>
-            {this.createPorision(classes)}
-          </Grid>
-        </Paper>
+          </Paper>
+        </Dialog>
       </div>
     );
   }
