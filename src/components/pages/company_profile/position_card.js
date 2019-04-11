@@ -141,6 +141,10 @@ class PositionCard extends Component {
             closeForm={_ => this._handleClickPositionEdit(false)}
             open={this.state.openPositionEdit}
             title={this.props.title}
+            role={this.props.role}
+            location={this.props.location}
+            skills={this.props.skills}
+            Job={this.props.Job}
           />
         }
       </div>

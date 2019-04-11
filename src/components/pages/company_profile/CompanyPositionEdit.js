@@ -166,29 +166,36 @@ class PositionEdit extends Component {
             >
               <EditTextField
                 classes={classes}
+                name={"Title"}
+                value={this.props.title}
+                onChange={this.handleChange}
+                id="title"
+              />
+              <EditTextField
+                classes={classes}
                 name={"Job Type"}
-                value={this.state.name}
+                value={this.props.role}
                 onChange={this.handleChange}
                 id="title"
               />
               <EditTextField
                 classes={classes}
                 name={"Location"}
-                value={this.state.name}
+                value={this.state.location}
                 onChange={this.handleChange}
                 id="title"
               />
               <EditTextField
                 classes={classes}
                 name={"Skill"}
-                value={this.state.name}
+                value={this.state.skills}
                 onChange={this.handleChange}
                 id="title"
               />
               <EditTextField
                 classes={classes}
                 name={"Decription"}
-                value={this.state.name}
+                value={this.state.jobs}
                 onChange={this.handleChange}
                 id="title"
               />
