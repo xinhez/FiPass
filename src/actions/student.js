@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "./config";
+import { addSkill } from "./skill";
 import { loginStudentUser } from "./user";
 
 export function fetchStudents(Authorization) {
@@ -39,7 +40,6 @@ const fetchStudentsFailure = error => ({
 
 export function createStudent(userInfo) {
   return dispatch => {
-    console.log("create", userInfo);
     dispatch(createStudentBegin());
     axios({
       method: "POST",
@@ -49,7 +49,6 @@ export function createStudent(userInfo) {
       }
     })
       .then(response => {
-        console.log("success", response);
         dispatch(createStudentSuccess(response.data));
         dispatch(
           loginStudentUser({
@@ -57,9 +56,11 @@ export function createStudent(userInfo) {
             password: userInfo.password
           })
         );
+        userInfo.skillIds.forEach(skill_id => {
+          dispatch(addSkill(response.data.id, skill_id));
+        });
       })
       .catch(error => {
-        console.log("failure", error);
         dispatch(createStudentFailure(error));
       });
   };

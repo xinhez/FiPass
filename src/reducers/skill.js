@@ -1,4 +1,7 @@
 import {
+  ADD_SKILL_BEGIN,
+  ADD_SKILL_SUCCESS,
+  ADD_SKILL_FAILURE,
   FETCH_SKILLS_BEGIN,
   FETCH_SKILLS_SUCCESS,
   FETCH_SKILLS_FAILURE
@@ -12,6 +15,24 @@ const initialState = {
 
 export default function skillReducer(state = initialState, action) {
   switch (action.type) {
+    case ADD_SKILL_BEGIN:
+      return {
+        ...state,
+        fetchingSkills: true,
+        error: null
+      };
+    case ADD_SKILL_SUCCESS:
+      return {
+        ...state,
+        fetchingSkills: false,
+        error: null
+      };
+    case ADD_SKILL_FAILURE:
+      return {
+        ...state,
+        fetchingSkills: false,
+        error: action.payload.error
+      };
     case FETCH_SKILLS_BEGIN:
       return {
         ...state,
