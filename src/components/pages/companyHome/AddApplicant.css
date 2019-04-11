@@ -1,0 +1,15 @@
+.studentLogIn {
+  justify-content: center;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.studentLogIn-top {
+  width: 100%;
+}
+
+.studentLogIn-close {
+  float: right;
+  padding-right: 15px !important;
+  padding-top: 15px !important;
+}

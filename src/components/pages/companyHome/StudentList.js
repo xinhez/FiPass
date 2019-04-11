@@ -30,9 +30,10 @@ class StudentList extends Component {
                 {student.first_name} {student.last_name}
               </Typography>
               <Typography className="subtitle" variant="subtitle2">
-                {student.major_2 === null
-                  ? `${student.major_1}`
-                  : `${student.major_1} | ${student.major_2}`}
+                {typeof student.major_2 === "string" &&
+                student.major_2.length > 0
+                  ? `${student.major_1} | ${student.major_2}`
+                  : `${student.major_1}`}
               </Typography>
               <Typography variant="caption">
                 {student.school}, {student.graduation_year}

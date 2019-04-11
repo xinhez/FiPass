@@ -1,4 +1,7 @@
 import {
+  ADD_APPLICATION_BEGIN,
+  ADD_APPLICATION_SUCCESS,
+  ADD_APPLICATION_FAILURE,
   FETCH_APPLICATIONS_BEGIN,
   FETCH_APPLICATIONS_SUCCESS,
   FETCH_APPLICATIONS_FAILURE
@@ -31,6 +34,25 @@ export default function applicationReducer(state = initialState, action) {
         ...state,
         fetchingApplications: false,
         applications: [],
+        error: action.payload.error
+      };
+    case ADD_APPLICATION_BEGIN:
+      return {
+        ...state,
+        fetchingApplications: true,
+        error: null
+      };
+    case ADD_APPLICATION_SUCCESS:
+      return {
+        ...state,
+        fetchingApplications: false,
+        applications: state.applications.concat([action.payload.application]),
+        error: null
+      };
+    case ADD_APPLICATION_FAILURE:
+      return {
+        ...state,
+        fetchingApplications: false,
         error: action.payload.error
       };
     default:

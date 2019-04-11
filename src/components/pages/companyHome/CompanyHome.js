@@ -159,11 +159,12 @@ class CompanyHome extends Component {
                     {selectedStudent.first_name} {selectedStudent.last_name}
                   </Typography>
                   <Typography className="subtitle" variant="subtitle2">
-                    {selectedStudent.major_2 === null
-                      ? `${selectedStudent.major_1}`
-                      : `${selectedStudent.major_1} | ${
+                    {typeof selectedStudent.major_2 === "string" &&
+                    selectedStudent.major_2.length > 0
+                      ? `${selectedStudent.major_1} | ${
                           selectedStudent.major_2
-                        }`}
+                        }`
+                      : `${selectedStudent.major_1}`}
                   </Typography>
                   <Typography
                     className="CompanyHome-profile-bottom"
