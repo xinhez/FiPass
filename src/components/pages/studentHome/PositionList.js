@@ -11,7 +11,8 @@ import "./PositionList.css";
 class PositionList extends Component {
   renderPositions() {
     const { id, positions, likedPositions } = this.props;
-    const liked = new Set(likedPositions);
+    const liked = new Set(likedPositions.map(like => like.position_id));
+    console.log("liked:", liked);
     const positionCards = positions.map(position => (
       <div key={position.id}>
         <Card className="positionList-card">
@@ -44,12 +45,20 @@ class PositionList extends Component {
             )}
           </div>
           {liked.has(position.id) && (
-            <ButtonBase disableRipple className="Button-base">
+            <ButtonBase
+              disableRipple
+              className="Button-base"
+              onClick={_ => this.props.likePosition(position.id, false)}
+            >
               <FavoriteRounded className="positionList-card-liked" />
             </ButtonBase>
           )}
           {!liked.has(position.id) && (
-            <ButtonBase disableRipple className="Button-base">
+            <ButtonBase
+              disableRipple
+              className="Button-base"
+              onClick={_ => this.props.likePosition(position.id, true)}
+            >
               <FavoriteBorderRounded className="positionList-card-notLiked" />
             </ButtonBase>
           )}
