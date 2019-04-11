@@ -101,9 +101,9 @@ class PositionCard extends Component {
 
     this._handleClickPositionEdit = this._handleClickPositionEdit.bind(this);
   }
-  componentWillReceiveProps(nextProps) {
-    this._handleClickPositionEdit(false);
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this._handleClickPositionEdit(false);
+  // }
   _handleClickPositionEdit(open: boolean) {
     this.setState({
       openPositionEdit: open
@@ -140,6 +140,7 @@ class PositionCard extends Component {
           <PositionEdit
             closeForm={_ => this._handleClickPositionEdit(false)}
             open={this.state.openPositionEdit}
+            title={this.props.title}
           />
         }
       </div>
