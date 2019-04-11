@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "./config";
+import { loginStudentUser } from "./user";
 
 export function fetchStudents(Authorization) {
   return dispatch => {
@@ -50,6 +51,12 @@ export function createStudent(userInfo) {
       .then(response => {
         console.log("success", response);
         dispatch(createStudentSuccess(response.data));
+        dispatch(
+          loginStudentUser({
+            email: userInfo.email,
+            password: userInfo.password
+          })
+        );
       })
       .catch(error => {
         console.log("failure", error);

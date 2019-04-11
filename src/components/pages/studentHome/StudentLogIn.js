@@ -8,7 +8,6 @@ import {
   Typography
 } from "@material-ui/core";
 import { Close } from "@material-ui/icons";
-import { loginStudentUser } from "../../../actions/user";
 import "../../common/Component.css";
 import "./StudentLogIn.css";
 
@@ -19,27 +18,11 @@ class StudentLogIn extends Component {
       email: "",
       password: ""
     };
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.handleClickLogIn = this.handleClickLogIn.bind(this);
+    this._handleValueChange = this._handleValueChange.bind(this);
   }
 
-  handleClickLogIn() {
-    const { email, password } = this.state;
-    this.props.dispatch(
-      loginStudentUser({
-        email,
-        password
-      })
-    );
-  }
-
-  handleEmailChange(email) {
-    this.setState({ email });
-  }
-
-  handlePasswordChange(password) {
-    this.setState({ password });
+  _handleValueChange(value) {
+    this.setState({ ...value });
   }
 
   render() {
@@ -67,7 +50,7 @@ class StudentLogIn extends Component {
             required
             id="email"
             value={email}
-            onChange={e => this.handleEmailChange(e.target.value)}
+            onChange={e => this._handleValueChange({ email: e.target.value })}
             label="Email"
             fullWidth
           />
@@ -77,7 +60,9 @@ class StudentLogIn extends Component {
             margin="normal"
             required
             value={password}
-            onChange={e => this.handlePasswordChange(e.target.value)}
+            onChange={e =>
+              this._handleValueChange({ password: e.target.value })
+            }
             id="password"
             label="Password"
             type="password"

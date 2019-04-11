@@ -51,21 +51,17 @@ class StudentSignUp extends Component {
     const { open } = this.props;
     return (
       <Dialog className="studentSignUp" fullWidth maxWidth={"sm"} open={open}>
-        <div className="studentSignUp-button-top-container">
+        <div>
           {step !== 1 && (
-            <ButtonBase className="studentSignUp-before">
-              <NavigateBefore
-                className="Button-icon"
-                onClick={_ => this._handleValueChange({ step: step - 1 })}
-              />
-            </ButtonBase>
-          )}
-          <ButtonBase className="studentSignUp-close">
-            <Close
-              className="Button-icon"
-              onClick={_ => this.props.closeForm()}
+            <NavigateBefore
+              className="Button-icon studentSignUp-before"
+              onClick={_ => this._handleValueChange({ step: step - 1 })}
             />
-          </ButtonBase>
+          )}
+          <Close
+            className="Button-icon studentSignUp-close"
+            onClick={_ => this.props.closeForm()}
+          />
         </div>
         {step === 1 && this.renderStepOne()}
         {step === 2 && this.renderStepTwo()}
